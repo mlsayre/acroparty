@@ -26,19 +26,29 @@ meta.foundation-mq-xxlarge {
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
 
+/* micropost jQuery countdown */
+
+.countdown {
+
+  margin-top: -12px;
+  margin-bottom: 10px;
+  font-size: .8em;
+  padding-left: 0px;
+  color: gray;
+}
+
 html,
 body {
   font-size: 100%; }
 
 body {
-  background: black;
+  background: white;
   color: #222222;
   padding: 0;
   margin: 0;
   font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
   font-weight: normal;
   font-style: normal;
-  font-color: white;
   line-height: 1;
   position: relative;
   cursor: default; }
