@@ -37,6 +37,21 @@ meta.foundation-mq-xxlarge {
   color: gray;
 }
 
+#user_dateofbirth_2i {
+  width: 114px;
+  margin-right: 0;
+}
+
+#user_dateofbirth_3i {
+  width: 50px;
+  margin-right: 0;
+}
+
+#user_dateofbirth_1i {
+  width: 80px;
+  margin-right: 0;
+}
+
 html,
 body {
   font-size: 100%; }
