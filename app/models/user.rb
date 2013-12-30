@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 
   validates_length_of :username, :maximum => 15
   validates_length_of :username, :minimum => 3
-  validates_length_of :about, :maximum => 140
+  validates_length_of :about, :maximum => 80
 
   validates :email, uniqueness: true
   validates :username, uniqueness: true
