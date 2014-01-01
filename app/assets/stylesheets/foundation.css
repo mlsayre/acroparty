@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,700");
+@import url("//fonts.googleapis.com/css?family=Concert+One|Open+Sans:300italic,400italic,700italic,400,300,700");
 meta.foundation-mq-small {
   font-family: "/only screen and (max-width: 40em)/";
   width: 0em; }
@@ -57,7 +57,7 @@ body {
   font-size: 100%; }
 
 body {
-  background: white;
+  background-color: #d4fffe;
   color: #222222;
   padding: 0;
   margin: 0;
@@ -67,6 +67,13 @@ body {
   line-height: 1;
   position: relative;
   cursor: default; }
+
+.acrofont {
+  font-family:Concert One;
+  font-size:250%;
+  font-weight:normal;
+  color: #1f19b5;
+  text-shadow: 4px 4px 4px #aaa; }
 
 a:hover {
   cursor: pointer; }
@@ -4471,7 +4478,7 @@ textarea {
   textarea:focus {
     -webkit-box-shadow: 0 0 5px #999999;
     -moz-box-shadow: 0 0 5px #999999;
-    box-shadow: 0 0 5px #999999;
+    box-shadow: 0 0 5px #1f19b5;
     border-color: #999999; }
   input[type="text"]:focus,
   input[type="password"]:focus,
@@ -4532,7 +4539,7 @@ fieldset {
   margin: 1.125rem 0; }
   fieldset legend {
     font-weight: bold;
-    background: white;
+    background: transparent;
     padding: 0 0.1875rem;
     margin: 0;
     margin-left: -0.1875rem; }

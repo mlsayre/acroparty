@@ -1,5 +1,5 @@
 <center>
-  <h2>Sign up for AcroParty</h2>
+  <h2 class="acrofont">Sign up for AcroParty</h2>
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
@@ -28,12 +28,12 @@
         <%= f.text_area :about, :size => "30x30" %></div>
         <div class="countdown"></div>
         <div class="small-6"><%= f.label :avatarurl, "Your avatar (change once you're logged in)" %>
-          <%= image_tag("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png") %>
+          <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
         </div>
     </fieldset>
     <div class="large-2"><%= f.submit "Sign up", :class => "button middle" %></div>
 
   <% end %>
 
-  <%= render "devise/shared/links" %>
+  <%= render "devise/shared/links" %><br/>
 </center>

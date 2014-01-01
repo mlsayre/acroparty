@@ -11,26 +11,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131228011719) do
+ActiveRecord::Schema.define(:version => 20131231003506) do
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",               :null => false
-    t.string   "encrypted_password",     :default => "",               :null => false
+    t.string   "email",                  :default => "",                                                                     :null => false
+    t.string   "encrypted_password",     :default => "",                                                                     :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0,                :null => false
+    t.integer  "sign_in_count",          :default => 0,                                                                      :null => false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                                           :null => false
-    t.datetime "updated_at",                                           :null => false
+    t.datetime "created_at",                                                                                                 :null => false
+    t.datetime "updated_at",                                                                                                 :null => false
     t.string   "username"
     t.date     "dateofbirth"
     t.string   "location",               :default => "Acroparty City"
     t.string   "about",                  :default => "-"
-    t.string   "avatarurl"
+    t.string   "avatarurl",              :default => "https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"
     t.integer  "gamesplayed",            :default => 0
     t.integer  "gameswon",               :default => 0
     t.integer  "ignores",                :default => 0
