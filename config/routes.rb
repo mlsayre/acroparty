@@ -3,6 +3,14 @@ Acroparty::Application.routes.draw do
 
   root :to => 'pages#landing'
 
+  resources :pages do
+    collection do
+      get 'foyer'
+    end
+  end
+
+  match 'foyer' => 'pages#foyer'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

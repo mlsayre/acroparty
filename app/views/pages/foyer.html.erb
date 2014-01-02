@@ -1,0 +1,14 @@
+<center>
+  <div class="row">
+    <div class="large-10 acrofont"; style="margin-top:180px; margin-bottom:40px; font-size:380%; font-weight:normal;">
+      Welcome, <%= current_user.username %>!
+    </div>
+  </div>
+  <div class="row">
+    <div class="large-8"; style="margin-top:100px;">
+      <%= link_to "Sign in", new_user_session_path %>
+      or
+      <%= link_to "Sign up", new_user_registration_path %>
+    </div>
+  </div>
+</center>
