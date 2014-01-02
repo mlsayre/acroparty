@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Concert+One|Open+Sans:300italic,400italic,700italic,400,300,700");
+@import url("//fonts.googleapis.com/css?family=Russo+One|Open+Sans:300italic,400italic,700italic,400,300,700");
 meta.foundation-mq-small {
   font-family: "/only screen and (max-width: 40em)/";
   width: 0em; }
@@ -69,11 +69,22 @@ body {
   cursor: default; }
 
 .acrofont {
-  font-family:Concert One;
+  font-family:Russo One;
   font-size:250%;
+  padding-bottom:24px;
+  margin-bottom:24px;
   font-weight:normal;
   color: #1f19b5;
-  text-shadow: 4px 4px 4px #aaa; }
+  text-shadow:
+  1px 1px 0 #00f1f5,
+  -1px -1px 0 #00f1f5,
+  1px -1px 0 #00f1f5,
+  -1px 1px 0 #00f1f5,
+  0px 1px 0 #00f1f5,
+  1px 0px 0 #00f1f5,
+  0px -1px 0 #00f1f5,
+  -1px 0px 0 #00f1f5,
+  3px 3px 3px #aaa; }
 
 a:hover {
   cursor: pointer; }
