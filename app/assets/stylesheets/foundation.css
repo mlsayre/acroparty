@@ -77,8 +77,8 @@ body {
 .acrofont {
   font-family:Russo One;
   font-size:250%;
-  padding-bottom:24px;
-  margin-bottom:24px;
+  padding-bottom:0px;
+  margin-bottom:0px;
   font-weight:normal;
   color: #1f19b5;
   text-shadow:
@@ -2029,8 +2029,8 @@ button, .button {
     text-align: right;
     padding-right: 0.75rem; }
   button.radius, .button.radius {
-    -webkit-border-radius: 3px;
-    border-radius: 3px; }
+    -webkit-border-radius: 12px;
+    border-radius: 12px; }
   button.round, .button.round {
     -webkit-border-radius: 1000px;
     border-radius: 1000px; }

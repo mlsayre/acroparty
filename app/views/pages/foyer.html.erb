@@ -1,14 +1,36 @@
-<center>
-  <div class="row">
-    <div class="large-10 acrofont"; style="margin-top:180px; margin-bottom:40px; font-size:380%; font-weight:normal;">
-      Welcome, <%= current_user.username %>!
-    </div>
+<div class="row">
+  <div class="small-3 columns" style="margin-top:18px; margin-bottom:4px;">
+    <center>
+      <%= image_tag current_user.avatarurl %>
+      <p class="acrofont"; style="margin-top:0px; margin-bottom:0px; font-size:120%; font-weight:normal;">Welcome, <%= @username %>!</p>
+      Points (all-time): 1,286
+      Points (this month): 412
+      Points (this week): 108
+      Points (today): 10
+
+      <%= link_to "Your Stats", foyer_path, :class => "button round", :style => "margin-top:10px" %>
+      <%= link_to "Edit Profile", edit_user_registration_path, :class => "button round" %>
+      <%= link_to "Rules", foyer_path, :class => "button round" %>
+    </center>
   </div>
-  <div class="row">
-    <div class="large-8"; style="margin-top:100px;">
+  <div class="small-5 columns" style="margin-top:18px; margin-bottom:4px;">
+    <center>
+      Rooms bla bla
+    </center>
+  </div>
+  <div class="small-4 columns" style="margin-top:18px; margin-bottom:4px;">
+    <center>
+      High scores bla bla
+    </center>
+  </div>
+</div>
+<div class="row">
+  <div class="large-4"; style="margin-top:100px;">
+    <center>
       <%= link_to "Sign in", new_user_session_path %>
       or
       <%= link_to "Sign up", new_user_registration_path %>
-    </div>
+    </center>
   </div>
-</center>
+</div>
+
