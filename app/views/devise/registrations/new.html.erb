@@ -1,40 +1,44 @@
-<center>
-  <h2 class="acrofont">Sign up for AcroParty</h2>
+<h2 class="acrofont centerall">Sign up for AcroParty</h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+  <div class="centerall">
     <%= devise_error_messages! %>
-    <fieldset class="small-4">
-      <legend>Required</legend>
-        <div class="small-8"><%= f.label :username %>
-        <%= f.text_field :username, :autofocus => true %></div>
+  </div>
+  <fieldset class="small-4 centerall">
+    <legend>Required</legend>
+      <div class="small-8 centerall"><%= f.label :username %>
+      <%= f.text_field :username, :autofocus => true %></div>
 
-        <div class="small-10"><%= f.label :email %>
-        <%= f.email_field :email %></div>
+      <div class="small-10 centerall"><%= f.label :email %>
+      <%= f.email_field :email %></div>
 
-        <div class="small-10"><%= f.label :password %>
-        <%= f.password_field :password %></div>
+      <div class="small-10 centerall"><%= f.label :password %>
+      <%= f.password_field :password %></div>
 
-        <div class="small-10"><%= f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation %></div>
-    </fieldset><br/>
+      <div class="small-10 centerall"><%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %></div>
+  </fieldset><br/>
+  <div class="centerall">
     (Your email address and all other information will never be shared with anyone.)
-    <fieldset class="small-5">
-      <legend>Optional</legend>
-        <div class="small-5"><%= f.label :location, "Your city" %>
-        <%= f.text_field :location %></div>
-        <div class="small-8"><%= f.label :dateofbirth, "Date of birth" %>
-          <%= f.date_select :dateofbirth, {:start_year => 1900, :end_year => Time.now.year - 6, :order => [:month, :day, :year], :default => { month: 1, day: 1, year: 1980 } }, {:class => "row"} %>
-        </div><br/>
-        <div class="small-10"><%= f.label :about, "About yourself" %>
-        <%= f.text_area :about, :size => "30x30" %></div>
-        <div class="countdown"></div>
-        <div class="small-6"><%= f.label :avatarurl, "Your avatar (change once you're logged in)" %>
-          <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
-        </div>
-    </fieldset>
-    <div class="large-2"><%= f.submit "Sign up", :class => "button middle" %></div>
+  </div>
+  <fieldset class="small-5 centerall">
+    <legend>Optional</legend>
+      <div class="small-5 centerall"><%= f.label :location, "Your city" %>
+      <%= f.text_field :location %></div>
+      <div class="small-8 centerall"><%= f.label :dateofbirth, "Date of birth" %>
+        <%= f.date_select :dateofbirth, {:start_year => 1900, :end_year => Time.now.year - 6, :order => [:month, :day, :year], :default => { month: 1, day: 1, year: 1980 } }, {:class => "row"} %>
+      </div><br/>
+      <div class="small-10 centerall"><%= f.label :about, "About yourself" %>
+      <%= f.text_area :about, :size => "30x30" %></div>
+      <div class="countdown centerall"></div>
+      <div class="small-6 centerall"><%= f.label :avatarurl, "Your avatar (change once you're logged in)" %>
+        <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
+      </div>
+  </fieldset>
+  <div class="large-2 centerall"><%= f.submit "Sign up", :class => "button middle" %></div>
 
-  <% end %>
+<% end %>
+<div class="centerall">
+  <%= render "devise/shared/links" %>
+</div>
 
-  <%= render "devise/shared/links" %><br/>
-</center>

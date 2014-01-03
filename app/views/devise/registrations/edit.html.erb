@@ -1,48 +1,49 @@
-<center>
-  <h2 class="acrofont">Edit <%= current_user.username %></h2>
+<h2 class="acrofont centerall">Edit <%= current_user.username %></h2>
 
-  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+  <div class="centerall">
     <%= devise_error_messages! %>
+  </div>
 
-    <div class="small-2"><%= f.label :username %>
-        <%= f.text_field :username, :autofocus => true %></div>
+  <div class="small-2 centerall"><%= f.label :username %>
+      <%= f.text_field :username, :autofocus => true %></div>
 
-    <div class="small-3"><%= f.label :email %>
-    <%= f.email_field :email %></div>
+  <div class="small-3 centerall"><%= f.label :email %>
+  <%= f.email_field :email %></div>
 
-    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-      <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-    <% end %>
-
-    <div class="small-3"><%= f.label :password %> <i style="font-size:.7em">(leave blank if you don't want to change it)</i>
-    <%= f.password_field :password, :autocomplete => "off" %></div>
-
-    <div class="small-3"><%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %></div>
-
-    <div class="small-3"><%= f.label :current_password %> <i style="font-size:.7em">(we need your current password to confirm your changes)</i>
-    <%= f.password_field :current_password %></div>
-
-    <fieldset class="small-5">
-      <legend>Optional Information</legend>
-        <div class="small-6"><%= f.label :avatarurl, "Your avatar (change)" %>
-          <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
-        </div>
-        <div class="small-5"><%= f.label :location, "Your city" %>
-        <%= f.text_field :location %></div>
-        <div class="small-8"><%= f.label :dateofbirth, "Date of birth" %>
-          <%= f.date_select :dateofbirth, {:start_year => 1900, :end_year => Time.now.year - 6, :order => [:month, :day, :year], :default => { month: 1, day: 1, year: 1980 } }, {:class => "row"} %>
-        </div><br/>
-        <div class="small-10"><%= f.label :about, "About yourself" %>
-        <%= f.text_area :about, :size => "30x30" %></div>
-        <div class="countdown"></div>
-    </fieldset>
-    <div class="large-2"><%= f.submit "Update", :class => "button" %></div>
-
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div class="centerall">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>
+
+  <div class="small-3 centerall"><%= f.label :password %> <i style="font-size:.7em">(leave blank if you don't want to change it)</i>
+  <%= f.password_field :password, :autocomplete => "off" %></div>
+
+  <div class="small-3 centerall"><%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %></div>
+
+  <div class="small-3 centerall"><%= f.label :current_password %> <i style="font-size:.7em">(we need your current password to confirm your changes)</i>
+  <%= f.password_field :current_password %></div>
+
+  <fieldset class="small-5 centerall">
+    <legend>Optional Information</legend>
+      <div class="small-6 centerall"><%= f.label :avatarurl, "Your avatar (change)" %>
+        <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
+      </div>
+      <div class="small-5 centerall"><%= f.label :location, "Your city" %>
+      <%= f.text_field :location %></div>
+      <div class="small-8 centerall"><%= f.label :dateofbirth, "Date of birth" %>
+        <%= f.date_select :dateofbirth, {:start_year => 1900, :end_year => Time.now.year - 6, :order => [:month, :day, :year], :default => { month: 1, day: 1, year: 1980 } }, {:class => "row"} %>
+      </div><br/>
+      <div class="small-10 centerall"><%= f.label :about, "About yourself" %>
+      <%= f.text_area :about, :size => "30x30" %></div>
+      <div class="countdown centerall"></div>
+  </fieldset>
+  <div class="large-2 centerall"><%= f.submit "Update", :class => "button" %></div>
+
+<% end %>
+<div class="centerall">
   <%= link_to "Back", :back %>
-  <h4 style="text-align:right; margin-right:40px">Delete my account</h4>
+</div>
+<h4 style="text-align:right; margin-right:40px">Delete my account</h4>
 
-  <p style="text-align:right; margin-right:40px; font-size:.8em">Leave the party forever? <%= button_to "Delete my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny alert round", :style => "float:right; margin-right:40px" %></p>
-
-</center>
+<p style="text-align:right; margin-right:40px; font-size:.8em">Leave the party forever? <%= button_to "Delete my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny alert round", :style => "float:right; margin-right:40px" %></p>

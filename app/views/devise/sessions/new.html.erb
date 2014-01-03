@@ -1,18 +1,21 @@
-<center>
-  <h2 class="acrofont">Sign in to AcroParty</h2>
+<h2 class="acrofont centerall" style="margin-bottom:20px">
+  Sign in to AcroParty
+</h2>
 
 <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div class="small-3"><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true %></div>
+  <div class="small-3 centerall"><%= f.label :email %>
+    <%= f.email_field :email, :autofocus => true %></div>
 
-  <div class="small-3"><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+  <div class="small-3 centerall"><%= f.label :password %>
+    <%= f.password_field :password %></div>
 
   <% if devise_mapping.rememberable? -%>
-    <div class="small-2"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+    <div class="small-2 centerall"><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+  <% end %>
 
-  <div class="large-2"><%= f.submit "Sign in", :class => "button middle" %></div>
+  <div class="large-2 centerall">
+    <%= f.submit "Sign in", :class => "button middle" %></div>
 <% end %>
-
-<%= render "devise/shared/links" %>
+<div class="centerall">
+  <%= render "devise/shared/links" %>
+</div>
