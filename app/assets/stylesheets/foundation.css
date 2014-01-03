@@ -92,6 +92,13 @@ body {
   -1px 0px 0 #00f1f5,
   3px 3px 3px #aaa; }
 
+userinfo {
+  width: auto;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+}
+
 a:hover {
   cursor: pointer; }
 
