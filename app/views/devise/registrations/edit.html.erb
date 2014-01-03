@@ -26,8 +26,8 @@
 
   <fieldset class="small-5 centerall">
     <legend>Optional Information</legend>
-      <div class="small-6 centerall"><%= f.label :avatarurl, "Your avatar (change)" %>
-        <%= image_tag ("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png"), :style => "border: 1px solid gray" %>
+      <div class="small-10 centerall"><%= f.label :avatarurl, "Your avatar (change in foyer)" %>
+        <%= image_tag current_user.avatarurl, :style => "border: 1px solid gray; margin-bottom:12px;" %>
       </div>
       <div class="small-5 centerall"><%= f.label :location, "Your city" %>
       <%= f.text_field :location %></div>
@@ -38,7 +38,7 @@
       <%= f.text_area :about, :size => "30x30" %></div>
       <div class="countdown centerall"></div>
   </fieldset>
-  <div class="large-2 centerall"><%= f.submit "Update", :class => "button" %></div>
+  <div class="large-2 centerall" style="margin-top:12px"><%= f.submit "Update", :class => "button" %></div>
 
 <% end %>
 <div class="centerall">
