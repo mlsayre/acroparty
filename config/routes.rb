@@ -15,6 +15,10 @@ Acroparty::Application.routes.draw do
 
   devise_for :users
 
+  authenticated :user do
+    root :to => 'pages#foyer'
+  end
+
   root :to => 'pages#landing'
 
   resources :pages do

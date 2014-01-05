@@ -82,6 +82,10 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    papercrop (0.1.1)
+      jquery-rails
+      paperclip (>= 3.4)
+      rails (>= 3.1)
     pg (0.17.1)
     polyglot (0.3.3)
     rack (1.4.5)
@@ -145,6 +149,7 @@ DEPENDENCIES
   foundation-rails
   jquery-rails
   paperclip
+  papercrop
   pg
   rails (= 3.2.15)
   sass-rails (~> 3.2.3)

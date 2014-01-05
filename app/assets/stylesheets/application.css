@@ -11,5 +11,6 @@
  *= require_self
  *= require foundation_and_overrides
  *= require foundation
+ *= require jquery.jcrop
  *= require_tree .
  */

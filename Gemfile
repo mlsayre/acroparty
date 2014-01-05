@@ -11,6 +11,7 @@ gem 'foundation-rails'
 gem 'paperclip'
 gem 'aws-sdk'
 gem 'figaro'
+gem 'papercrop'
 
 # Gems used only for assets and not required
 # in production environments by default.

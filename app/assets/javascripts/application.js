@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require foundation
 //= require signup
+//= require jquery.jcrop
+//= require papercrop
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

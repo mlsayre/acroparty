@@ -7,7 +7,10 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :username, :location, :about, :avatar, :gameswon, :login,
-                  :gamesplayed, :ignores, :boots, :highestscore, :dateofbirth
+                  :gamesplayed, :ignores, :boots, :highestscore, :dateofbirth,
+                  :avatar_original_w, :avatar_original_h, :avatar_box_w,
+                  :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
+                  :avatar_aspect
 
   attr_accessor :login
 
@@ -26,6 +29,8 @@ class User < ActiveRecord::Base
     large: '300x300>'
     },
     :default_url => 'https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png'
+
+  crop_attached_file :avatar
 
   def self.find_first_by_auth_conditions(warden_conditions)
       conditions = warden_conditions.dup
