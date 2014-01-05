@@ -6,8 +6,11 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :username, :location, :about, :avatarurl, :gameswon,
+                  :username, :location, :about, :avatar, :gameswon, :login,
                   :gamesplayed, :ignores, :boots, :highestscore, :dateofbirth
+
+  attr_accessor :login
+
   # attr_accessible :title, :body
   validates_presence_of :username
 
@@ -15,6 +18,22 @@ class User < ActiveRecord::Base
   validates_length_of :username, :minimum => 3
   validates_length_of :about, :maximum => 80
 
-  validates :email, uniqueness: true
-  validates :username, uniqueness: true
+  validates :email, :uniqueness => {:case_sensitive => false}
+  validates :username, :uniqueness => {:case_sensitive => false}
+
+  has_attached_file :avatar, styles: {
+    small: '80x80>',
+    large: '300x300>'
+    },
+    :default_url => 'https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png'
+
+  def self.find_first_by_auth_conditions(warden_conditions)
+      conditions = warden_conditions.dup
+      if login = conditions.delete(:login)
+        where(conditions).where(["lower(username) = :value OR lower(email) = :value", { :value => login.downcase }]).first
+      else
+        where(conditions).first
+      end
+    end
+
 end

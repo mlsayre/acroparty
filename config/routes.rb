@@ -1,13 +1,31 @@
 Acroparty::Application.routes.draw do
+  get "user/index"
+
+  get "user/show"
+
+  get "user/new"
+
+  get "user/edit"
+
+  get "user/create"
+
+  get "user/update"
+
+  get "user/destroy"
+
   devise_for :users
 
   root :to => 'pages#landing'
 
   resources :pages do
     collection do
-      get 'foyer'
+      get 'foyer' => 'pages#foyer'
     end
   end
+
+  # devise_scope :user do
+  #   get "/user/avatar" => "devise/registrations#avatar"
+  # end
 
   match 'foyer' => 'pages#foyer'
 

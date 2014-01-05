@@ -8,6 +8,9 @@ gem 'rails', '3.2.15'
 gem 'pg'
 gem 'devise'
 gem 'foundation-rails'
+gem 'paperclip'
+gem 'aws-sdk'
+gem 'figaro'
 
 # Gems used only for assets and not required
 # in production environments by default.

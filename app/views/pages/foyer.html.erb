@@ -1,7 +1,11 @@
 <div class="row">
   <div class="small-3 columns" style="margin-top:18px; margin-bottom:4px;">
     <center>
-      <%= image_tag current_user.avatarurl %>
+      <% if current_user.avatar.url == "" %>
+        <%= image_tag("https://s3-us-west-2.amazonaws.com/apavatars/ap_generic_avatar80.png") %>
+      <% else %>
+        <%= image_tag current_user.avatar.url(:small) %>
+      <% end %>
       <p class="acrofont"; style="margin-top:0px; margin-bottom:0px; font-size:120%; font-weight:normal;">Welcome, <%= @username %>!</p>
       Points (all-time): 1,286
       Points (this month): 412
