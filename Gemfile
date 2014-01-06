@@ -26,6 +26,16 @@ group :assets do
 end
 
 gem 'jquery-rails'
+gem 'minitest-rails'
+
+group :test do
+  gem 'minitest-rails-capybara'
+  #gem 'capybara-webkit'
+ # gem 'selenium-webdriver'
+  gem 'turn'
+  gem 'launchy'
+  gem 'simplecov', :require => false
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
