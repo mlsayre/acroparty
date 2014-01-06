@@ -3,7 +3,7 @@ require "test_helper"
 feature "User Username log in" do
   scenario "The member can log in with Username" do
     visit new_user_session_path
-    save_and_open_page
+
     #click_link "Sign in"
 
     # given a complete log in form

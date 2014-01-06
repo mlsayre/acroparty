@@ -16,6 +16,14 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
   fixtures :all
 
+def sign_in(user)
+  visit new_user_session_path
+  fill_in "Username or Email", with: users(user).email
+  fill_in "Password", with: "password"
+
+  click_on "Sign in"
+end
+
 class ActionDispatch::IntegrationTest
   include Rails.application.routes.url_helpers
   include Capybara::DSL

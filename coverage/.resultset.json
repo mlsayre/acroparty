@@ -583,9 +583,9 @@
         1,
         null,
         1,
-        2,
-        2,
-        2,
+        3,
+        3,
+        3,
         null,
         0,
         null,
@@ -598,7 +598,7 @@
         1,
         null,
         1,
-        2,
+        3,
         null,
         null,
         null
@@ -614,11 +614,33 @@
       "/home/matt/acroparty/app/controllers/pages_controller.rb": [
         1,
         1,
-        2,
+        4,
+        null,
+        null
+      ],
+      "/home/matt/acroparty/test/features/change_username_test.rb": [
+        1,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        null,
+        1,
+        null,
         null,
         null
       ]
     },
-    "timestamp": 1388984474
+    "timestamp": 1388985173
   }
 }
