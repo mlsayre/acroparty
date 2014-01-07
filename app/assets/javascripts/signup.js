@@ -9,5 +9,3 @@ jQuery(document).ready(function($) {
     $('#user_about').change(updateCountdown);
     $('#user_about').keyup(updateCountdown);
 });
-
-$("#chatbox").scrollTop(10000);

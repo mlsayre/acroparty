@@ -12,11 +12,10 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require private_pub
 //= require foundation
-//= require signup
 //= require jquery.jcrop
 //= require papercrop
+//= require scrollbardown
 //= require_tree .
 
 $(function(){ $(document).foundation(); });
