@@ -1,4 +1,8 @@
 Acroparty::Application.routes.draw do
+  get "room/FamilyRoom"
+
+  get "room/Sauna"
+
   get "user/edit"
 
   get "user/update"
@@ -12,6 +16,8 @@ Acroparty::Application.routes.draw do
   end
 
   root :to => 'pages#landing'
+
+  resources :messages
 
   resources :pages do
     collection do

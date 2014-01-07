@@ -27,6 +27,8 @@ end
 
 gem 'jquery-rails'
 gem 'minitest-rails'
+gem 'private_pub'
+gem 'thin'
 
 group :test do
   gem 'minitest-rails-capybara'
