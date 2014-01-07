@@ -1,13 +1,11 @@
 class RoomController < ApplicationController
-  def FamilyRoom
+  def familyroom
     @messages = Message.all
   end
 
-  def Sauna
+  def sauna
   end
 
-  def create
-    @message = Message.create!(params[:message])
-  end
+
 
 end

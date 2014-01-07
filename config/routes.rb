@@ -1,9 +1,9 @@
 Acroparty::Application.routes.draw do
   get "messages/create"
 
-  get "room/FamilyRoom"
+  get "room/familyroom"
 
-  get "room/Sauna"
+  get "room/sauna"
 
   get "user/edit"
 

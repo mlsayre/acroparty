@@ -101,6 +101,13 @@ body {
   text-align: center;
 }
 
+.chattable {
+  display: block;
+  height: 280px;
+  border: 2px solid black;
+  overflow-y: auto;
+}
+
 a:hover {
   cursor: pointer; }
 

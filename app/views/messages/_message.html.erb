@@ -1,0 +1,5 @@
+<li>
+  <span class="created_at" style="font-size:.7em"><%= message.created_at.strftime("%l:%M%p") %></span>
+  <span><%= message.user.username if message.user %>:</span>
+  <span><%= message.content %></span>
+</li>
