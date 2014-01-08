@@ -101,9 +101,16 @@ body {
   text-align: center;
 }
 
-.chattable {
+.usertable {
   display: block;
   height: 280px;
+  border: 2px solid black;
+  overflow-y: auto;
+}
+
+.chattable {
+  display: block;
+  height: 243px;
   border: 2px solid black;
   overflow-y: auto;
 }
