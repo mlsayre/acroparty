@@ -30,7 +30,9 @@
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" id="userlistbox">
       <%= image_tag current_user.avatar.url, :size => "10x10" %>
-      <%= current_user.username %>
+      <%= current_user.username %><br/>
+      <%= @user[2].username %><br/>
+      <%= @user.count %> members!
     </div>
   </div>
   <div class="small-7 columns">
@@ -43,7 +45,7 @@
       <%= subscribe_to "/messages/new" %>
       <%= form_for Message.new, remote: true do |f| %>
         <div class="row">
-          <div class="small-10 columns"><%= f.text_field :content, :placeholder => "Enter chat here..." %></div>
+          <div class="small-10 columns"><%= f.text_field :content, :placeholder => "Enter chat here...", :autofocus => true %></div>
           <%= f.hidden_field :user_id, :value => current_user.id %>
           <div class="small-2 columns"><%= f.submit "Send", :class => "button tiny radius centerall", :style => "margin-top:2px; margin-left:-6px" %>
           </div>

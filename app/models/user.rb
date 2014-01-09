@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                   :gamesplayed, :ignores, :boots, :highestscore, :dateofbirth,
                   :avatar_original_w, :avatar_original_h, :avatar_box_w,
                   :avatar_crop_x, :avatar_crop_y, :avatar_crop_w, :avatar_crop_h,
-                  :avatar_aspect
+                  :avatar_aspect, :time_zone
 
   attr_accessor :login
 

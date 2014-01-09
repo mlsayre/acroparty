@@ -104,14 +104,14 @@ body {
 .usertable {
   display: block;
   height: 280px;
-  border: 2px solid black;
+  border: 2px solid gray;
   overflow-y: auto;
 }
 
 .chattable {
   display: block;
   height: 243px;
-  border: 2px solid black;
+  border: 2px solid gray;
   overflow-y: auto;
 }
 

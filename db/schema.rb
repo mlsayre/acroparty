@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140107092518) do
+ActiveRecord::Schema.define(:version => 20140109003906) do
 
   create_table "messages", :force => true do |t|
     t.datetime "created_at", :null => false
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20140107092518) do
     t.integer  "avatar_file_size"
     t.datetime "avatar_updated_at"
     t.boolean  "admin",                  :default => false
+    t.string   "time_zone"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
