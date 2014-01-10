@@ -15,6 +15,7 @@ class User < ActiveRecord::Base
   attr_accessor :login
 
   has_many :messages
+  has_one :player
 
   # attr_accessible :title, :body
   validates_presence_of :username

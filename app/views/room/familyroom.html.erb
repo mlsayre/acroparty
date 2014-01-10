@@ -29,6 +29,9 @@
 <div class="row">
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" id="userlistbox">
+      <% @playerlist.each do |player| %>
+        <%= player.name %><br />
+      <% end %>
       <%= image_tag current_user.avatar.url, :size => "10x10" %>
       <%= current_user.username %><br/>
       <%= @user[2].username %><br/>
@@ -42,6 +45,7 @@
       </ul>
     </div>
     <div class="small-12">
+      <%= subscribe_to "/messages/familyroom" %>
       <%= form_for Message.new, remote: true do |f| %>
         <div class="row">
           <div class="small-10 columns"><%= f.text_field :content, :placeholder => "Enter chat here...", :autofocus => true %></div>
@@ -50,7 +54,6 @@
           </div>
         </div>
       <% end %>
-       <%= subscribe_to "/messages/familyroom" %>
     </div>
   </div>
   <div class="small-2 columns centerall">
@@ -59,3 +62,8 @@
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>
+<script>
+window.onunload = function() {
+  window.alert('does this work?');
+};
+</script>
