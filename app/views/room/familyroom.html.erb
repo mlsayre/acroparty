@@ -18,7 +18,7 @@
 </div>
 <div class="row">
   <div class="small-8 small-centered acrofont centerall">
-    <p style="margin-top:-40px; margin-bottom:-40px; font-size:340%; font-weight:normal;">ACRO</p>
+    <p id="acroletters" style="margin-top:-40px; margin-bottom:-40px; font-size:340%; font-weight:normal;">ACRO</p>
   </div>
 </div>
 <div class="row">
@@ -42,7 +42,6 @@
       </ul>
     </div>
     <div class="small-12">
-      <%= subscribe_to "/messages/new" %>
       <%= form_for Message.new, remote: true do |f| %>
         <div class="row">
           <div class="small-10 columns"><%= f.text_field :content, :placeholder => "Enter chat here...", :autofocus => true %></div>
@@ -51,6 +50,7 @@
           </div>
         </div>
       <% end %>
+       <%= subscribe_to "/messages/familyroom" %>
     </div>
   </div>
   <div class="small-2 columns centerall">
