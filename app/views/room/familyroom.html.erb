@@ -1,3 +1,12 @@
+<script type="text/JavaScript">
+window.addEventListener('beforeunload', function () {
+  $.ajax({
+    url: "/room/destroyplayer",
+    type: "delete"
+  });
+});
+</script>
+
 <div class="row">
   <div class="small-6 columns centerall">
     <h2>Round 1 of 10</h2>
@@ -62,8 +71,4 @@
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>
-<script>
-window.onunload = function() {
-  window.alert('does this work?');
-};
-</script>
+

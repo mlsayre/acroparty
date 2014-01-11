@@ -21,6 +21,12 @@ Acroparty::Application.routes.draw do
 
   resources :messages
 
+  resources :room do
+    collection do
+      delete 'destroyplayer'
+    end
+  end
+
   resources :pages do
     collection do
       get 'foyer' => 'pages#foyer'
