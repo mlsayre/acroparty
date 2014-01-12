@@ -5,6 +5,10 @@ window.addEventListener('beforeunload', function () {
     type: "delete"
   });
 });
+
+setInterval( function() {
+  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+}, 4000);
 </script>
 
 <div class="row">
@@ -37,11 +41,11 @@ window.addEventListener('beforeunload', function () {
 </div>
 <div class="row">
   <div class="small-3 columns">
-    <div class="small-12 float-right usertable" id="userlistbox">
-      <%= @playerlist.count %>/12 players:<br />
-      <% @playerlist.each do |player| %>
-        <%= player.name %><br />
-      <% end %>
+    <div class="small-12 float-right usertable">
+      <p id="userlistbox"><%= @playerlist.count %>/12 players:<br />
+        <% @playerlist.each do |player| %>
+          <%= player.name %><br />
+        <% end %></p>
     </div>
   </div>
   <div class="small-7 columns">
@@ -68,20 +72,4 @@ window.addEventListener('beforeunload', function () {
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>
-
-<script type="text/JavaScript">
-function updateplayerlist() {
-  $.ajax({
-    url: '/room/familyroom',
-    success: function(data) {
-      $('#userlistbox').load('/room/familyroom' '@uselistbox')
-    }
-  });
-  setTimeout(updateplayerlist, 4000);
-}
-
-$(document).ready(function() {
-  setTimeout(updateplayerlist, 4000);
-});
-</script>
 
