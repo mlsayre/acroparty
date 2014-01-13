@@ -1,6 +1,6 @@
-if (gon.watch.playerlistcount > 1)
+if (gon.playerlistcount > 1)
   {
-  $("#acroletters").hide();
+  $("#acroletters").replaceWith('Waiting for at least 3 players...');
   }
 else
   {

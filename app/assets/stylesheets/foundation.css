@@ -92,6 +92,13 @@ body {
   -1px 0px 0 #00f1f5,
   3px 3px 3px #aaa; }
 
+.verticalcenter {
+  margin:auto;
+  position:absolute;
+  top:0; left:0; bottom:0; right:0;
+}
+
+
 .centertext {
   text-align: center; }
 
@@ -99,6 +106,12 @@ body {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+}
+
+.acrotable {
+  display: block;
+  height: 160px;
+  border: 1px solid black;
 }
 
 .usertable {

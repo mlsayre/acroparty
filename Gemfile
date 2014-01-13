@@ -29,7 +29,7 @@ gem 'jquery-rails'
 gem 'minitest-rails'
 gem 'private_pub'
 gem 'thin'
-gem 'gon', '3.0.5'
+gem 'gon', '4.1.1'
 
 group :test do
   gem 'minitest-rails-capybara'

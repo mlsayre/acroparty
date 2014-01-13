@@ -92,7 +92,7 @@ GEM
     foundation-rails (5.0.2.0)
       railties (>= 3.1.0)
       sass (>= 3.2.0)
-    gon (3.0.5)
+    gon (4.1.1)
       actionpack (>= 2.3.0)
       json
     hike (1.2.3)
@@ -215,7 +215,7 @@ DEPENDENCIES
   devise
   figaro
   foundation-rails
-  gon (= 3.0.5)
+  gon (= 4.1.1)
   jquery-rails
   launchy
   minitest-rails
