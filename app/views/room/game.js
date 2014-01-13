@@ -1,0 +1,1 @@
+$(#acroletters).hide();

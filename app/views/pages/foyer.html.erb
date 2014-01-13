@@ -17,10 +17,9 @@
       <%= link_to "Rules", foyer_path, :class => "button round" %>
     </center>
   </div>
-  <div class="small-5 columns" style="margin-top:18px; margin-bottom:4px;">
-    <center>
-      Rooms bla bla
-    </center>
+  <div class="small-5 columns centerall" style="margin-top:18px; margin-bottom:4px;">
+    Game Rooms:<br />
+    <%= link_to "Living Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players
   </div>
   <div class="small-4 columns" style="margin-top:18px; margin-bottom:4px;">
     <center>
@@ -29,10 +28,12 @@
   </div>
 </div>
 <div class="row">
-  <div class="large-4"; style="margin-top:100px;">
-    <center>
-      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-    </center>
+  <div class="large-4 centerall"; style="margin-top:100px;">
+    Online Users:<br/>
+    <% @player.each do |player| %>
+      <%= player.name %>(<%= player.room %><br />
+    <% end %>
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
   </div>
 </div>
 

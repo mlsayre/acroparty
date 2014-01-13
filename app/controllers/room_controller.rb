@@ -7,6 +7,7 @@ class RoomController < ApplicationController
     @user = User.all
     @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
     @playerlist = Player.where(:room => "familyroom")
+    gon.playerlistcount = @playerlist.count
 
   end
 

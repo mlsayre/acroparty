@@ -15,7 +15,6 @@
 //= require foundation
 //= require jquery.jcrop
 //= require papercrop
-//= require scrollbardown
-//= require_tree .
+//= require_directory .
 
 $(function(){ $(document).foundation(); });
