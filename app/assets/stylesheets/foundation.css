@@ -121,6 +121,12 @@ body {
   overflow-y: auto;
 }
 
+.roomslisttable {
+  display: block;
+  height: 160px;
+  border: 1px solid black;
+}
+
 .chattable {
   display: block;
   height: 243px;

@@ -1,6 +1,5 @@
 <script type="text/JavaScript">
 window.addEventListener('beforeunload', function () {
-  'Are you sure you want to quit the game and leave this room?'
   $.ajax({
     url: "/room/destroyplayer",
     type: "delete"

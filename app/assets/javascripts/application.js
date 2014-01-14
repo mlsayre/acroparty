@@ -15,6 +15,8 @@
 //= require foundation
 //= require jquery.jcrop
 //= require papercrop
+//= require spin
+//= require jquery.spin
 //= require_directory .
 
 $(function(){ $(document).foundation(); });
