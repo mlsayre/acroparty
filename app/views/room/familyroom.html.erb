@@ -8,12 +8,13 @@ window.addEventListener('beforeunload', function () {
 
 setInterval( function() {
   $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-}, 4000);
+}, 2000);
 </script>
 
 <div class="row">
+  <%= subscribe_to "/familyroom/game" %>
   <div class="small-6 columns centerall">
-    <h2>Round 1 of 10</h2>
+    <h2 id="roundtext">Round 1 of 10</h2>
   </div>
   <div class="small-6 columns centerall">
     <h2>Time remaining</h2>
@@ -73,6 +74,5 @@ setInterval( function() {
   </div>
 </div>
 
-<%= include_gon %>
 <%= javascript_include_tag "game/scrollbardown" %>
 <%= javascript_include_tag "game/game" %>

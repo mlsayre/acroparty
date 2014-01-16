@@ -4,5 +4,9 @@ if (gon.playerlistcount > 1)
   }
 else
   {
-  $("#acroletters").show();
-  }
+  $("#acroletters").hide();
+  };
+
+PrivatePub.subscribe("/familyroom/game", function(data, channel) {
+  $("#roundtext").replaceWith(data.game_message);
+});

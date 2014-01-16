@@ -8,6 +8,11 @@ class RoomController < ApplicationController
     @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
     @playerlist = Player.where(:room => "familyroom")
     gon.playerlistcount = @playerlist.count
+    if @playerlist.count == 1
+      PrivatePub.publish_to "/familyroom/game", :game_message => "Only 1 player"
+    elsif @playerlist.count == 2
+      PrivatePub.publish_to "/familyroom/game", :game_message => "More than 1"
+    end
 
   end
 
