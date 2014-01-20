@@ -1,18 +1,50 @@
+<%= subscribe_to "/messages/familyroom" %>
+<%= subscribe_to "/familyroom/game" %>
+
 <script type="text/JavaScript">
+<% publish_to "/familyroom/game" do %>
+  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+<% end %>
 window.addEventListener('beforeunload', function () {
   $.ajax({
     url: "/room/destroyplayer",
     type: "delete"
   });
+  <% publish_to "/familyroom/game" do %>
+    setTimeout( function() {
+      $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+    }, 100);
+
+  <% end %>
 });
 
-setInterval( function() {
-  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-}, 2000);
-</script>
+function waiting() {
+  <% publish_to "/familyroom/game" do %>
+  $("#roundtext").text("Waiting for more players");
+  <% end %>
+}
 
+function bester() {
+  <% publish_to "/familyroom/game" do %>
+  $("#roundtext").text("Got one player");
+  <% end %>
+}
+
+
+if (gon.playerlistcount < 2 )
+  {
+    bester();
+  }
+if (gon.playerlistcount == 2 )
+  {
+    waiting();
+  }
+
+
+
+
+</script>
 <div class="row">
-  <%= subscribe_to "/familyroom/game" %>
   <div class="small-6 columns centerall">
     <h2 id="roundtext">Round 1 of 10</h2>
   </div>
@@ -25,14 +57,18 @@ setInterval( function() {
     <p>0 of 5 Answers Submitted</p>
   </div>
   <div class="small-4 columns centerall">
-    <h3>Category</h3>
+    <h3>
+      "<%= @randomcategory.sample %>"
+    </h3>
   </div>
   <div class="small-4 columns">
   </div>
 </div>
 <div class="row">
   <div class="small-10 small-centered acrotable acrofont centerall">
-    <p id="acroletters" class="verticalcenter" style="font-size:340%; margin-top:-20px; margin-bottom:40px;">ACRO</p>
+
+    <p id="acroletters" class="verticalcenter" style="font-size:340%; margin-top:-20px; margin-bottom:40px;">
+      <%= @letterpool.sample(4).join %></p>
   </div>
 </div>
 <div class="row">
@@ -42,7 +78,7 @@ setInterval( function() {
 </div>
 <div class="row">
   <div class="small-3 columns">
-    <div class="small-12 float-right usertable">
+    <div class="small-12 float-right usertable" style="padding-left:6px">
       <p id="userlistbox"><%= @playerlist.count %>/12 players:<br />
         <% @playerlist.each do |player| %>
           <%= player.name %><br />
@@ -56,7 +92,6 @@ setInterval( function() {
       </ul>
     </div>
     <div class="small-12">
-      <%= subscribe_to "/messages/familyroom" %>
       <%= form_for Message.new, remote: true do |f| %>
         <div class="row">
           <div class="small-10 columns"><%= f.text_field :content, :placeholder => "Enter chat here...", :autofocus => true %></div>
