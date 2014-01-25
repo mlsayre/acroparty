@@ -1,49 +1,28 @@
 <%= subscribe_to "/messages/familyroom" %>
 <%= subscribe_to "/familyroom/game" %>
 
-<script type="text/JavaScript">
-<% publish_to "/familyroom/game" do %>
-  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-<% end %>
-window.addEventListener('beforeunload', function () {
+<script>
+
+function userLeaves(){
   $.ajax({
     url: "/room/destroyplayer",
     type: "delete"
   });
   <% publish_to "/familyroom/game" do %>
-    setTimeout( function() {
-      $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-    }, 100);
-
+  setTimeout( function() {
+    $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+  }, 500);
   <% end %>
+}
+
+
+$(window).on('beforeunload', function () {
+  userLeaves()
 });
-
-function waiting() {
-  <% publish_to "/familyroom/game" do %>
-  $("#roundtext").text("Waiting for more players");
-  <% end %>
-}
-
-function bester() {
-  <% publish_to "/familyroom/game" do %>
-  $("#roundtext").text("Got one player");
-  <% end %>
-}
-
-
-if (gon.playerlistcount < 2 )
-  {
-    bester();
-  }
-if (gon.playerlistcount == 2 )
-  {
-    waiting();
-  }
-
-
 
 
 </script>
+
 <div class="row">
   <div class="small-6 columns centerall">
     <h2 id="roundtext">Round 1 of 10</h2>
@@ -79,10 +58,11 @@ if (gon.playerlistcount == 2 )
 <div class="row">
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" style="padding-left:6px">
-      <p id="userlistbox"><%= @playerlist.count %>/12 players:<br />
+      <div id="userlistbox"><%= @playerlist.count %>/12 players:<br />
         <% @playerlist.each do |player| %>
           <%= player.name %><br />
-        <% end %></p>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="small-7 columns">
