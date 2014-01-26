@@ -2,25 +2,20 @@
 <%= subscribe_to "/familyroom/game" %>
 
 <script>
+setInterval(function() {
+  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+}, 6000 );
 
 function userLeaves(){
   $.ajax({
     url: "/room/destroyplayer",
     type: "delete"
   });
-  <% publish_to "/familyroom/game" do %>
-  setTimeout( function() {
-    $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-  }, 500);
-  <% end %>
 }
-
 
 $(window).on('beforeunload', function () {
   userLeaves()
 });
-
-
 </script>
 
 <div class="row">
