@@ -86,3 +86,16 @@ $(window).on('beforeunload', function () {
 
 <%= javascript_include_tag "game/scrollbardown" %>
 <%= javascript_include_tag "game/game" %>
+
+<script>
+<% publish_to "/familyroom/game" do %>
+if (<%= @playerlist.count %> == 1)
+  {
+    $("#roundtext").text("One player");
+  }
+else
+  {
+    $("#roundtext").text("Two players");
+  }
+  <% end %>
+</script>
