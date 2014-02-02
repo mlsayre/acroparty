@@ -28,10 +28,28 @@ class RoomController < ApplicationController
                       "Music", "Art", "Animals", "Science", "Government", "Fashion",
                       "Books", "Travel", "Celebrities", "Romance", "Technology",
                       "Family", "School", "Nature", "Health"]
-    if Famroomacroletters.select("let4").first == nil
-      Famroomacroletters.create(:let4 => @letterpool.sample(4).join)
+    if Famroomacroletters.select("let3").first == nil
+      Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
+                                :let4 => @letterpool.sample(4).join,
+                                :let5 => @letterpool.sample(5).join,
+                                :let6 => @letterpool.sample(6).join,
+                                :let7 => @letterpool.sample(7).join)
+      Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
+                                :let4 => @letterpool.sample(4).join,
+                                :let5 => @letterpool.sample(5).join,
+                                :let6 => @letterpool.sample(6).join,
+                                :let7 => @letterpool.sample(7).join)
     end
-    @testacro = Famroomacroletters.find(:first).let4
+    @round1letters = Famroomacroletters.find(:first).let3
+    @round2letters = Famroomacroletters.find(:first).let4
+    @round3letters = Famroomacroletters.find(:first).let5
+    @round4letters = Famroomacroletters.find(:first).let6
+    @round5letters = Famroomacroletters.find(:first).let7
+    @round6letters = Famroomacroletters.find(:last).let3
+    @round7letters = Famroomacroletters.find(:last).let4
+    @round8letters = Famroomacroletters.find(:last).let5
+    @round9letters = Famroomacroletters.find(:last).let6
+    @round10letters = Famroomacroletters.find(:last).let7
 
   end
 
