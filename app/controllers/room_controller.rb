@@ -4,6 +4,7 @@ class RoomController < ApplicationController
 
   def familyroom
     @messages = Message.all
+    @famroomacroletters = Famroomacroletters.all
     @user = User.all
     @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
     @playerlist = Player.where(:room => "familyroom")
@@ -27,6 +28,11 @@ class RoomController < ApplicationController
                       "Music", "Art", "Animals", "Science", "Government", "Fashion",
                       "Books", "Travel", "Celebrities", "Romance", "Technology",
                       "Family", "School", "Nature", "Health"]
+    if Famroomacroletters.select("let4").first == nil
+      Famroomacroletters.create(:let4 => @letterpool.sample(4).join)
+    end
+    @testacro = Famroomacroletters.find(:first).let4
+
   end
 
   def destroyplayer

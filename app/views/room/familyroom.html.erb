@@ -4,7 +4,7 @@
 <script>
 setInterval(function() {
   $("#userlistbox").load("/room/familyroom #userlistbox", ".");
-}, 6000 );
+}, 5000 );
 
 function userLeaves(){
   $.ajax({
@@ -42,7 +42,7 @@ $(window).on('beforeunload', function () {
   <div class="small-10 small-centered acrotable acrofont centerall">
 
     <p id="acroletters" class="verticalcenter" style="font-size:340%; margin-top:-20px; margin-bottom:40px;">
-      <%= @letterpool.sample(4).join %></p>
+      ...</p>
   </div>
 </div>
 <div class="row">
@@ -89,13 +89,13 @@ $(window).on('beforeunload', function () {
 
 <script>
 <% publish_to "/familyroom/game" do %>
-if (<%= @playerlist.count %> == 1)
+if (<%= @playerlist.count %> < 2)
   {
-    $("#roundtext").text("One player");
+    $("#acroletters").text("Waiting.");
   }
 else
   {
-    $("#roundtext").text("Two players");
+    $("#acroletters").text("<%= @testacro %>");
   }
   <% end %>
 </script>

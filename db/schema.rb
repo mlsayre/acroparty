@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140110203212) do
+ActiveRecord::Schema.define(:version => 20140202025958) do
+
+  create_table "famroomacroletters", :force => true do |t|
+    t.string "let3"
+    t.string "let4"
+    t.string "let5"
+    t.string "let6"
+    t.string "let7"
+  end
 
   create_table "messages", :force => true do |t|
     t.datetime "created_at", :null => false
