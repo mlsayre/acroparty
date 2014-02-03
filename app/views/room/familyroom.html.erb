@@ -22,19 +22,19 @@ $(window).on('beforeunload', function () {
   <div class="small-6 columns centerall">
     <h2 id="roundtext">Round 1 of 10</h2>
   </div>
-  <div class="small-6 columns centerall">
-    <h2>Time remaining</h2>
-  </div>
+  <h2><div id="timertext" class="small-6 columns centerall">
+    Time remaining
+  </div></h2>
 </div>
 <div class="row">
-  <div class="small-4 columns centerall">
+  <div id="submittedtext" class="small-4 columns centerall">
     <p>0 of 5 Answers Submitted</p>
   </div>
-  <div class="small-4 columns centerall">
-    <h3>
-      "<%= @randomcategory.sample %>"
-    </h3>
-  </div>
+  <h3><div id="categorytext" class="small-4 columns centerall">
+
+
+
+  </div></h3>
   <div class="small-4 columns">
   </div>
 </div>
@@ -46,7 +46,7 @@ $(window).on('beforeunload', function () {
   </div>
 </div>
 <div class="row">
-  <div class="small-8 small-centered columns centerall">
+  <div id="answerfield" class="small-8 small-centered columns centerall">
     <%= text_field_tag 'submission', nil, :style => "font-size:1.7em; visibility:visible; height:44px", :placeholder => "Enter your acro here..." %>
   </div>
 </div>
@@ -91,11 +91,13 @@ $(window).on('beforeunload', function () {
 <% publish_to "/familyroom/game" do %>
 if (<%= @playerlist.count %> < 2)
   {
-    $("#acroletters").text("Waiting.");
-  }
+    $("#acroletters").replaceWith("<br/>Waiting for<br/> at least 3 players...");
+    $("#roundtext").text("Round 0 of 10");
+    $("#categorytext").text("Category: Waiting...");
+}
 else
   {
-    $("#acroletters").text("<%= @round9letters %>");
+    game();
   }
   <% end %>
 </script>
