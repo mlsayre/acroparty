@@ -5,6 +5,7 @@ class RoomController < ApplicationController
   def familyroom
     @messages = Message.all
     @famroomacroletters = Famroomacroletters.all
+    @famroomgamestate = Famroomgamestate.all
     @user = User.all
     @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
     @playerlist = Player.where(:room => "familyroom")
@@ -50,6 +51,10 @@ class RoomController < ApplicationController
     @round8letters = Famroomacroletters.find(:last).let5
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
+
+    if @playerlist.count < 2 && Famroomgamestate.find(:first).activity != "waiting"
+      Famroomgamestate.create(:activity => "waiting")
+    end
 
   end
 

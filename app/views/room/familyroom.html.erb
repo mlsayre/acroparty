@@ -89,11 +89,12 @@ $(window).on('beforeunload', function () {
 
 <script>
 <% publish_to "/familyroom/game" do %>
-if (<%= @playerlist.count %> < 2)
+if (<%= Famroomgamestate.find(:first).activity == "waiting" %>)
   {
     $("#acroletters").replaceWith("<br/>Waiting for<br/> at least 3 players...");
     $("#roundtext").text("Round 0 of 10");
     $("#categorytext").text("Category: Waiting...");
+
 }
 else
   {

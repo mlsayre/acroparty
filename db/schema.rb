@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140202025958) do
+ActiveRecord::Schema.define(:version => 20140203083358) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(:version => 20140202025958) do
     t.string "let5"
     t.string "let6"
     t.string "let7"
+  end
+
+  create_table "famroomgamestates", :force => true do |t|
+    t.string  "activity"
+    t.integer "round"
+    t.boolean "inprogress"
   end
 
   create_table "messages", :force => true do |t|
