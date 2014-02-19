@@ -55,6 +55,8 @@ class RoomController < ApplicationController
     if @playerlist.count < 2 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
       Famroomacroletters.destroy_all
+    elsif @playerlist.count < 2
+      Famroomroundtime.destroy_all
     elsif @playerlist.count >= 2 && Famroomroundtime.select("r1write").first == nil
       Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
                              :r1prep => DateTime.now.utc + 10.seconds,
@@ -99,6 +101,49 @@ class RoomController < ApplicationController
                              :r10res => DateTime.now.utc + 1295.seconds,
                              :finalresults => DateTime.now.utc + 1310.seconds)
     end
+
+  @timer1prep = Famroomroundtime.find(:first).r1prep
+  @timer1write = Famroomroundtime.find(:first).r1write
+  @timer1vote = Famroomroundtime.find(:first).r1vote
+  @timer1res = Famroomroundtime.find(:first).r1res
+  @timer2prep = Famroomroundtime.find(:first).r2prep
+  @timer2write = Famroomroundtime.find(:first).r2write
+  @timer2vote = Famroomroundtime.find(:first).r2vote
+  @timer2res = Famroomroundtime.find(:first).r2res
+  @timer3prep = Famroomroundtime.find(:first).r3prep
+  @timer3write = Famroomroundtime.find(:first).r3write
+  @timer3vote = Famroomroundtime.find(:first).r3vote
+  @timer3res = Famroomroundtime.find(:first).r3res
+  @timer4prep = Famroomroundtime.find(:first).r4prep
+  @timer4write = Famroomroundtime.find(:first).r4write
+  @timer4vote = Famroomroundtime.find(:first).r4vote
+  @timer4res = Famroomroundtime.find(:first).r4res
+  @timer5prep = Famroomroundtime.find(:first).r5prep
+  @timer5write = Famroomroundtime.find(:first).r5write
+  @timer5vote = Famroomroundtime.find(:first).r5vote
+  @timer5res = Famroomroundtime.find(:first).r5res
+  @timer6prep = Famroomroundtime.find(:first).r6prep
+  @timer6write = Famroomroundtime.find(:first).r6write
+  @timer6vote = Famroomroundtime.find(:first).r6vote
+  @timer6res = Famroomroundtime.find(:first).r6res
+  @timer7prep = Famroomroundtime.find(:first).r7prep
+  @timer7write = Famroomroundtime.find(:first).r7write
+  @timer7vote = Famroomroundtime.find(:first).r7vote
+  @timer7res = Famroomroundtime.find(:first).r7res
+  @timer8prep = Famroomroundtime.find(:first).r8prep
+  @timer8write = Famroomroundtime.find(:first).r8write
+  @timer8vote = Famroomroundtime.find(:first).r8vote
+  @timer8res = Famroomroundtime.find(:first).r8res
+  @timer9prep = Famroomroundtime.find(:first).r9prep
+  @timer9write = Famroomroundtime.find(:first).r9write
+  @timer9vote = Famroomroundtime.find(:first).r9vote
+  @timer9res = Famroomroundtime.find(:first).r9res
+  @timer10prep = Famroomroundtime.find(:first).r10prep
+  @timer10write = Famroomroundtime.find(:first).r10write
+  @timer10vote = Famroomroundtime.find(:first).r10vote
+  @timer10res = Famroomroundtime.find(:first).r10res
+  @timernewgamestarts = Famroomroundtime.find(:first).newgamestarts
+  @timerfinalresults = Famroomroundtime.find(:first).finalresults
 
   end
 
