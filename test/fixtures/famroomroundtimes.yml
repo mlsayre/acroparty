@@ -1,0 +1,14 @@
+# Read about fixtures at
+# http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  R1Prep: 2014-02-18 13:03:15
+  R1Write: 2014-02-18 13:03:15
+  R1Vote: 2014-02-18 13:03:15
+  R1Res: 2014-02-18 13:03:15
+
+two:
+  R1Prep: 2014-02-18 13:03:15
+  R1Write: 2014-02-18 13:03:15
+  R1Vote: 2014-02-18 13:03:15
+  R1Res: 2014-02-18 13:03:15

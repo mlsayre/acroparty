@@ -3,7 +3,7 @@
 
 <script>
 setInterval(function() {
-  $("#userlistbox").load("/room/familyroom #userlistbox", ".");
+  $("#userlistbox").load("/room/familyroom #userlistbox");
 }, 5000 );
 
 function userLeaves(){
@@ -94,11 +94,10 @@ if (<%= Famroomgamestate.find(:first).activity == "waiting" %>)
     $("#acroletters").replaceWith("<br/>Waiting for<br/> at least 3 players...");
     $("#roundtext").text("Round 0 of 10");
     $("#categorytext").text("Category: Waiting...");
-
 }
 else
   {
     game();
   }
-  <% end %>
+<% end %>
 </script>

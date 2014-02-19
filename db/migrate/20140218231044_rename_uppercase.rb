@@ -1,0 +1,46 @@
+class RenameUppercase < ActiveRecord::Migration
+  def change
+    rename_column :famroomroundtimes, :R1Prep, :r1prep
+    rename_column :famroomroundtimes, :R1Res, :r1res
+    rename_column :famroomroundtimes, :R1Vote, :r1vote
+    rename_column :famroomroundtimes, :R1Write, :r1write
+    rename_column :famroomroundtimes, :R2Prep, :r2prep
+    rename_column :famroomroundtimes, :R2Res, :r2res
+    rename_column :famroomroundtimes, :R2Vote, :r2vote
+    rename_column :famroomroundtimes, :R2Write, :r2write
+    rename_column :famroomroundtimes, :R3Prep, :r3prep
+    rename_column :famroomroundtimes, :R3Res, :r3res
+    rename_column :famroomroundtimes, :R3Vote, :r3vote
+    rename_column :famroomroundtimes, :R3Write, :r3write
+    rename_column :famroomroundtimes, :R4Prep, :r4prep
+    rename_column :famroomroundtimes, :R4Res, :r4res
+    rename_column :famroomroundtimes, :R4Vote, :r4vote
+    rename_column :famroomroundtimes, :R4Write, :r4write
+    rename_column :famroomroundtimes, :R5Prep, :r5prep
+    rename_column :famroomroundtimes, :R5Res, :r5res
+    rename_column :famroomroundtimes, :R5Vote, :r5vote
+    rename_column :famroomroundtimes, :R5Write, :r5write
+    rename_column :famroomroundtimes, :R6Prep, :r6prep
+    rename_column :famroomroundtimes, :R6Res, :r6res
+    rename_column :famroomroundtimes, :R6Vote, :r6vote
+    rename_column :famroomroundtimes, :R6Write, :r6write
+    rename_column :famroomroundtimes, :R7Prep, :r7prep
+    rename_column :famroomroundtimes, :R7Res, :r7res
+    rename_column :famroomroundtimes, :R7Vote, :r7vote
+    rename_column :famroomroundtimes, :R7Write, :r7write
+    rename_column :famroomroundtimes, :R8Prep, :r8prep
+    rename_column :famroomroundtimes, :R8Res, :r8res
+    rename_column :famroomroundtimes, :R8Vote, :r8vote
+    rename_column :famroomroundtimes, :R8Write, :r8write
+    rename_column :famroomroundtimes, :R9Prep, :r9prep
+    rename_column :famroomroundtimes, :R9Res, :r9res
+    rename_column :famroomroundtimes, :R9Vote, :r9vote
+    rename_column :famroomroundtimes, :R9Write, :r9write
+    rename_column :famroomroundtimes, :R10Prep, :r10prep
+    rename_column :famroomroundtimes, :R10Res, :r10res
+    rename_column :famroomroundtimes, :R10Vote, :r10vote
+    rename_column :famroomroundtimes, :R10Write, :r10write
+    rename_column :famroomroundtimes, :FinalResults, :finalresults
+    rename_column :famroomroundtimes, :NewGameStarts, :newgamestarts
+  end
+end

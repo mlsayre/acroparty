@@ -1,0 +1,40 @@
+class AddRoundsToFamroomroundtimes < ActiveRecord::Migration
+  def change
+    add_column :famroomroundtimes, :R2Prep, :datetime
+    add_column :famroomroundtimes, :R2Write, :datetime
+    add_column :famroomroundtimes, :R2Vote, :datetime
+    add_column :famroomroundtimes, :R2Res, :datetime
+    add_column :famroomroundtimes, :R3Prep, :datetime
+    add_column :famroomroundtimes, :R3Write, :datetime
+    add_column :famroomroundtimes, :R3Vote, :datetime
+    add_column :famroomroundtimes, :R3Res, :datetime
+    add_column :famroomroundtimes, :R4Prep, :datetime
+    add_column :famroomroundtimes, :R4Write, :datetime
+    add_column :famroomroundtimes, :R4Vote, :datetime
+    add_column :famroomroundtimes, :R4Res, :datetime
+    add_column :famroomroundtimes, :R5Prep, :datetime
+    add_column :famroomroundtimes, :R5Write, :datetime
+    add_column :famroomroundtimes, :R5Vote, :datetime
+    add_column :famroomroundtimes, :R5Res, :datetime
+    add_column :famroomroundtimes, :R6Prep, :datetime
+    add_column :famroomroundtimes, :R6Write, :datetime
+    add_column :famroomroundtimes, :R6Vote, :datetime
+    add_column :famroomroundtimes, :R6Res, :datetime
+    add_column :famroomroundtimes, :R7Prep, :datetime
+    add_column :famroomroundtimes, :R7Write, :datetime
+    add_column :famroomroundtimes, :R7Vote, :datetime
+    add_column :famroomroundtimes, :R7Res, :datetime
+    add_column :famroomroundtimes, :R8Prep, :datetime
+    add_column :famroomroundtimes, :R8Write, :datetime
+    add_column :famroomroundtimes, :R8Vote, :datetime
+    add_column :famroomroundtimes, :R8Res, :datetime
+    add_column :famroomroundtimes, :R9Prep, :datetime
+    add_column :famroomroundtimes, :R9Write, :datetime
+    add_column :famroomroundtimes, :R9Vote, :datetime
+    add_column :famroomroundtimes, :R9Res, :datetime
+    add_column :famroomroundtimes, :R10Prep, :datetime
+    add_column :famroomroundtimes, :R10Write, :datetime
+    add_column :famroomroundtimes, :R10Vote, :datetime
+    add_column :famroomroundtimes, :R10Res, :datetime
+  end
+end

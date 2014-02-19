@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140203083358) do
+ActiveRecord::Schema.define(:version => 20140218231044) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -25,6 +25,53 @@ ActiveRecord::Schema.define(:version => 20140203083358) do
     t.string  "activity"
     t.integer "round"
     t.boolean "inprogress"
+  end
+
+  create_table "famroomroundtimes", :force => true do |t|
+    t.datetime "r1prep"
+    t.datetime "r1write"
+    t.datetime "r1vote"
+    t.datetime "r1res"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+    t.datetime "r2prep"
+    t.datetime "r2write"
+    t.datetime "r2vote"
+    t.datetime "r2res"
+    t.datetime "r3prep"
+    t.datetime "r3write"
+    t.datetime "r3vote"
+    t.datetime "r3res"
+    t.datetime "r4prep"
+    t.datetime "r4write"
+    t.datetime "r4vote"
+    t.datetime "r4res"
+    t.datetime "r5prep"
+    t.datetime "r5write"
+    t.datetime "r5vote"
+    t.datetime "r5res"
+    t.datetime "r6prep"
+    t.datetime "r6write"
+    t.datetime "r6vote"
+    t.datetime "r6res"
+    t.datetime "r7prep"
+    t.datetime "r7write"
+    t.datetime "r7vote"
+    t.datetime "r7res"
+    t.datetime "r8prep"
+    t.datetime "r8write"
+    t.datetime "r8vote"
+    t.datetime "r8res"
+    t.datetime "r9prep"
+    t.datetime "r9write"
+    t.datetime "r9vote"
+    t.datetime "r9res"
+    t.datetime "r10prep"
+    t.datetime "r10write"
+    t.datetime "r10vote"
+    t.datetime "r10res"
+    t.datetime "finalresults"
+    t.datetime "newgamestarts"
   end
 
   create_table "messages", :force => true do |t|

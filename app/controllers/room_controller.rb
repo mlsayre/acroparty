@@ -54,12 +54,62 @@ class RoomController < ApplicationController
 
     if @playerlist.count < 2 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
+      Famroomacroletters.destroy_all
+    elsif @playerlist.count >= 2 && Famroomroundtime.select("r1write").first == nil
+      Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
+                             :r1prep => DateTime.now.utc + 10.seconds,
+                             :r1write => DateTime.now.utc + 25.seconds,
+                             :r1vote => DateTime.now.utc + 95.seconds,
+                             :r1res => DateTime.now.utc + 125.seconds,
+                             :r2prep => DateTime.now.utc + 140.seconds,
+                             :r2write => DateTime.now.utc + 155.seconds,
+                             :r2vote => DateTime.now.utc + 225.seconds,
+                             :r2res => DateTime.now.utc + 255.seconds,
+                             :r3prep => DateTime.now.utc + 270.seconds,
+                             :r3write => DateTime.now.utc + 285.seconds,
+                             :r3vote => DateTime.now.utc + 355.seconds,
+                             :r3res => DateTime.now.utc + 385.seconds,
+                             :r4prep => DateTime.now.utc + 400.seconds,
+                             :r4write => DateTime.now.utc + 415.seconds,
+                             :r4vote => DateTime.now.utc + 485.seconds,
+                             :r4res => DateTime.now.utc + 515.seconds,
+                             :r5prep => DateTime.now.utc + 530.seconds,
+                             :r5write => DateTime.now.utc + 545.seconds,
+                             :r5vote => DateTime.now.utc + 615.seconds,
+                             :r5res => DateTime.now.utc + 645.seconds,
+                             :r6prep => DateTime.now.utc + 660.seconds,
+                             :r6write => DateTime.now.utc + 675.seconds,
+                             :r6vote => DateTime.now.utc + 745.seconds,
+                             :r6res => DateTime.now.utc + 775.seconds,
+                             :r7prep => DateTime.now.utc + 790.seconds,
+                             :r7write => DateTime.now.utc + 805.seconds,
+                             :r7vote => DateTime.now.utc + 875.seconds,
+                             :r7res => DateTime.now.utc + 905.seconds,
+                             :r8prep => DateTime.now.utc + 920.seconds,
+                             :r8write => DateTime.now.utc + 935.seconds,
+                             :r8vote => DateTime.now.utc + 1005.seconds,
+                             :r8res => DateTime.now.utc + 1035.seconds,
+                             :r9prep => DateTime.now.utc + 1050.seconds,
+                             :r9write => DateTime.now.utc + 1065.seconds,
+                             :r9vote => DateTime.now.utc + 1135.seconds,
+                             :r9res => DateTime.now.utc + 1165.seconds,
+                             :r10prep => DateTime.now.utc + 1180.seconds,
+                             :r10write => DateTime.now.utc + 1195.seconds,
+                             :r10vote => DateTime.now.utc + 1265.seconds,
+                             :r10res => DateTime.now.utc + 1295.seconds,
+                             :finalresults => DateTime.now.utc + 1310.seconds)
     end
 
   end
 
   def destroyplayer
+    @famroomplayerlist = Player.where(:room => "familyroom")
     Player.delete_all(["name = ? AND room = ?", current_user.username, 'familyroom'])
+
+    if @famroomplayerlist.count < 2
+      Famroomroundtime.destroy_all
+    end
+
     respond_to do |format|
       format.html { redirect_to root_path, notice: 'Game ended.' }
       format.json { head :no_content }
