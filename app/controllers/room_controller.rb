@@ -52,13 +52,58 @@ class RoomController < ApplicationController
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
 
-    if @playerlist.count < 2 && Famroomgamestate.find(:first).activity != "waiting"
+    # ROUND TIMINGS
+    @newgamestartstime = 8
+    @r1preptime = 15
+    @r1writetime = 70
+    @r1votetime = 30
+    @r1restime = 15
+    @r2preptime = 15
+    @r2writetime = 70
+    @r2votetime = 30
+    @r2restime = 15
+    @r3preptime = 15
+    @r3writetime = 70
+    @r3votetime = 30
+    @r3restime = 15
+    @r4preptime = 15
+    @r4writetime = 70
+    @r4votetime = 30
+    @r4restime = 15
+    @r5preptime = 15
+    @r5writetime = 70
+    @r5votetime = 30
+    @r5restime = 15
+    @r6preptime = 15
+    @r6writetime = 70
+    @r6votetime = 30
+    @r6restime = 15
+    @r7preptime = 15
+    @r7writetime = 70
+    @r7votetime = 30
+    @r7restime = 15
+    @r8preptime = 15
+    @r8writetime = 70
+    @r8votetime = 30
+    @r8restime = 15
+    @r9preptime = 15
+    @r9writetime = 70
+    @r9votetime = 30
+    @r9restime = 15
+    @r10preptime = 15
+    @r10writetime = 70
+    @r10votetime = 30
+    @r10restime = 15
+    @finalresultstime = 30
+
+    if @playerlist.count < 1 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
-    elsif @playerlist.count < 2
+    elsif @playerlist.count < 1
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
-      eventArray.clear
-    elsif @playerlist.count >= 2 && Famroomroundtime.select("r1write").first == nil
+      eventArray = []
+
+    elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
       Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
                              :r1prep => DateTime.now.utc + 10.seconds,
                              :r1write => DateTime.now.utc + 25.seconds,
@@ -160,6 +205,12 @@ class RoomController < ApplicationController
 
       @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
 
+      @timetonextround = @nextround.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
+
+      # if @nextround == @timernewgamestarts
+      #   @nextround = "WORKS"
+      # end
+
     end
 
   end
@@ -168,9 +219,9 @@ class RoomController < ApplicationController
     @famroomplayerlist = Player.where(:room => "familyroom")
     Player.delete_all(["name = ? AND room = ?", current_user.username, 'familyroom'])
 
-    if @famroomplayerlist.count < 2
+    if @famroomplayerlist.count < 1
       Famroomroundtime.destroy_all
-      eventArray.clear
+      eventArray = []
     end
 
     respond_to do |format|

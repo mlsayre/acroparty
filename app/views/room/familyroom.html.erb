@@ -88,16 +88,68 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
-<% publish_to "/familyroom/game" do %>
-if (<%= Famroomgamestate.find(:first).activity == "waiting" %>)
-  {
-    $("#acroletters").replaceWith("<br/>Waiting for<br/> at least 3 players...");
-    $("#roundtext").text("Round 0 of 10");
-    $("#categorytext").text("Category: Waiting...");
+setTimeout(newGameStarts, 2000);
+
+function newGameStarts() {
+  $("#categorytext").text("Round: NewGameStarts");
+  setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }
-else
-  {
-    game();
+
+function r1prep() {
+  $("#categorytext").text("Round: r1prep");
+  setTimeout(r1write, <%= @r1preptime %>*1000);
+}
+
+function r1write() {
+  $("#categorytext").text("Round: r1write");
+  var answercount=61;
+  var votecount=26;
+  var counter=setInterval(timer, 1000);
+  function timer() {
+    answercount=answercount-1;
+    if (answercount <= -1)
+    {
+      clearInterval(counter);
+      return;
+    }
+    document.getElementById('timertext').innerHTML=answercount;
   }
-<% end %>
+
+  $("#acroletters").text("<%= @round1letters %>");
+  setTimeout(r1vote, <%= @r1writetime %>*1000);
+}
+
+function r1vote() {
+  $("#categorytext").text("Round: r1vote");
+  setTimeout(r2prep, <%= @r1votetime %>*1000);
+}
+
+function r2prep() {
+  $("#categorytext").text("Round: r2prep");
+  setTimeout(r2write, <%= @r2preptime %>*1000);
+}
+
+function r2write() {
+  $("#categorytext").text("Round: r2write");
+  var answercount=61;
+  var votecount=26;
+  var counter=setInterval(timer, 1000);
+  function timer() {
+    answercount=answercount-1;
+    if (answercount <= -1)
+    {
+      clearInterval(counter);
+      return;
+    }
+    document.getElementById('timertext').innerHTML=answercount;
+  }
+
+  $("#acroletters").text("<%= @round1letters %>");
+  setTimeout(r2vote, <%= @r2writetime %>*1000);
+}
+
+function r2vote() {
+  $("#categorytext").text("Round: r2vote");
+  setTimeout(r3prep, <%= @r2votetime %>*1000);
+}
 </script>
