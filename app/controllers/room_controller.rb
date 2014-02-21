@@ -53,7 +53,7 @@ class RoomController < ApplicationController
     @round10letters = Famroomacroletters.find(:last).let7
 
     # ROUND TIMINGS
-    @newgamestartstime = 8
+    @newgamestartstime = 10
     @r1preptime = 15
     @r1writetime = 70
     @r1votetime = 30
@@ -96,6 +96,18 @@ class RoomController < ApplicationController
     @r10restime = 15
     @finalresultstime = 30
 
+    roundTimeArray = [@newgamestartstime, @r1preptime, @r1writetime, @r1votetime, @r1restime,
+                      @r2preptime, @r2writetime, @r2votetime, @r2restime,
+                      @r3preptime, @r3writetime, @r3votetime, @r3restime,
+                      @r4preptime, @r4writetime, @r4votetime, @r4restime,
+                      @r5preptime, @r5writetime, @r5votetime, @r5restime,
+                      @r6preptime, @r6writetime, @r6votetime, @r6restime,
+                      @r7preptime, @r7writetime, @r7votetime, @r7restime,
+                      @r8preptime, @r8writetime, @r8votetime, @r8restime,
+                      @r9preptime, @r9writetime, @r9votetime, @r9restime,
+                      @r10preptime, @r10writetime, @r10votetime, @r10restime,
+                      @finalresultstime]
+
     if @playerlist.count < 1 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
     elsif @playerlist.count < 1
@@ -105,7 +117,7 @@ class RoomController < ApplicationController
 
     elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
       Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
-                             :r1prep => DateTime.now.utc + 10.seconds,
+                             :r1prep => DateTime.now.utc + roundTimeArray.take(1).sum.seconds,
                              :r1write => DateTime.now.utc + 25.seconds,
                              :r1vote => DateTime.now.utc + 95.seconds,
                              :r1res => DateTime.now.utc + 125.seconds,

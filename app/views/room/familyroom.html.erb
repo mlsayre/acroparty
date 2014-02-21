@@ -88,6 +88,11 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
+
+function joinr1write() {
+  setTimeout(r1write, <%= @joinr1writetime %>*1000)
+}
+
 setTimeout(newGameStarts, 2000);
 
 function newGameStarts() {
