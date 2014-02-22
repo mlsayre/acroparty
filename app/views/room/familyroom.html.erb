@@ -88,14 +88,11 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
-
-function joinr1write() {
-  setTimeout(r1write, <%= @joinr1writetime %>*1000)
+function joinInProgress() {
+  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000)
 }
 
-setTimeout(newGameStarts, 2000);
-
-function newGameStarts() {
+function newgamestarts() {
   $("#categorytext").text("Round: NewGameStarts");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }
@@ -157,4 +154,5 @@ function r2vote() {
   $("#categorytext").text("Round: r2vote");
   setTimeout(r3prep, <%= @r2votetime %>*1000);
 }
+
 </script>

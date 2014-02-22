@@ -118,48 +118,47 @@ class RoomController < ApplicationController
     elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
       Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
                              :r1prep => DateTime.now.utc + roundTimeArray.take(1).sum.seconds,
-                             :r1write => DateTime.now.utc + 25.seconds,
-                             :r1vote => DateTime.now.utc + 95.seconds,
-                             :r1res => DateTime.now.utc + 125.seconds,
-                             :r2prep => DateTime.now.utc + 140.seconds,
-                             :r2write => DateTime.now.utc + 155.seconds,
-                             :r2vote => DateTime.now.utc + 225.seconds,
-                             :r2res => DateTime.now.utc + 255.seconds,
-                             :r3prep => DateTime.now.utc + 270.seconds,
-                             :r3write => DateTime.now.utc + 285.seconds,
-                             :r3vote => DateTime.now.utc + 355.seconds,
-                             :r3res => DateTime.now.utc + 385.seconds,
-                             :r4prep => DateTime.now.utc + 400.seconds,
-                             :r4write => DateTime.now.utc + 415.seconds,
-                             :r4vote => DateTime.now.utc + 485.seconds,
-                             :r4res => DateTime.now.utc + 515.seconds,
-                             :r5prep => DateTime.now.utc + 530.seconds,
-                             :r5write => DateTime.now.utc + 545.seconds,
-                             :r5vote => DateTime.now.utc + 615.seconds,
-                             :r5res => DateTime.now.utc + 645.seconds,
-                             :r6prep => DateTime.now.utc + 660.seconds,
-                             :r6write => DateTime.now.utc + 675.seconds,
-                             :r6vote => DateTime.now.utc + 745.seconds,
-                             :r6res => DateTime.now.utc + 775.seconds,
-                             :r7prep => DateTime.now.utc + 790.seconds,
-                             :r7write => DateTime.now.utc + 805.seconds,
-                             :r7vote => DateTime.now.utc + 875.seconds,
-                             :r7res => DateTime.now.utc + 905.seconds,
-                             :r8prep => DateTime.now.utc + 920.seconds,
-                             :r8write => DateTime.now.utc + 935.seconds,
-                             :r8vote => DateTime.now.utc + 1005.seconds,
-                             :r8res => DateTime.now.utc + 1035.seconds,
-                             :r9prep => DateTime.now.utc + 1050.seconds,
-                             :r9write => DateTime.now.utc + 1065.seconds,
-                             :r9vote => DateTime.now.utc + 1135.seconds,
-                             :r9res => DateTime.now.utc + 1165.seconds,
-                             :r10prep => DateTime.now.utc + 1180.seconds,
-                             :r10write => DateTime.now.utc + 1195.seconds,
-                             :r10vote => DateTime.now.utc + 1265.seconds,
-                             :r10res => DateTime.now.utc + 1295.seconds,
-                             :finalresults => DateTime.now.utc + 1310.seconds)
+                             :r1write => DateTime.now.utc + roundTimeArray.take(2).sum.seconds,
+                             :r1vote => DateTime.now.utc + roundTimeArray.take(3).sum.seconds,
+                             :r1res => DateTime.now.utc + roundTimeArray.take(4).sum.seconds,
+                             :r2prep => DateTime.now.utc + roundTimeArray.take(5).sum.seconds,
+                             :r2write => DateTime.now.utc + roundTimeArray.take(6).sum.seconds,
+                             :r2vote => DateTime.now.utc + roundTimeArray.take(7).sum.seconds,
+                             :r2res => DateTime.now.utc + roundTimeArray.take(8).sum.seconds,
+                             :r3prep => DateTime.now.utc + roundTimeArray.take(9).sum.seconds,
+                             :r3write => DateTime.now.utc + roundTimeArray.take(10).sum.seconds,
+                             :r3vote => DateTime.now.utc + roundTimeArray.take(11).sum.seconds,
+                             :r3res => DateTime.now.utc + roundTimeArray.take(12).sum.seconds,
+                             :r4prep => DateTime.now.utc + roundTimeArray.take(13).sum.seconds,
+                             :r4write => DateTime.now.utc + roundTimeArray.take(14).sum.seconds,
+                             :r4vote => DateTime.now.utc + roundTimeArray.take(15).sum.seconds,
+                             :r4res => DateTime.now.utc + roundTimeArray.take(16).sum.seconds,
+                             :r5prep => DateTime.now.utc + roundTimeArray.take(17).sum.seconds,
+                             :r5write => DateTime.now.utc + roundTimeArray.take(18).sum.seconds,
+                             :r5vote => DateTime.now.utc + roundTimeArray.take(19).sum.seconds,
+                             :r5res => DateTime.now.utc + roundTimeArray.take(20).sum.seconds,
+                             :r6prep => DateTime.now.utc + roundTimeArray.take(21).sum.seconds,
+                             :r6write => DateTime.now.utc + roundTimeArray.take(22).sum.seconds,
+                             :r6vote => DateTime.now.utc + roundTimeArray.take(23).sum.seconds,
+                             :r6res => DateTime.now.utc + roundTimeArray.take(24).sum.seconds,
+                             :r7prep => DateTime.now.utc + roundTimeArray.take(25).sum.seconds,
+                             :r7write => DateTime.now.utc + roundTimeArray.take(26).sum.seconds,
+                             :r7vote => DateTime.now.utc + roundTimeArray.take(27).sum.seconds,
+                             :r7res => DateTime.now.utc + roundTimeArray.take(28).sum.seconds,
+                             :r8prep => DateTime.now.utc + roundTimeArray.take(29).sum.seconds,
+                             :r8write => DateTime.now.utc + roundTimeArray.take(30).sum.seconds,
+                             :r8vote => DateTime.now.utc + roundTimeArray.take(31).sum.seconds,
+                             :r8res => DateTime.now.utc + roundTimeArray.take(32).sum.seconds,
+                             :r9prep => DateTime.now.utc + roundTimeArray.take(33).sum.seconds,
+                             :r9write => DateTime.now.utc + roundTimeArray.take(34).sum.seconds,
+                             :r9vote => DateTime.now.utc + roundTimeArray.take(35).sum.seconds,
+                             :r9res => DateTime.now.utc + roundTimeArray.take(36).sum.seconds,
+                             :r10prep => DateTime.now.utc + roundTimeArray.take(37).sum.seconds,
+                             :r10write => DateTime.now.utc + roundTimeArray.take(38).sum.seconds,
+                             :r10vote => DateTime.now.utc + roundTimeArray.take(39).sum.seconds,
+                             :r10res => DateTime.now.utc + roundTimeArray.take(40).sum.seconds,
+                             :finalresults => DateTime.now.utc + roundTimeArray.take(41).sum.seconds)
 
-    elsif @playerlist.count >= 2
       @timer1prep = Famroomroundtime.find(:first).r1prep.utc
       @timer1write = Famroomroundtime.find(:first).r1write.utc
       @timer1vote = Famroomroundtime.find(:first).r1vote.utc
@@ -218,6 +217,23 @@ class RoomController < ApplicationController
       @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
 
       @timetonextround = @nextround.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
+
+      if @nextround == @timernewgamestarts
+        @timetojoin = @timernewgamestarts.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
+        @roundtojoin = "newgamestarts"
+        respond_to do |format|
+          format.html
+          format.js { render :js => "joinInProgress();" }
+        end
+      elsif @nextround == @timer1prep
+        @timetojoin = @timer1prep.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
+        @roundtojoin = r1prep
+        respond_to do |format|
+          format.html
+          format.js { render :js => "joinInProgress();" }
+        end
+      end
+
 
       # if @nextround == @timernewgamestarts
       #   @nextround = "WORKS"
