@@ -88,12 +88,43 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
+// decide which JS event the player will join next
 function joinInProgress() {
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
 joinInProgress();
 
+// Writing and voting timer
+function wtimer() {
+  var answercount=61; // Answer write time (s)
+  var writecounter=setInterval(writingtimer, 1000);
+  function writingtimer() {
+    answercount=answercount-1;
+    if (answercount <= -1)
+    {
+      clearInterval(writecounter);
+      return;
+    }
+    $("#timertext").text(answercount);
+  }
+}
+
+function vtimer() {
+  var votecount=26; // Vote time (s)
+  var votecounter=setInterval(votingtimer, 1000);
+  function votingtimer() {
+    votecount=votecount-1;
+    if (votecount <= -1)
+    {
+      clearInterval(votecounter);
+      return;
+    }
+    $("#timertext").text(votecount);
+  }
+}
+
+// gameplay rounds
 function newGameStarts() {
   $("#categorytext").text("Round: NewGameStarts");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
@@ -106,26 +137,20 @@ function r1prep() {
 
 function r1write() {
   $("#categorytext").text("Round: r1write");
-  var answercount=61;
-  var votecount=26;
-  var counter=setInterval(timer, 1000);
-  function timer() {
-    answercount=answercount-1;
-    if (answercount <= -1)
-    {
-      clearInterval(counter);
-      return;
-    }
-    document.getElementById('timertext').innerHTML=answercount;
-  }
-
+  wtimer();
   $("#acroletters").text("<%= @round1letters %>");
   setTimeout(r1vote, <%= @r1writetime %>*1000);
 }
 
 function r1vote() {
   $("#categorytext").text("Round: r1vote");
-  setTimeout(r2prep, <%= @r1votetime %>*1000);
+  vtimer();
+  setTimeout(r1res, <%= @r1votetime %>*1000);
+}
+
+function r1res() {
+  $("#categorytext").text("Round: r1res");
+  setTimeout(r2prep, <%= @r2restime %>*1000);
 }
 
 function r2prep() {
@@ -135,26 +160,20 @@ function r2prep() {
 
 function r2write() {
   $("#categorytext").text("Round: r2write");
-  var answercount=61;
-  var votecount=26;
-  var counter=setInterval(timer, 1000);
-  function timer() {
-    answercount=answercount-1;
-    if (answercount <= -1)
-    {
-      clearInterval(counter);
-      return;
-    }
-    document.getElementById('timertext').innerHTML=answercount;
-  }
-
-  $("#acroletters").text("<%= @round1letters %>");
+  wtimer();
+  $("#acroletters").text("<%= @round2letters %>");
   setTimeout(r2vote, <%= @r2writetime %>*1000);
 }
 
 function r2vote() {
   $("#categorytext").text("Round: r2vote");
-  setTimeout(r3prep, <%= @r2votetime %>*1000);
+  vtimer();
+  setTimeout(r2res, <%= @r2votetime %>*1000);
+}
+
+function r2res() {
+  $("#categorytext").text("Round: r2res");
+  setTimeout(r3prep, <%= @r2restime %>*1000);
 }
 
 </script>
