@@ -89,10 +89,12 @@ $(window).on('beforeunload', function () {
 
 <script>
 function joinInProgress() {
-  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000)
+  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
-function newgamestarts() {
+joinInProgress();
+
+function newGameStarts() {
   $("#categorytext").text("Round: NewGameStarts");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }

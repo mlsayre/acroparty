@@ -116,7 +116,7 @@ class RoomController < ApplicationController
       eventArray = []
 
     elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
-      Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
+      Famroomroundtime.create(:newgamestarts => DateTime.now.utc,
                              :r1prep => DateTime.now.utc + roundTimeArray.take(1).sum.seconds,
                              :r1write => DateTime.now.utc + roundTimeArray.take(2).sum.seconds,
                              :r1vote => DateTime.now.utc + roundTimeArray.take(3).sum.seconds,
@@ -158,6 +158,8 @@ class RoomController < ApplicationController
                              :r10vote => DateTime.now.utc + roundTimeArray.take(39).sum.seconds,
                              :r10res => DateTime.now.utc + roundTimeArray.take(40).sum.seconds,
                              :finalresults => DateTime.now.utc + roundTimeArray.take(41).sum.seconds)
+
+    end
 
       @timer1prep = Famroomroundtime.find(:first).r1prep.utc
       @timer1write = Famroomroundtime.find(:first).r1write.utc
@@ -220,18 +222,12 @@ class RoomController < ApplicationController
 
       if @nextround == @timernewgamestarts
         @timetojoin = @timernewgamestarts.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
-        @roundtojoin = "newgamestarts"
-        respond_to do |format|
-          format.html
-          format.js { render :js => "joinInProgress();" }
-        end
+        @roundtojoin = "newGameStarts"
+
       elsif @nextround == @timer1prep
         @timetojoin = @timer1prep.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
-        @roundtojoin = r1prep
-        respond_to do |format|
-          format.html
-          format.js { render :js => "joinInProgress();" }
-        end
+        @roundtojoin = "r1prep"
+
       end
 
 
@@ -239,7 +235,7 @@ class RoomController < ApplicationController
       #   @nextround = "WORKS"
       # end
 
-    end
+
 
   end
 
