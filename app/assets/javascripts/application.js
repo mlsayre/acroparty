@@ -16,6 +16,8 @@
 //= require jquery.jcrop
 //= require papercrop
 //= require spin
+//= require jquery.lettering
+//= require jquery.textillate
 //= require jquery.spin
 //= require_directory .
 

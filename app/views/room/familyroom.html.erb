@@ -42,7 +42,7 @@ $(window).on('beforeunload', function () {
   <div class="small-10 small-centered acrotable acrofont centerall">
 
     <p id="acroletters" class="verticalcenter" style="font-size:340%; margin-top:-20px; margin-bottom:40px;">
-      ...</p>
+      </p>
   </div>
 </div>
 <div class="row">
@@ -124,6 +124,35 @@ function vtimer() {
   }
 }
 
+// Letter display
+function showLetters() {
+  $("#acroletters").textillate( {
+    initialDelay: 0,
+    inEffects: [],
+    in: {
+      effect: 'fadeIn',
+      delayScale: 1,
+      delay: 1000,
+    },
+    callback: function () {
+      wtimer();
+    }
+  });
+}
+
+function removeLetters() {
+  $("#acroletters").textillate( {
+    autoStart: true,
+    outEffects: [ 'hinge'],
+    out: {
+      effect: 'hinge',
+      delayScale: 1,
+      delay: 600,
+      reverse: true,
+    }
+  });
+}
+
 // gameplay rounds
 function newGameStarts() {
   $("#categorytext").text("Round: NewGameStarts");
@@ -137,13 +166,16 @@ function r1prep() {
 
 function r1write() {
   $("#categorytext").text("Round: r1write");
-  wtimer();
   $("#acroletters").text("<%= @round1letters %>");
+  document.getElementById("acroletters").style.visibility="hidden";
+  showLetters();
   setTimeout(r1vote, <%= @r1writetime %>*1000);
 }
 
 function r1vote() {
   $("#categorytext").text("Round: r1vote");
+  document.getElementById("acroletters").style.visibility="visible";
+  removeLetters();
   vtimer();
   setTimeout(r1res, <%= @r1votetime %>*1000);
 }
@@ -160,8 +192,9 @@ function r2prep() {
 
 function r2write() {
   $("#categorytext").text("Round: r2write");
-  wtimer();
   $("#acroletters").text("<%= @round2letters %>");
+  document.getElementById("acroletters").style.visibility="hidden";
+  showLetters();
   setTimeout(r2vote, <%= @r2writetime %>*1000);
 }
 
