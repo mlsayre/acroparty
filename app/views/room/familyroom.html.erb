@@ -125,32 +125,32 @@ function vtimer() {
 }
 
 // Letter display
-function showLetters() {
-  $("#acroletters").textillate( {
-    initialDelay: 0,
-    inEffects: [],
-    in: {
-      effect: 'fadeIn',
-      delayScale: 1,
-      delay: 1000,
-    },
-    callback: function () {
-      wtimer();
-    }
-  });
-}
 
-function removeLetters() {
-  $("#acroletters").textillate( {
-    autoStart: true,
-    outEffects: [ 'hinge'],
-    out: {
-      effect: 'hinge',
-      delayScale: 1,
-      delay: 600,
-      reverse: true,
-    }
-  });
+function showLetters() {
+  var text = $('#acroletters').text();
+
+  var length = text.length;
+  var timeOut;
+  var character = 0;
+
+  (function typeWriter() {
+      timeOut = setTimeout(function() {
+          document.getElementById("acroletters").style.visibility="visible";
+          character++;
+
+          var type = text.substring(0, character);
+
+          $('#acroletters').text(type);
+
+          typeWriter();
+          $('#acroletters').addClass('animated fadeIn');
+          if (character == length) {
+              clearTimeout(timeOut);
+              wtimer();
+          }
+
+      }, 1500);
+  }());
 }
 
 // gameplay rounds
@@ -174,8 +174,9 @@ function r1write() {
 
 function r1vote() {
   $("#categorytext").text("Round: r1vote");
-  document.getElementById("acroletters").style.visibility="visible";
-  removeLetters();
+  //document.getElementById("acroletters").style.visibility="visible";
+  //$("#acroletters").text("");
+  $("#acroletters").addClass('animated flipOutX');
   vtimer();
   setTimeout(r1res, <%= @r1votetime %>*1000);
 }
@@ -193,8 +194,8 @@ function r2prep() {
 function r2write() {
   $("#categorytext").text("Round: r2write");
   $("#acroletters").text("<%= @round2letters %>");
-  document.getElementById("acroletters").style.visibility="hidden";
-  showLetters();
+  $("#acroletters").addClass('animated slideInRight');
+
   setTimeout(r2vote, <%= @r2writetime %>*1000);
 }
 

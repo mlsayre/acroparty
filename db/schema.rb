@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140218231044) do
+ActiveRecord::Schema.define(:version => 20140226004031) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -32,8 +32,6 @@ ActiveRecord::Schema.define(:version => 20140218231044) do
     t.datetime "r1write"
     t.datetime "r1vote"
     t.datetime "r1res"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
     t.datetime "r2prep"
     t.datetime "r2write"
     t.datetime "r2vote"
