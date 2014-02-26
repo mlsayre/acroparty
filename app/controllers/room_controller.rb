@@ -53,12 +53,12 @@ class RoomController < ApplicationController
     @round10letters = Famroomacroletters.find(:last).let7
 
     # ROUND TIMINGS
-    @newgamestartstime = 2  #10
-    @r1preptime = 2         #15
-    @r1writetime = 7        #70
-    @r1votetime = 3         #30
-    @r1restime = 1          #15
-    @r2preptime = 2         #15
+    @newgamestartstime = 10  #10
+    @r1preptime = 15         #15
+    @r1writetime = 70        #70
+    @r1votetime = 30         #30
+    @r1restime = 15          #15
+    @r2preptime = 15         #15
     @r2writetime = 70
     @r2votetime = 30
     @r2restime = 15

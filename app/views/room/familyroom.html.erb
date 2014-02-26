@@ -191,7 +191,7 @@ function r2prep() {
 function r2write() {
   $("#categorytext").text("Round: r2write");
   $("#acroletters").text("<%= @round2letters %>");
-  //document.getElementById("acroletters").style.visibility="visible";
+  document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   setTimeout(r2vote, <%= @r2writetime %>*1000);
 }
