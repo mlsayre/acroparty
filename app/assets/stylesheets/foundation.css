@@ -92,6 +92,24 @@ body {
   -1px 0px 0 #00f1f5,
   3px 3px 3px #aaa; }
 
+.acroinfo {
+  font-family:Russo One;
+  font-size:100%;
+  padding-bottom:0px;
+  margin-bottom:0px;
+  font-weight:normal;
+  color: #1f19b5;
+  text-shadow:
+  1px 1px 0 #00f1f5,
+  -1px -1px 0 #00f1f5,
+  1px -1px 0 #00f1f5,
+  -1px 1px 0 #00f1f5,
+  0px 1px 0 #00f1f5,
+  1px 0px 0 #00f1f5,
+  0px -1px 0 #00f1f5,
+  -1px 0px 0 #00f1f5,
+  3px 3px 3px #aaa; }
+
 .verticalcenter {
   margin:auto;
   position:absolute;

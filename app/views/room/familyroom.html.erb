@@ -90,6 +90,8 @@ $(window).on('beforeunload', function () {
 <script>
 // decide which JS event the player will join next, set up board
 function joinInProgress() {
+  $("#acroletters").css('fontSize', '100%');
+  $("#acroletters").html("<br/>Waiting to<br/> join next round...");
   $('#answerfield').addClass('animated fadeOutDown');
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
@@ -132,27 +134,32 @@ function showLetters() {
   var length = text.length;
   var timeOut;
   var character = 0;
-  (function typeWriter() {
+  $("#acroletters").css('fontSize', '340%');
+  function typeWriter() {
     timeOut = setTimeout(function() {
       document.getElementById("acroletters").style.visibility="visible";
       character++;
+      $('#acroletters').removeClass('animated fadeIn');
       var type = text.substring(0, character);
       $('#acroletters').text(type);
       $("#acroletters").removeClass('animated fadeOutUp');
       $('#acroletters').addClass('animated fadeIn');
       typeWriter();
-      if (character == length) {
+      if (character == length + 1) {
         clearTimeout(timeOut);
         wtimer();
         $('#answerfield').removeClass('animated fadeOutDown');
         $('#answerfield').addClass('animated fadeIn');
       }
     }, 1500);
-  }());
+  };
+  typeWriter();
 }
 
 // gameplay rounds
 function newGameStarts() {
+    $("#acroletters").text("");
+
   $("#categorytext").text("NewGameStarts");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }
