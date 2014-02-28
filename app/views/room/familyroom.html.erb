@@ -49,7 +49,7 @@ $(window).on('beforeunload', function () {
   <%= form_for Famroomanswer.new, remote: true do |a| %>
     <div id="answerfield" class="small-8 small-centered columns centerall">
       <%= a.hidden_field :user_id, :value => current_user.id %>
-      <%= a.hidden_field :roundstarted, :value => @roundstartedtime %>
+      <%= a.hidden_field :round, :id => "answerroundnumber" %>
       <%= a.text_field :answer, :id => "answertextfield", :style => "font-size:1.7em; visibility:visible; height:44px", :placeholder => "Enter your acro here..." %>
     </div>
     <%= a.submit "", :id => "answersubmit", :style => "display:none;" %>
@@ -98,6 +98,8 @@ function joinInProgress() {
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Waiting to<br/> join next round...");
   $('#answerfield').addClass('animated fadeOutDown');
+  $("#answertextfield").attr("disabled", true);
+  $("#answersubmit").attr("disabled", true);
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
@@ -108,14 +110,16 @@ function wtimer() {
   var answercount=61; // Answer write time (s)
   var writecounter=setInterval(writingtimer, 1000);
   $("#timertext").css('color', 'black');
-  <% @roundstartedtime = DateTime.now.utc %>
   function writingtimer() {
     answercount=answercount-1;
+    if ( answercount == 0 )
+    {
+      $("#answertextfield").attr("disabled", true);
+      $("#answersubmit").attr("disabled", true);
+    }
     if ( answercount <= -1 )
     {
       clearInterval(writecounter);
-      $("#answertextfield").attr("disabled", true);
-      $("#answersubmit").attr("disabled", true);
       return;
     }
     if ( answercount == 20 || answercount == 10 || answercount == 5 )
@@ -179,6 +183,8 @@ function showLetters() {
       if (character == length + 1) {
         clearTimeout(timeOut);
         wtimer();
+        $("#answertextfield").removeAttr("disabled");
+        $("#answersubmit").removeAttr("disabled");
         $('#answerfield').removeClass('animated fadeOutDown');
         $('#answerfield').addClass('animated rubberBand');
       }
@@ -189,8 +195,7 @@ function showLetters() {
 
 // gameplay rounds
 function newGameStarts() {
-    $("#acroletters").text("");
-
+  $("#acroletters").text("");
   $("#categorytext").text("NewGameStarts");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }
@@ -201,6 +206,8 @@ function r1prep() {
 }
 
 function r1write() {
+  var roundnumber = 1;
+  $("#answerroundnumber").val(roundnumber);
   $("#categorytext").text("Round: r1write");
   $("#acroletters").text("<%= @round1letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
@@ -227,6 +234,8 @@ function r2prep() {
 }
 
 function r2write() {
+  var roundnumber = 2;
+  $("#answerroundnumber").val(roundnumber);
   $("#categorytext").text("Round: r2write");
   $("#acroletters").text("<%= @round2letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
