@@ -50,6 +50,7 @@ $(window).on('beforeunload', function () {
     <div id="answerfield" class="small-8 small-centered columns centerall">
       <%= a.hidden_field :user_id, :value => current_user.id %>
       <%= a.hidden_field :round, :id => "answerroundnumber" %>
+      <%= a.hidden_field :roundstarted, :id => "answerroundstarted" %>
       <%= a.text_field :answer, :id => "answertextfield", :style => "font-size:1.7em; visibility:visible; height:44px", :placeholder => "Enter your acro here..." %>
     </div>
     <%= a.submit "", :id => "answersubmit", :style => "display:none;" %>
@@ -208,6 +209,8 @@ function r1prep() {
 function r1write() {
   var roundnumber = 1;
   $("#answerroundnumber").val(roundnumber);
+  var roundstarted = "<%= @timer1write + 6.5.seconds %>";
+  $("#answerroundstarted").val(roundstarted);
   $("#categorytext").text("Round: r1write");
   $("#acroletters").text("<%= @round1letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
@@ -236,6 +239,8 @@ function r2prep() {
 function r2write() {
   var roundnumber = 2;
   $("#answerroundnumber").val(roundnumber);
+  var roundstarted = "<%= @timer2write + 8.seconds %>";
+  $("#answerroundstarted").val(roundstarted);
   $("#categorytext").text("Round: r2write");
   $("#acroletters").text("<%= @round2letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
