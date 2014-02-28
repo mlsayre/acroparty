@@ -46,9 +46,14 @@ $(window).on('beforeunload', function () {
   </div>
 </div>
 <div class="row">
-  <div id="answerfield" class="small-8 small-centered columns centerall">
-    <%= text_field_tag 'submission', nil, :style => "font-size:1.7em; visibility:visible; height:44px", :placeholder => "Enter your acro here..." %>
-  </div>
+  <%= form_for Famroomanswer.new, remote: true do |a| %>
+    <div id="answerfield" class="small-8 small-centered columns centerall">
+      <%= a.hidden_field :user_id, :value => current_user.id %>
+      <%= a.hidden_field :roundstarted, :value => @roundstartedtime %>
+      <%= a.text_field :answer, :id => "answertextfield", :style => "font-size:1.7em; visibility:visible; height:44px", :placeholder => "Enter your acro here..." %>
+    </div>
+    <%= a.submit "", :id => "answersubmit", :style => "display:none;" %>
+  <% end %>
 </div>
 <div class="row">
   <div class="small-3 columns">
@@ -102,27 +107,54 @@ joinInProgress();
 function wtimer() {
   var answercount=61; // Answer write time (s)
   var writecounter=setInterval(writingtimer, 1000);
+  $("#timertext").css('color', 'black');
+  <% @roundstartedtime = DateTime.now.utc %>
   function writingtimer() {
     answercount=answercount-1;
-    if (answercount <= -1)
+    if ( answercount <= -1 )
     {
       clearInterval(writecounter);
+      $("#answertextfield").attr("disabled", true);
+      $("#answersubmit").attr("disabled", true);
       return;
     }
+    if ( answercount == 20 || answercount == 10 || answercount == 5 )
+      {
+        $("#timertext").addClass('animated tada');
+      }
+    if ( answercount == 19 || answercount == 9 || answercount == 4 )
+      {
+        $("#timertext").removeClass('animated tada');
+      }
+    if ( answercount == 10 )
+      {
+        $("#timertext").css('color', 'red');
+      }
     $("#timertext").text(answercount);
   }
 }
 
 function vtimer() {
   var votecount=26; // Vote time (s)
+  $("#timertext").css('color', 'black');
   var votecounter=setInterval(votingtimer, 1000);
   function votingtimer() {
     votecount=votecount-1;
-    if (votecount <= -1)
+    if ( votecount <= -1 )
     {
       clearInterval(votecounter);
       return;
     }
+    if ( votecount == 5 )
+      {
+        $("#timertext").addClass('animated tada');
+        $("#timertext").css('color', 'red');
+      }
+    if ( votecount == 4 )
+      {
+        $("#timertext").removeClass('animated tada');
+      }
+
     $("#timertext").text(votecount);
   }
 }
@@ -139,7 +171,6 @@ function showLetters() {
     timeOut = setTimeout(function() {
       document.getElementById("acroletters").style.visibility="visible";
       character++;
-      $('#acroletters').removeClass('animated fadeIn');
       var type = text.substring(0, character);
       $('#acroletters').text(type);
       $("#acroletters").removeClass('animated fadeOutUp');
@@ -149,7 +180,7 @@ function showLetters() {
         clearTimeout(timeOut);
         wtimer();
         $('#answerfield').removeClass('animated fadeOutDown');
-        $('#answerfield').addClass('animated fadeIn');
+        $('#answerfield').addClass('animated rubberBand');
       }
     }, 1500);
   };

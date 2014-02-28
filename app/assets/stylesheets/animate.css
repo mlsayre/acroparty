@@ -369,6 +369,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 .tada {
+  -webkit-animation-duration: .85s;
+  -ms-animation-duration: .85s;
+  -animation-duration: .85s;
   -webkit-animation-name: tada;
   animation-name: tada;
 }

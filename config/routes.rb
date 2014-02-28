@@ -21,6 +21,8 @@ Acroparty::Application.routes.draw do
 
   resources :messages
 
+  resources :famroomanswers
+
   resources :room do
     collection do
       delete 'destroyplayer'
