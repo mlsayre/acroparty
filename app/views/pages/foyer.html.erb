@@ -10,6 +10,7 @@
     Points (this month): 412
     Points (this week): 108
     Points (today): 10
+    <%= Famroomanswer.find(:first).answertime %>
 
     <%= link_to "Your Stats", foyer_path, :class => "button round", :style => "margin-top:10px" %>
     <%= link_to "Edit Profile", edit_user_registration_path, :class => "button round" %>

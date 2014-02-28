@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140227235437) do
+ActiveRecord::Schema.define(:version => 20140228090146) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20140227235437) do
     t.integer  "round"
     t.string   "answer"
     t.datetime "roundstarted"
-    t.float    "answertime"
     t.integer  "points"
     t.boolean  "winner",       :default => false
     t.datetime "created_at",                      :null => false
