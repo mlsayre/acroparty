@@ -6,6 +6,6 @@ class FamroomanswersController < ApplicationController
 
   def create
     @famroomanswer = Famroomanswer.create!(params[:famroomanswer])
-    # PrivatePub.publish_to("/messages/familyroom", message: @message)
+    render :nothing => true
   end
 end

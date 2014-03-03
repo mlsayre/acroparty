@@ -46,7 +46,7 @@ $(window).on('beforeunload', function () {
   </div>
 </div>
 <div class="row">
-  <%= form_for Famroomanswer.new, remote: true do |a| %>
+  <%= form_for Famroomanswer.new, :html => {:id => "answerform"}, remote: true do |a| %>
     <div id="answerfield" class="small-8 small-centered columns centerall">
       <%= a.hidden_field :user_id, :value => current_user.id %>
       <%= a.hidden_field :round, :id => "answerroundnumber" %>
@@ -194,6 +194,15 @@ function showLetters() {
   typeWriter();
 }
 
+function submitAnswerFX() {
+  function addPulse() {
+    $('#answerfield').addClass('animated pulse');
+  }
+  $('#answerfield').removeClass('animated pulse');
+  $('#answerfield').removeClass('animated rubberBand');
+  setTimeout(addPulse, 30);
+}
+
 // gameplay rounds
 function newGameStarts() {
   $("#acroletters").text("");
@@ -215,6 +224,9 @@ function r1write() {
   $("#acroletters").text("<%= @round1letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
+  $("#answerform").submit(function() {
+    submitAnswerFX();
+  });
   setTimeout(r1vote, <%= @r1writetime %>*1000);
 }
 

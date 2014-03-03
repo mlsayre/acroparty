@@ -108,6 +108,12 @@ class RoomController < ApplicationController
                       @r10preptime, @r10writetime, @r10votetime, @r10restime,
                       @finalresultstime]
 
+    if @playerlist.count == 0
+      Famroomroundtime.destroy_all
+      Famroomacroletters.destroy_all
+      eventArray = []
+    end
+
     if @playerlist.count < 1 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
     elsif @playerlist.count < 1
