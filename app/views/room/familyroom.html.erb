@@ -20,7 +20,7 @@ $(window).on('beforeunload', function () {
 
 <div class="row">
   <div class="small-6 columns centerall">
-    <h2 id="roundtext">Round 1 of 10</h2>
+    <h2 id="roundtext"></h2>
   </div>
   <h2><div id="timertext" class="small-6 columns centerall">
     Time remaining
@@ -28,14 +28,13 @@ $(window).on('beforeunload', function () {
 </div>
 <div class="row">
   <div id="submittedtext" class="small-4 columns centerall">
-    <p>0 of 5 Answers Submitted</p> <%= @nextround %>
+    <p>0 of 5 Answers Submitted</p>
   </div>
   <h3><div id="categorytext" class="small-4 columns centerall">
-
-
-
+Category: Horses
   </div></h3>
-  <div class="small-4 columns">
+  <div id="acceptedtext" class="small-4 columns right" style="font-size:120%; color:green;">
+    Answer Accepted
   </div>
 </div>
 <div class="row">
@@ -94,10 +93,12 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
-// decide which JS event the player will join next, set up board
+// decide which JS event(game round) the player will join next, set up board
 function joinInProgress() {
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Waiting to<br/> join next round...");
+  slideRoundText();
+  $("#roundtext").text("Joining next round...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
@@ -106,112 +107,18 @@ function joinInProgress() {
 
 joinInProgress();
 
-// Writing and voting timer
-function wtimer() {
-  var answercount=61; // Answer write time (s)
-  var writecounter=setInterval(writingtimer, 1000);
-  $("#timertext").css('color', 'black');
-  function writingtimer() {
-    answercount=answercount-1;
-    if ( answercount == 0 )
-    {
-      $("#answertextfield").attr("disabled", true);
-      $("#answersubmit").attr("disabled", true);
-    }
-    if ( answercount <= -1 )
-    {
-      clearInterval(writecounter);
-      return;
-    }
-    if ( answercount == 20 || answercount == 10 || answercount == 5 )
-      {
-        $("#timertext").addClass('animated tada');
-      }
-    if ( answercount == 19 || answercount == 9 || answercount == 4 )
-      {
-        $("#timertext").removeClass('animated tada');
-      }
-    if ( answercount == 10 )
-      {
-        $("#timertext").css('color', 'red');
-      }
-    $("#timertext").text(answercount);
-  }
-}
-
-function vtimer() {
-  var votecount=26; // Vote time (s)
-  $("#timertext").css('color', 'black');
-  var votecounter=setInterval(votingtimer, 1000);
-  function votingtimer() {
-    votecount=votecount-1;
-    if ( votecount <= -1 )
-    {
-      clearInterval(votecounter);
-      return;
-    }
-    if ( votecount == 5 )
-      {
-        $("#timertext").addClass('animated tada');
-        $("#timertext").css('color', 'red');
-      }
-    if ( votecount == 4 )
-      {
-        $("#timertext").removeClass('animated tada');
-      }
-
-    $("#timertext").text(votecount);
-  }
-}
-
-// Letter display
-
-function showLetters() {
-  var text = $('#acroletters').text();
-  var length = text.length;
-  var timeOut;
-  var character = 0;
-  $("#acroletters").css('fontSize', '340%');
-  function typeWriter() {
-    timeOut = setTimeout(function() {
-      document.getElementById("acroletters").style.visibility="visible";
-      character++;
-      var type = text.substring(0, character);
-      $('#acroletters').text(type);
-      $("#acroletters").removeClass('animated fadeOutUp');
-      $('#acroletters').addClass('animated fadeIn');
-      typeWriter();
-      if (character == length + 1) {
-        clearTimeout(timeOut);
-        wtimer();
-        $("#answertextfield").removeAttr("disabled");
-        $("#answersubmit").removeAttr("disabled");
-        $('#answerfield').removeClass('animated fadeOutDown');
-        $('#answerfield').addClass('animated rubberBand');
-      }
-    }, 1500);
-  };
-  typeWriter();
-}
-
-function submitAnswerFX() {
-  function addPulse() {
-    $('#answerfield').addClass('animated pulse');
-  }
-  $('#answerfield').removeClass('animated pulse');
-  $('#answerfield').removeClass('animated rubberBand');
-  setTimeout(addPulse, 30);
-}
-
 // gameplay rounds
 function newGameStarts() {
   $("#acroletters").text("");
-  $("#categorytext").text("NewGameStarts");
+  $('#answerfield').addClass('animated fadeOutDown');
+  slideRoundText();
+  $("#roundtext").text("New game starting...");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);
 }
 
 function r1prep() {
-  $("#categorytext").text("Round: r1prep");
+  slideRoundText();
+  $("#roundtext").text("Round 1/10 - Get ready!");
   setTimeout(r1write, <%= @r1preptime %>*1000);
 }
 
@@ -220,7 +127,8 @@ function r1write() {
   $("#answerroundnumber").val(roundnumber);
   var roundstarted = "<%= @timer1write + 6.5.seconds %>";
   $("#answerroundstarted").val(roundstarted);
-  $("#categorytext").text("Round: r1write");
+  slideRoundText();
+  $("#roundtext").text("Round 1/10 - Write");
   $("#acroletters").text("<%= @round1letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
@@ -231,7 +139,8 @@ function r1write() {
 }
 
 function r1vote() {
-  $("#categorytext").text("Round: r1vote");
+  slideRoundText();
+  $("#roundtext").text("Round 1/10 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
   vtimer();
@@ -239,7 +148,7 @@ function r1vote() {
 }
 
 function r1res() {
-  $("#categorytext").text("Round: r1res");
+  $("#roundtext").text("Round 1/10 - Results");
   setTimeout(r2prep, <%= @r2restime %>*1000);
 }
 

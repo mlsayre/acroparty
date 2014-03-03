@@ -16,6 +16,7 @@
 //= require jquery.jcrop
 //= require papercrop
 //= require spin
+//= require game/game
 //= require jquery.lettering
 //= require jquery.textillate
 //= require jquery.spin
