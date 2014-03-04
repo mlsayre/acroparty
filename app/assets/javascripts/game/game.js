@@ -121,7 +121,7 @@ function checkSubmittedNumber() {
   document.getElementById("submittedtext").style.visibility="visible";
   var submittedtextcheck = setInterval(intervalSubmittedCheck, 6000);
   function endSubmittedCheck() {
-    setTimeout(endSubmittedCheck, 60300);
+    clearInterval(submittedtextcheck);
   }
-  endSubmittedCheck();
+  setTimeout(endSubmittedCheck, 60300);
 }
