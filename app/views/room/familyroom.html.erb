@@ -27,14 +27,15 @@ $(window).on('beforeunload', function () {
   </div></h2>
 </div>
 <div class="row">
-  <div id="submittedtext" class="small-4 columns centerall">
-    <p>0 of 5 Answers Submitted</p>
+  <div class="small-4 columns centerall">
+    <p id ="submittedtext"><%= Famroomanswer.where(round: 1).count %> Answers Submitted</p>
   </div>
   <h3><div id="categorytext" class="small-4 columns centerall">
 Category: Horses
   </div></h3>
-  <div id="acceptedtext" class="small-4 columns right" style="font-size:120%; color:green;">
-    Answer Accepted
+  <div class="small-4 columns centerall">
+    <p id="acceptedtext" style="font-size:120%; color:green; height:16px;">Answer Accepted (<%= @submissiontime %>s)
+    </p>
   </div>
 </div>
 <div class="row">
@@ -95,6 +96,8 @@ Category: Horses
 <script>
 // decide which JS event(game round) the player will join next, set up board
 function joinInProgress() {
+  $("#acceptedtext").hide();
+  document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Waiting to<br/> join next round...");
   slideRoundText();
@@ -125,13 +128,14 @@ function r1prep() {
 function r1write() {
   var roundnumber = 1;
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer1write + 6.5.seconds %>";
+  var roundstarted = "<%= @timer1write + 8.75.seconds %>";
   $("#answerroundstarted").val(roundstarted);
   slideRoundText();
   $("#roundtext").text("Round 1/10 - Write");
   $("#acroletters").text("<%= @round1letters %>");
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
+  checkSubmittedNumber();
   $("#answerform").submit(function() {
     submitAnswerFX();
   });
@@ -140,6 +144,8 @@ function r1write() {
 
 function r1vote() {
   slideRoundText();
+  document.getElementById("submittedtext").style.visibility="hidden";
+  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 1/10 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -160,7 +166,7 @@ function r2prep() {
 function r2write() {
   var roundnumber = 2;
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer2write + 8.seconds %>";
+  var roundstarted = "<%= @timer2write + 10.25.seconds %>";
   $("#answerroundstarted").val(roundstarted);
   $("#categorytext").text("Round: r2write");
   $("#acroletters").text("<%= @round2letters %>");

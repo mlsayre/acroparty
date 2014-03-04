@@ -90,9 +90,16 @@ function submitAnswerFX() {
   function addPulse() {
     $('#answerfield').addClass('animated pulse');
   }
+  function addAcceptedTextFlip() {
+    $('#acceptedtext').addClass('animated flip');
+    $("#acceptedtext").show();
+    $("#acceptedtext").load("/room/familyroom #acceptedtext", ".");
+  }
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
   setTimeout(addPulse, 30);
+  $('#acceptedtext').removeClass('animated flip');
+  setTimeout(addAcceptedTextFlip, 230);
 }
 
 function slideRoundText() {
@@ -103,4 +110,18 @@ function slideRoundText() {
   }
   $('#roundtext').removeClass('animated slideInLeft');
   setTimeout(resetSlideIn, 20);
+}
+
+// to check number of submitted entries
+function intervalSubmittedCheck() {
+  $("#submittedtext").load("/room/familyroom #submittedtext", ".");
+}
+
+function checkSubmittedNumber() {
+  document.getElementById("submittedtext").style.visibility="visible";
+  var submittedtextcheck = setInterval(intervalSubmittedCheck, 6000);
+  function endSubmittedCheck() {
+    setTimeout(endSubmittedCheck, 60300);
+  }
+  endSubmittedCheck();
 }

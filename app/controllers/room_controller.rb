@@ -59,11 +59,11 @@ class RoomController < ApplicationController
     @r1votetime = 30         #30
     @r1restime = 15          #15
     @r2preptime = 15         #15
-    @r2writetime = 70
+    @r2writetime = 72
     @r2votetime = 30
     @r2restime = 15
     @r3preptime = 15
-    @r3writetime = 70
+    @r3writetime = 74
     @r3votetime = 30
     @r3restime = 15
     @r4preptime = 15
@@ -240,9 +240,17 @@ class RoomController < ApplicationController
                             "r10prep", "r10write", "r10vote", "r10res",
                             "finalResults"]
 
+    if Famroomanswer.where(user_id: current_user.id).find(:last) != nil
+      @submissiontime = Famroomanswer.where(user_id: current_user.id)
+                        .find(:last).answertime
+    else
+      @submissiontime = 1.11
+    end
+
     eventArray.zip(jsRoundFunctionArray).each do |roundtime, function|
       if @nextround == roundtime
-        @timetojoin = roundtime.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
+        @timetojoin = roundtime.change(:usec => 0) -
+                      DateTime.now.utc.change(:usec => 0)
         @roundtojoin = function
       end
     end

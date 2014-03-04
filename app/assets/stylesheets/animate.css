@@ -1685,6 +1685,9 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 }
 
 .animated.flip {
+  -webkit-animation-duration: .6s;
+  -ms-animation-duration: .6s;
+  -animation-duration: .6s;
   -webkit-backface-visibility: visible;
   -ms-backface-visibility: visible;
   backface-visibility: visible;
