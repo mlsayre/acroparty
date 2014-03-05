@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140228090146) do
+ActiveRecord::Schema.define(:version => 20140305085458) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -30,6 +30,23 @@ ActiveRecord::Schema.define(:version => 20140228090146) do
     t.boolean  "winner",       :default => false
     t.datetime "created_at",                      :null => false
     t.datetime "updated_at",                      :null => false
+    t.string   "category"
+    t.string   "acroletters"
+  end
+
+  create_table "famroomcats", :force => true do |t|
+    t.string   "r1cat"
+    t.string   "r2cat"
+    t.string   "r3cat"
+    t.string   "r4cat"
+    t.string   "r5cat"
+    t.string   "r6cat"
+    t.string   "r7cat"
+    t.string   "r8cat"
+    t.string   "r9cat"
+    t.string   "r10cat"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "famroomgamestates", :force => true do |t|

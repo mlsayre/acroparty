@@ -112,6 +112,16 @@ function slideRoundText() {
   setTimeout(resetSlideIn, 20);
 }
 
+function enterCatText() {
+  document.getElementById("categorytext").style.visibility="hidden";
+  function resetCatIn() {
+    document.getElementById("categorytext").style.visibility="visible";
+    $('#categorytext').addClass('animated fadeInDown');
+  }
+  $('#categorytext').removeClass('animated fadeInDown');
+  setTimeout(resetCatIn, 500);
+}
+
 // to check number of submitted entries
 function intervalSubmittedCheck() {
   $("#submittedtext").load("/room/familyroom #submittedtext", ".");
@@ -147,4 +157,46 @@ function incorrectLength() {
   $('#acceptedtext').text("Incorrect length!");
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(invalidAcceptedTextFlip, 230);
+}
+
+function notJustLetters() {
+  function invalidAcceptedTextFlip() {
+    $('#acceptedtext').addClass('animated flip');
+    $("#acceptedtext").show();
+  }
+  $("#acceptedtext").hide();
+  $('#acceptedtext').text("Not feeling creative?");
+  $('#acceptedtext').removeClass('animated flip');
+  setTimeout(invalidAcceptedTextFlip, 230);
+}
+
+// acronym validation
+function acroValidate(roundletters) {
+  var letters = roundletters;
+  var eachletter = letters.split('');
+  var submission = document.getElementById("answertextfield").value;
+  var words = submission.toUpperCase().split(' ');
+  if (words.length == 3 &&
+     ((words[0].charAt(0) != eachletter[0]) ||
+     (words[1].charAt(0) != eachletter[1]) ||
+     (words[2].charAt(0) != eachletter[2])))
+    {
+      notAnAcronym();
+      return false;
+    }
+  else if ((words.length < 3) || (words.length > 3))
+    {
+      incorrectLength();
+      return false;
+    }
+  else if (words.length == 3 &&
+     ((words[0] == eachletter[0]) &&
+     (words[1] == eachletter[1]) &&
+     (words[2] == eachletter[2])))
+    {
+      notJustLetters();
+      return false;
+    }
+  submitAnswerFX();
+  return( true );
 }

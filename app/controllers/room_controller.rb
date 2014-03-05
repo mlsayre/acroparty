@@ -52,6 +52,42 @@ class RoomController < ApplicationController
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
 
+    gon.round1letters = @round1letters
+    gon.round2letters = @round2letters
+    gon.round3letters = @round3letters
+    gon.round4letters = @round4letters
+    gon.round5letters = @round5letters
+    gon.round6letters = @round6letters
+    gon.round7letters = @round7letters
+    gon.round8letters = @round8letters
+    gon.round9letters = @round9letters
+    gon.round10letters = @round10letters
+
+    if Famroomcat.select("r1cat").first == nil
+      Famroomcat.create(:r1cat => @randomcategory.sample,
+                        :r2cat => @randomcategory.sample,
+                        :r3cat => @randomcategory.sample,
+                        :r4cat => @randomcategory.sample,
+                        :r5cat => @randomcategory.sample)
+      Famroomcat.create(:r6cat => @randomcategory.sample,
+                        :r7cat => @randomcategory.sample,
+                        :r8cat => @randomcategory.sample,
+                        :r9cat => @randomcategory.sample,
+                        :r10cat => @randomcategory.sample)
+    end
+
+    @round1cat = Famroomcat.find(:first).r1cat
+    @round2cat = Famroomcat.find(:first).r2cat
+    @round3cat = Famroomcat.find(:first).r3cat
+    @round4cat = Famroomcat.find(:first).r4cat
+    @round5cat = Famroomcat.find(:first).r5cat
+    @round6cat = Famroomcat.find(:first).r6cat
+    @round7cat = Famroomcat.find(:first).r7cat
+    @round8cat = Famroomcat.find(:first).r8cat
+    @round9cat = Famroomcat.find(:first).r9cat
+    @round10cat = Famroomcat.find(:first).r10cat
+
+
     # ROUND TIMINGS
     @newgamestartstime = 2  #10
     @r1preptime = 2         #15
