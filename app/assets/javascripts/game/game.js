@@ -176,27 +176,142 @@ function acroValidate(roundletters) {
   var eachletter = letters.split('');
   var submission = document.getElementById("answertextfield").value;
   var words = submission.toUpperCase().split(' ');
-  if (words.length == 3 &&
-     ((words[0].charAt(0) != eachletter[0]) ||
-     (words[1].charAt(0) != eachletter[1]) ||
-     (words[2].charAt(0) != eachletter[2])))
-    {
-      notAnAcronym();
-      return false;
+  if (eachletter.length == 3) {
+    if (words.length == 3 &&
+       ((words[0].charAt(0) != eachletter[0]) ||
+       (words[1].charAt(0) != eachletter[1]) ||
+       (words[2].charAt(0) != eachletter[2])))
+      {
+        notAnAcronym();
+        return false;
+      }
+    else if ((words.length < 3) || (words.length > 3))
+      {
+        incorrectLength();
+        return false;
+      }
+    else if (words.length == 3 &&
+       ((words[0] == eachletter[0]) &&
+       (words[1] == eachletter[1]) &&
+       (words[2] == eachletter[2])))
+      {
+        notJustLetters();
+        return false;
+      }
     }
-  else if ((words.length < 3) || (words.length > 3))
-    {
-      incorrectLength();
-      return false;
+    else if (eachletter.length == 4) {
+      if (words.length == 4 &&
+         ((words[0].charAt(0) != eachletter[0]) ||
+         (words[1].charAt(0) != eachletter[1]) ||
+         (words[2].charAt(0) != eachletter[2]) ||
+         (words[3].charAt(0) != eachletter[3])))
+        {
+          notAnAcronym();
+          return false;
+        }
+      else if ((words.length < 4) || (words.length > 4))
+        {
+          incorrectLength();
+          return false;
+        }
+      else if (words.length == 4 &&
+         ((words[0] == eachletter[0]) &&
+         (words[1] == eachletter[1]) &&
+         (words[2] == eachletter[2]) &&
+         (words[3] == eachletter[3])))
+        {
+          notJustLetters();
+          return false;
+        }
     }
-  else if (words.length == 3 &&
-     ((words[0] == eachletter[0]) &&
-     (words[1] == eachletter[1]) &&
-     (words[2] == eachletter[2])))
-    {
-      notJustLetters();
-      return false;
+    else if (eachletter.length == 5) {
+      if (words.length == 5 &&
+         ((words[0].charAt(0) != eachletter[0]) ||
+         (words[1].charAt(0) != eachletter[1]) ||
+         (words[2].charAt(0) != eachletter[2]) ||
+         (words[3].charAt(0) != eachletter[3]) ||
+         (words[4].charAt(0) != eachletter[4])))
+        {
+          notAnAcronym();
+          return false;
+        }
+      else if ((words.length < 5) || (words.length > 5))
+        {
+          incorrectLength();
+          return false;
+        }
+      else if (words.length == 5 &&
+         ((words[0] == eachletter[0]) &&
+         (words[1] == eachletter[1]) &&
+         (words[2] == eachletter[2]) &&
+         (words[3] == eachletter[3]) &&
+         (words[4] == eachletter[4])))
+        {
+          notJustLetters();
+          return false;
+        }
     }
+    else if (eachletter.length == 6) {
+      if (words.length == 6 &&
+         ((words[0].charAt(0) != eachletter[0]) ||
+         (words[1].charAt(0) != eachletter[1]) ||
+         (words[2].charAt(0) != eachletter[2]) ||
+         (words[3].charAt(0) != eachletter[3]) ||
+         (words[4].charAt(0) != eachletter[4]) ||
+         (words[5].charAt(0) != eachletter[5])))
+        {
+          notAnAcronym();
+          return false;
+        }
+      else if ((words.length < 6) || (words.length > 6))
+        {
+          incorrectLength();
+          return false;
+        }
+      else if (words.length == 6 &&
+         ((words[0] == eachletter[0]) &&
+         (words[1] == eachletter[1]) &&
+         (words[2] == eachletter[2]) &&
+         (words[3] == eachletter[3]) &&
+         (words[4] == eachletter[4]) &&
+         (words[5] == eachletter[5])))
+        {
+          notJustLetters();
+          return false;
+        }
+    }
+    else if (eachletter.length == 7) {
+      if (words.length == 7 &&
+         ((words[0].charAt(0) != eachletter[0]) ||
+         (words[1].charAt(0) != eachletter[1]) ||
+         (words[2].charAt(0) != eachletter[2]) ||
+         (words[3].charAt(0) != eachletter[3]) ||
+         (words[4].charAt(0) != eachletter[4]) ||
+         (words[5].charAt(0) != eachletter[5]) ||
+         (words[6].charAt(0) != eachletter[6])))
+        {
+          notAnAcronym();
+          return false;
+        }
+      else if ((words.length < 7) || (words.length > 7))
+        {
+          incorrectLength();
+          return false;
+        }
+      else if (words.length == 7 &&
+         ((words[0] == eachletter[0]) &&
+         (words[1] == eachletter[1]) &&
+         (words[2] == eachletter[2]) &&
+         (words[3] == eachletter[3]) &&
+         (words[4] == eachletter[4]) &&
+         (words[5] == eachletter[5]) &&
+         (words[6] == eachletter[6])))
+        {
+          notJustLetters();
+          return false;
+        }
+    }
+
   submitAnswerFX();
   return( true );
 }
