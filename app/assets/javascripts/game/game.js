@@ -125,3 +125,26 @@ function checkSubmittedNumber() {
   }
   setTimeout(endSubmittedCheck, 60300);
 }
+
+// Acronym validation functions
+function notAnAcronym() {
+  function invalidAcceptedTextFlip() {
+    $('#acceptedtext').addClass('animated flip');
+    $("#acceptedtext").show();
+  }
+  $("#acceptedtext").hide();
+  $('#acceptedtext').text("Not an acronym!");
+  $('#acceptedtext').removeClass('animated flip');
+  setTimeout(invalidAcceptedTextFlip, 230);
+}
+
+function incorrectLength() {
+  function invalidAcceptedTextFlip() {
+    $('#acceptedtext').addClass('animated flip');
+    $("#acceptedtext").show();
+  }
+  $("#acceptedtext").hide();
+  $('#acceptedtext').text("Incorrect length!");
+  $('#acceptedtext').removeClass('animated flip');
+  setTimeout(invalidAcceptedTextFlip, 230);
+}

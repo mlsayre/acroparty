@@ -255,6 +255,14 @@ class RoomController < ApplicationController
       end
     end
 
+    # only one answer per user
+    if Famroomanswer.where(:user_id => current_user.id).count > 1
+      newestuseranswer = Famroomanswer.where(:user_id => current_user.id)
+                                      .find(:last)
+      Famroomanswer.where('created_at < ? AND user_id = ?', newestuseranswer
+                   .created_at, current_user.id).delete_all
+    end
+
   end
 
   def destroyplayer

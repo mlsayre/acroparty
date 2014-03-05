@@ -4,6 +4,8 @@ class Famroomanswer < ActiveRecord::Base
 
   belongs_to :user
 
+  # validates :answer, acronym: true
+
   attr_reader :answertime
 
   def answertime

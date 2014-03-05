@@ -94,6 +94,24 @@ Category: Horses
 <%= javascript_include_tag "game/game" %>
 
 <script>
+// acronym validation
+function acroValidateR01() {
+  var letters = "<%= @round1letters %>";
+  var eachletter = letters.split('');
+  var submission = document.getElementById("answertextfield").value;
+  var words = submission.toUpperCase().split(' ');
+  if (words.length == 3 && ((words[0].charAt(0) != eachletter[0]) ||
+     (words[1].charAt(0) != eachletter[1]) ||
+     (words[2].charAt(0) != eachletter[2])))
+    { notAnAcronym();
+      return false; }
+  else if ((words.length < 3) || (words.length > 3))
+    { incorrectLength();
+      return false; }
+  submitAnswerFX();
+  return( true );
+}
+
 // decide which JS event(game round) the player will join next, set up board
 function joinInProgress() {
   $("#acceptedtext").hide();
@@ -137,7 +155,7 @@ function r1write() {
   showLetters();
   checkSubmittedNumber();
   $("#answerform").submit(function() {
-    submitAnswerFX();
+    return(acroValidateR01());
   });
   setTimeout(r1vote, <%= @r1writetime %>*1000);
 }
