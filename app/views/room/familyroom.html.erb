@@ -29,7 +29,11 @@ $(window).on('beforeunload', function () {
 
 <div class="row">
   <div class="small-12 columns centerall">
-    <p id="votetext" style="font-size:100%; display:none;">hello
+    <p id="votetext" style="font-size:100%; display:none;">
+      <% form_for @famroomanswers do |t| %>
+      <%= t.collection_select :answer, Famroomanswer.all, :id, :answer %>
+        <%= t.submit %>
+      <% end %>
     </p>
   </div>
 </div>
@@ -148,7 +152,16 @@ function newGameStarts() {
 
 function r1prep() {
   slideRoundText();
-  $("#votetext").dialog( { autoOpen: false });
+  $("#votetext").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "500",
+
+    });
   $("#votetext").dialog('open');
   $("#roundtext").text("Round 1/10 - Get ready!");
   setTimeout(r1write, <%= @r1preptime %>*1000);

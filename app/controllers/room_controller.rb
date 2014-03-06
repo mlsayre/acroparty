@@ -10,6 +10,7 @@ class RoomController < ApplicationController
     @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
     @playerlist = Player.where(:room => "familyroom")
     gon.playerlistcount = @playerlist.count
+    @famroomanswers = Famroomanswer.all
     @letterpool = ["A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
                   "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
                   "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
@@ -89,8 +90,8 @@ class RoomController < ApplicationController
 
 
     # ROUND TIMINGS
-    @newgamestartstime = 20  #10
-    @r1preptime = 2         #15
+    @newgamestartstime = 2  #10
+    @r1preptime = 40         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
     @r1restime = 15          #15
