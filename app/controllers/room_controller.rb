@@ -89,7 +89,7 @@ class RoomController < ApplicationController
 
 
     # ROUND TIMINGS
-    @newgamestartstime = 2  #10
+    @newgamestartstime = 20  #10
     @r1preptime = 2         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30

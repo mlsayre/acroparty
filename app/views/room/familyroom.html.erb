@@ -26,9 +26,31 @@ $(window).on('beforeunload', function () {
 
   </div></h2>
 </div>
+
+<div class="row">
+  <div class="small-12 columns centerall">
+    <p id="votetext" style="font-size:100%; display:none;">hello
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns centerall">
+    <p id="resulttext" style="font-size:100%; display:none;">
+    </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-12 columns centerall">
+    <p id="endofgametext" style="font-size:100%; display:none;">
+    </p>
+  </div>
+</div>
+
 <div class="row">
   <div class="small-4 columns centerall">
-    <p id ="submittedtext" style="height:16px; margin-top:14px;">Answers Submitted: <%= Famroomanswer.where(round: 1).count %></p>
+    <p id="submittedtext" style="height:16px; margin-top:14px;">Answers Submitted: <%= Famroomanswer.where(round: 1).count %></p>
   </div>
   <h3><div id="categorytext" class="small-4 columns centerall">
   </div></h3>
@@ -37,6 +59,7 @@ $(window).on('beforeunload', function () {
     </p>
   </div>
 </div>
+
 <div class="row">
   <div class="small-10 small-centered acrotable acrofont centerall">
 
@@ -44,6 +67,7 @@ $(window).on('beforeunload', function () {
       </p>
   </div>
 </div>
+
 <div class="row">
   <%= form_for Famroomanswer.new, :html => {:id => "answerform"}, remote: true do |a| %>
     <div id="answerfield" class="small-8 small-centered columns centerall">
@@ -57,6 +81,7 @@ $(window).on('beforeunload', function () {
     <%= a.submit "", :id => "answersubmit", :style => "display:none;" %>
   <% end %>
 </div>
+
 <div class="row">
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" style="padding-left:6px">
@@ -123,6 +148,8 @@ function newGameStarts() {
 
 function r1prep() {
   slideRoundText();
+  $("#votetext").dialog( { autoOpen: false });
+  $("#votetext").dialog('open');
   $("#roundtext").text("Round 1/10 - Get ready!");
   setTimeout(r1write, <%= @r1preptime %>*1000);
 }
