@@ -152,6 +152,15 @@ body {
   overflow-y: auto;
 }
 
+.acrovotelabel {
+  font-size: 1.1rem;
+  color: #4d4d4d;
+  cursor: pointer;
+  display: block;
+  font-weight: normal;
+  margin-bottom: 0.1rem;
+  }
+
 a:hover {
   cursor: pointer; }
 
@@ -4595,7 +4604,7 @@ input[type="file"],
 input[type="checkbox"],
 input[type="radio"],
 select {
-  margin: 0 0 1rem 0; }
+  margin: 0 0 .1rem 0; }
 
 input[type="checkbox"] + label,
 input[type="radio"] + label {

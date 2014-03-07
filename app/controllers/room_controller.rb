@@ -317,6 +317,10 @@ class RoomController < ApplicationController
     end
   end
 
+  def update
+    @famroomanswers.update_attributes(params[:point])
+  end
+
   def sauna
   end
 

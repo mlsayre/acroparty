@@ -11,6 +11,8 @@ Acroparty::Application.routes.draw do
 
   get "user/destroy"
 
+  get "room/update"
+
   devise_for :users
 
   authenticated :user do
