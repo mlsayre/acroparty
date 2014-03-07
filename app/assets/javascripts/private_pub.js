@@ -1,3 +1,5 @@
+Faye.transport.WebSocket.isUsable = function($, _, c){c(false)};
+
 function buildPrivatePub(doc) {
   var self = {
     connecting: false,
