@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require foundation
+//= require private_pub
 //= require jquery.jcrop
 //= require papercrop
 //= require spin
