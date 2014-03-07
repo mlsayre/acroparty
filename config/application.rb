@@ -65,7 +65,7 @@ module Acroparty
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
 
-    config.assets.initialize_on_precompile = false
+    # config.assets.initialize_on_precompile = false
 
     config.assets.precompile += %w( vendor/modernizr.js private_pub.js)
     end
