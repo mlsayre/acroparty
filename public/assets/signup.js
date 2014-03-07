@@ -1,0 +1,1 @@
+function updateCountdown(){var u=80-jQuery("#user_about").val().length;jQuery(".countdown").text(u+" characters remaining")}jQuery(document).ready(function(u){updateCountdown(),u("#user_about").change(updateCountdown),u("#user_about").keyup(updateCountdown)});
