@@ -3,6 +3,12 @@ rails.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 rails/index.png: rails-a3386665c05a2d82f711a4aaa72d247c.png
 application.js: application-0c896c3074de7fb1176863c26397ce5c.js
 application/index.js: application-0c896c3074de7fb1176863c26397ce5c.js
+game/game.js: game/game-3c8cd44f3366a4a9068dab7a69658cc8.js
+game/game/index.js: game/game-3c8cd44f3366a4a9068dab7a69658cc8.js
+game/scrollbardown.js: game/scrollbardown-4fd0f381749232dad72ab2a1a5454518.js
+game/scrollbardown/index.js: game/scrollbardown-4fd0f381749232dad72ab2a1a5454518.js
+nongame/foyer.js: nongame/foyer-a31fd58b8c813f9d28289027607c5347.js
+nongame/foyer/index.js: nongame/foyer-a31fd58b8c813f9d28289027607c5347.js
 application.css: application-9cf69dfd51590da5839c4c370116dc0e.css
 application/index.css: application-9cf69dfd51590da5839c4c370116dc0e.css
 jquery.min.map: jquery.min-6336c5bca4c709e809647cdfcb484d0a.map
