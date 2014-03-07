@@ -67,5 +67,5 @@ module Acroparty
 
     config.assets.initialize_on_precompile = false
 
-    config.assets.precompile += %w( vendor/modernizr.js private_pub.js
+    # config.assets.precompile += %w( vendor/modernizr.js private_pub.js
 end
