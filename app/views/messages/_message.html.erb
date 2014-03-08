@@ -1,6 +1,5 @@
 <li id="chatline" style="list-style-type:none">
-  <span class="float right" style="font-size:.6em; color:gray; margin-right:12px;"><%= message.created_at.localtime.strftime("%l:%M%p") %></span>
+  <span id="messagetime" class="float right" style="font-size:.6em; color:gray; margin-right:12px;"><%= message.created_at.localtime.strftime("%l:%M%p") %></span>
   <span style="color:red;"><%= message.user.username if message.user %>:</span>
   <span><%= message.content %></span>
 </li>
-

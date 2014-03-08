@@ -16,6 +16,10 @@ function userLeaves(){
 $(window).on('beforeunload', function () {
   userLeaves()
 });
+
+var currentTime = new Date();
+var utcOffset = currentTime.getTimezoneOffset();
+document.cookie = 'time_zone_offset='+utcOffset+';';
 </script>
 
 <div class="row">
@@ -30,7 +34,7 @@ $(window).on('beforeunload', function () {
 <div class="row">
   <div class="small-12 columns centerall">
     <p id="votetext" style="font-size:100%; display:none;">
-      <%= form_for @famroomanswers, :url => { :action => "update" }, :html => { :method => "put" }, remote: true do |t| %>
+      <%= form_for @famroomanswers, :url => { :action => "update", :controller => "room" }, :html => { :method => "put" }, remote: true do |t| %>
         <% @famroomanswers.shuffle.each do |t| %>
           <%= radio_button(:point, :points, 1) %>
           <%= label(:point, t.answer, :class => "acrovotelabel") %></br>

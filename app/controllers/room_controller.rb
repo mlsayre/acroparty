@@ -148,6 +148,7 @@ class RoomController < ApplicationController
     if @playerlist.count == 0
       Famroomroundtime.destroy_all
       Famroomacroletters.destroy_all
+      Famroomcat.destroy_all
       eventArray = []
     end
 
@@ -156,6 +157,7 @@ class RoomController < ApplicationController
     elsif @playerlist.count < 1
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
+      Famroomcat.destroy_all
       eventArray = []
 
     elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
@@ -319,6 +321,14 @@ class RoomController < ApplicationController
 
   def update
     @famroomanswers.update_attributes(params[:point])
+    render :nothing => true
+  end
+
+  def resetfamroom
+    Famroomacroletters.destroy_all
+    Famroomroundtime.destroy_all
+    Famroomcat.destroy_all
+    render :nothing => true
   end
 
   def sauna
