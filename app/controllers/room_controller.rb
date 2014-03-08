@@ -319,7 +319,8 @@ class RoomController < ApplicationController
     end
   end
 
-  def update
+  def votefor
+    @famroomanswers = Famroomanswer.all
     @famroomanswers.update_attributes(params[:point])
     render :nothing => true
   end
