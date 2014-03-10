@@ -33,10 +33,12 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 
 <div class="row">
   <div class="small-12 columns centerall">
+
+    <% @famroomanswers.shuffle.each do |answer| %>
     <p id="votetext" style="font-size:100%; display:none;">
-      <% @famroomanswers.shuffle.each do |answer| %>
         <%= answer.answer %>
-        <%= button_to "Vote", :controller => "room", :action => "votefor", :method => "put", remote: true %>
+        <%= answer.id %>
+        <%= button_to "Vote", :controller => "room", :action => "votefor", :id => answer.id, :method => "put", remote: true %>
       <% end %>
     </p>
   </div>

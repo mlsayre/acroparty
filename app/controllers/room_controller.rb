@@ -321,7 +321,9 @@ class RoomController < ApplicationController
 
   def votefor
     @famroomanswers = Famroomanswer.all
-    @famroomanswers.update_attributes(params[:point])
+    Famroomanswer.find(:all, :conditions => ["id = ?", params[:id]]).each do |ans|
+      ans.increment!(:points)
+    end
     render :nothing => true
   end
 
