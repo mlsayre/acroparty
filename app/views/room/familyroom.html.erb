@@ -32,29 +32,25 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 </div>
 
 <div class="row">
-  <div class="small-12 columns centerall">
-
+  <div id="votediv" class="small-12 columns" style="display: inline; font-size:110%; display:none;">
     <% @famroomanswers.shuffle.each do |answer| %>
-    <p id="votetext" style="font-size:100%; display:none;">
-        <%= answer.answer %>
-        <%= answer.id %>
-        <%= button_to "Vote", :controller => "room", :action => "votefor", :id => answer.id, :method => "put", remote: true %>
-      <% end %>
-    </p>
+      <span class="voteusernames"><%= answer.user.username %>:</span>
+      <div style="float: left; font-size:70%; margin-right:4px;">
+        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id , :method => "put"}, :class => "votebuttons", remote: true %>
+      </div>
+      "<%= answer.answer %>"
+      </br></br>
+    <% end %>
   </div>
 </div>
 
 <div class="row">
-  <div class="small-12 columns centerall">
-    <p id="resulttext" style="font-size:100%; display:none;">
-    </p>
+  <div id="resultsdiv" class="small-12 columns centerall" style="font-size:100%; display:none;">
   </div>
 </div>
 
 <div class="row">
-  <div class="small-12 columns centerall">
-    <p id="endofgametext" style="font-size:100%; display:none;">
-    </p>
+  <div id="endofgamediv" class="small-12 columns centerall" style="font-size:100%; display:none;">
   </div>
 </div>
 
@@ -142,6 +138,7 @@ function joinInProgress() {
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
+  $("#votediv").hide();
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
@@ -158,17 +155,20 @@ function newGameStarts() {
 
 function r1prep() {
   slideRoundText();
-  $("#votetext").dialog({
+  $("#votediv").dialog({
       autoOpen: false,
       closeOnEscape: false,
       draggable: false,
       resizable: false,
       position: { my: "center top", at: "center top-10", of: "#categorytext" },
       title: "Pick your favorite...",
-      width: "500",
+      width: "640",
 
     });
-  $("#votetext").dialog('open');
+  $("#votediv").show();
+  $("#votediv").dialog('open');
+  $(".votebuttons").attr("disabled", true);
+  $(".voteusernames").hide();
   $("#roundtext").text("Round 1/10 - Get ready!");
   setTimeout(r1write, <%= @r1preptime %>*1000);
 }
