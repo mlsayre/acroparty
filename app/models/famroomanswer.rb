@@ -1,6 +1,7 @@
 class Famroomanswer < ActiveRecord::Base
   attr_accessible :user_id, :round, :answer, :roundstarted, :answertime,
-                  :points, :winner, :category, :acroletters
+                  :points, :winner, :category, :acroletters, :playervoted,
+                  :gotvote
 
   belongs_to :user
 

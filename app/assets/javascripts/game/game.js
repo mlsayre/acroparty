@@ -315,3 +315,37 @@ function acroValidate(roundletters) {
   submitAnswerFX();
   return( true );
 }
+
+function votingRound() {
+  $("#votediv").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "640",
+
+    });
+  $("#votediv").dialog('open');
+  $("#votediv").show();
+  $("#votediv").submit(function() {
+    $(".votebuttons").attr("disabled", true);
+    $("#roundtext").text("Vote accepted...");
+  });
+}
+
+function resultsRound() {
+  $("#resultsdiv").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "640",
+
+    });
+  $("#resultsdiv").dialog('open');
+  $("#resultsdiv").show();
+}

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140310035247) do
+ActiveRecord::Schema.define(:version => 20140310125323) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20140310035247) do
     t.datetime "updated_at",                      :null => false
     t.string   "category"
     t.string   "acroletters"
+    t.boolean  "gotvote"
   end
 
   create_table "famroomcats", :force => true do |t|
@@ -141,6 +142,7 @@ ActiveRecord::Schema.define(:version => 20140310035247) do
     t.datetime "avatar_updated_at"
     t.boolean  "admin",                  :default => false
     t.string   "time_zone"
+    t.integer  "answervotedfor"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

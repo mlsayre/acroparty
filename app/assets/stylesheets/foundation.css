@@ -56,6 +56,19 @@ html,
 body {
   font-size: 100%; }
 
+.famroombg {
+  background: url('famroom.png'),
+              -webkit-linear-gradient(#73fffc, white); /* For Safari */
+  background: url('famroom.png'),
+              -o-linear-gradient(#73fffc, white); /* For Opera 11.1 to 12.0 */
+  background: url('famroom.png'),
+              -moz-linear-gradient(#73fffc, white); /* For Firefox 3.6 to 15 */
+  background: url('famroom.png'),
+              linear-gradient(#73fffc, white); /* Standard syntax */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 body {
   /* background-color: #d4fffe; */
   background: -webkit-linear-gradient(#73fffc, white); /* For Safari */

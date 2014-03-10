@@ -91,10 +91,10 @@ class RoomController < ApplicationController
 
     # ROUND TIMINGS
     @newgamestartstime = 2  #10
-    @r1preptime = 40         #15
+    @r1preptime = 2         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
-    @r1restime = 15          #15
+    @r1restime = 30          #15
     @r2preptime = 15         #15
     @r2writetime = 72
     @r2votetime = 30
@@ -302,6 +302,14 @@ class RoomController < ApplicationController
                    .created_at, current_user.id).delete_all
     end
 
+    # the player with the most votes at the end of the round
+    @roundwinner = Famroomanswer.order('points DESC, created_at ASC')
+                     .first.user
+    unless Famroomanswer.all == []
+      @roundwinner = User.first
+    end
+
+
   end
 
   def destroyplayer
@@ -323,7 +331,10 @@ class RoomController < ApplicationController
     @famroomanswers = Famroomanswer.all
     Famroomanswer.find(:all, :conditions => ["id = ?", params[:id]]).each do |ans|
       ans.increment!(:points)
+      ans.update_attributes(:gotvote => true)
     end
+    User.find(:first, :conditions => ["id = ?", current_user.id])
+      .update_attributes(:answervotedfor => params[:id])
     render :nothing => true
   end
 
