@@ -167,7 +167,10 @@ function r1prep() {
     });
   $("#votediv").show();
   $("#votediv").dialog('open');
-  $(".votebuttons").attr("disabled", true);
+  $("#votediv").submit(function() {
+    $(".votebuttons").attr("disabled", true);
+    $("#roundtext").text("Vote accepted...");
+  });
   $(".voteusernames").hide();
   $("#roundtext").text("Round 1/10 - Get ready!");
   setTimeout(r1write, <%= @r1preptime %>*1000);
