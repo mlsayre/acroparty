@@ -37,6 +37,11 @@ function vtimer() {
   var votecounter=setInterval(votingtimer, 1000);
   function votingtimer() {
     votecount=votecount-1;
+    if (votecount == 0)
+      {
+        $(".votebuttons").attr("disabled", true);
+        $("#roundtext").text("Voting complete...");
+      }
     if ( votecount <= -1 )
     {
       clearInterval(votecounter);

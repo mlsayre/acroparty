@@ -327,6 +327,7 @@ class RoomController < ApplicationController
 
   def updategamepoints
     if Famroomanswer.where('points > ?', 0).order('created_at ASC')
+                    .first != nil && Famroomanswer.where('points > ?', 0).order('created_at ASC')
                     .first.user.id == current_user.id
       @fastestanswer = Famroomanswer.where('points > ?', 0)
                        .order('created_at ASC').first
