@@ -326,11 +326,18 @@ class RoomController < ApplicationController
   end
 
   def updategamepoints
+    if Famroomanswer.where('points > ?', 0).order('created_at ASC')
+                    .first.user.id == current_user.id
+      @fastestanswer = Famroomanswer.where('points > ?', 0)
+                       .order('created_at ASC').first
+      @fastestanswer.user.increment!(:gamepoints, by = 2)
+    end
     @roundwinneranswer = Famroomanswer.order('points DESC, created_at ASC')
                      .first.id
-    @winninganswervoters = User.where('answervotedfor = ?', @roundwinneranswer)
-    @winninganswervoters.each do |winnervoter|
-      winnervoter.increment!(:gamepoints)
+    if User.where('answervotedfor = ? AND id = ?', @roundwinneranswer, current_user.id)
+       .first != nil
+      @winninganswervoters = User.where('answervotedfor = ? AND id = ?', @roundwinneranswer, current_user.id).first
+      @winninganswervoters.increment!(:gamepoints, by = 1)
     end
 
     render :nothing => true
