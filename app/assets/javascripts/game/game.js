@@ -354,6 +354,10 @@ function resultsRound() {
   function showFastestAnswer() {
     $("#fastestanswer").show();
   }
+  function showWinningVoters() {
+    $("#winninganswervoters").show();
+  }
   setTimeout(showAllAnswers, 1500);
   setTimeout(showFastestAnswer, 3000);
+  setTimeout(showWinningVoters, 4500);
 }

@@ -36,10 +36,10 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
   <div id="votediv" class="small-12 columns" style="display: inline; font-size:110%;">
     <% @famroomanswers.shuffle.each do |answer| %>
       <div style="float: left; font-size:70%; margin-right:4px;">
-        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id , :method => "put"}, :class => "votebuttons", remote: true %>
+      <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id , :method => "put"}, :class => "votebuttons", remote: true %>
       </div>
       "<%= answer.answer %>"
-      </br></br>
+    </br></br>
     <% end %>
   </div>
 </div>
@@ -57,6 +57,13 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
     <% end %>
     <p id="fastestanswer" class="centerall" style="display:none;">
       Fastest answer with at least one vote: <%= @fastestanswer.username %> (+2 points!)
+    </p>
+    <p id="winninganswervoters" class="centerall" style="display:none;">
+      Voted for the winning answer:
+      <% @winninganswervoters.each do |psychic| %>
+      <%= psychic.username %>,
+      <% end %>
+      (+1 point!)
     </p>
   </div>
 </div>

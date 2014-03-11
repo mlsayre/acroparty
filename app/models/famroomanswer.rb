@@ -10,7 +10,7 @@ class Famroomanswer < ActiveRecord::Base
   attr_reader :answertime
 
   def answertime
-    (updated_at - roundstarted).round(2)
+    (created_at - roundstarted).round(2)
   end
 
 end

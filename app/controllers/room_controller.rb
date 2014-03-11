@@ -308,8 +308,11 @@ class RoomController < ApplicationController
     elsif Famroomanswer.all != []
       @roundwinner = Famroomanswer.order('points DESC, created_at ASC')
                      .first.user
+      @roundwinneranswer = Famroomanswer.order('points DESC, created_at ASC')
+                     .first.id
     end
 
+    # the player with the fastest answer receiving a vote
     if Famroomanswer.all == [] || Famroomanswer.where('points > ?', 0)
        .all == []
       @fastestanswer = User.first
@@ -317,6 +320,8 @@ class RoomController < ApplicationController
       @fastestanswer = Famroomanswer.where('points > ?', 0)
                        .order('created_at ASC').first.user
     end
+
+    @winninganswervoters = User.where('answervotedfor = ?', @roundwinneranswer)
 
   end
 
