@@ -325,6 +325,17 @@ class RoomController < ApplicationController
 
   end
 
+  def updategamepoints
+    @roundwinneranswer = Famroomanswer.order('points DESC, created_at ASC')
+                     .first.id
+    @winninganswervoters = User.where('answervotedfor = ?', @roundwinneranswer)
+    @winninganswervoters.each do |winnervoter|
+      winnervoter.increment!(:gamepoints)
+    end
+
+    render :nothing => true
+  end
+
   def destroyplayer
     @famroomplayerlist = Player.where(:room => "familyroom")
     Player.delete_all(["name = ? AND room = ?", current_user.username, 'familyroom'])

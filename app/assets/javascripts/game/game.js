@@ -357,7 +357,15 @@ function resultsRound() {
   function showWinningVoters() {
     $("#winninganswervoters").show();
   }
+  function updatePoints(){
+  $.ajax({
+    url: "/room/updategamepoints",
+    type: "POST"
+  });
+
+}
   setTimeout(showAllAnswers, 1500);
   setTimeout(showFastestAnswer, 3000);
   setTimeout(showWinningVoters, 4500);
+  setTimeout(updatePoints, 5000);
 }

@@ -29,6 +29,7 @@ Acroparty::Application.routes.draw do
     collection do
       post 'votefor'
       post 'resetfamroom'
+      post 'updategamepoints'
       delete 'destroyplayer'
     end
   end

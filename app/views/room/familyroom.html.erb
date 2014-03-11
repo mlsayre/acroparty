@@ -112,7 +112,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
     <div class="small-12 float-right usertable" style="padding-left:6px; background:#d1fffe;">
       <div id="userlistbox"><u><%= @playerlist.count %>/12 players:</u><br />
         <% @playerlist.each do |player| %>
-          <%= player.name %><br />
+          <%= player.name %><span style="float:right; padding-right:6px;"><%= player.user.gamepoints%></span><br />
         <% end %>
       </div>
     </div>

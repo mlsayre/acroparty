@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140310125323) do
+ActiveRecord::Schema.define(:version => 20140311092343) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20140310125323) do
     t.boolean  "admin",                  :default => false
     t.string   "time_zone"
     t.integer  "answervotedfor"
+    t.integer  "gamepoints",             :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
