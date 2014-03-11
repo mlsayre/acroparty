@@ -347,5 +347,13 @@ function resultsRound() {
 
     });
   $("#resultsdiv").dialog('open');
-  $("#resultsdiv").show();
+  $("#roundwinnerannounce").show();
+  function showAllAnswers() {
+    $(".answerresultinfo").show();
+  }
+  function showFastestAnswer() {
+    $("#fastestanswer").show();
+  }
+  setTimeout(showAllAnswers, 1500);
+  setTimeout(showFastestAnswer, 3000);
 }

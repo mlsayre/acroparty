@@ -303,12 +303,20 @@ class RoomController < ApplicationController
     end
 
     # the player with the most votes at the end of the round
-    @roundwinner = Famroomanswer.order('points DESC, created_at ASC')
-                     .first.user
-    unless Famroomanswer.all == []
+    if Famroomanswer.all == []
       @roundwinner = User.first
+    elsif Famroomanswer.all != []
+      @roundwinner = Famroomanswer.order('points DESC, created_at ASC')
+                     .first.user
     end
 
+    if Famroomanswer.all == [] || Famroomanswer.where('points > ?', 0)
+       .all == []
+      @fastestanswer = User.first
+    else
+      @fastestanswer = Famroomanswer.where('points > ?', 0)
+                       .order('created_at ASC').first.user
+    end
 
   end
 
