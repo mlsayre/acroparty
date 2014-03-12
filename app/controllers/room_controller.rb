@@ -339,6 +339,26 @@ class RoomController < ApplicationController
     else
       @famroomanswersminusplayer = @famroomanswers
     end
+
+    # show bonus points in results
+    if Famroomanswer.first.round == 1 ||
+      Famroomanswer.first.round == 6
+      @bonuspointsshow = 3
+    elsif Famroomanswer.first.round == 2 ||
+      Famroomanswer.first.round == 7
+      @bonuspointsshow = 4
+    elsif Famroomanswer.first.round == 3 ||
+      Famroomanswer.first.round == 8
+      @bonuspointsshow = 5
+    elsif Famroomanswer.first.round == 4 ||
+      Famroomanswer.first.round == 9
+      @bonuspointsshow = 6
+    elsif Famroomanswer.first.round == 5 ||
+      Famroomanswer.first.round == 10
+      @bonuspointsshow = 7
+    else
+      @bonuspointsshow = 0
+    end
   end
 
   def updategamepoints
@@ -367,6 +387,30 @@ class RoomController < ApplicationController
       @roundpointstoadd = 0
     end
     User.where('id = ?', current_user.id).first.increment!(:gamepoints, by = @roundpointstoadd)
+
+    # add bonus points to winner
+    if Famroomanswer.first.round == 1 ||
+      Famroomanswer.first.round == 6
+      @bonuspoints = 3
+    elsif Famroomanswer.first.round == 2 ||
+      Famroomanswer.first.round == 7
+      @bonuspoints = 4
+    elsif Famroomanswer.first.round == 3 ||
+      Famroomanswer.first.round == 8
+      @bonuspoints = 5
+    elsif Famroomanswer.first.round == 4 ||
+      Famroomanswer.first.round == 9
+      @bonuspoints = 6
+    elsif Famroomanswer.first.round == 5 ||
+      Famroomanswer.first.round == 10
+      @bonuspoints = 7
+    else
+      @bonuspoints = 0
+    end
+    @roundwinnerforbonus = Famroomanswer.order('points DESC, created_at ASC').first.user
+    if @roundwinnerforbonus.id == current_user.id
+      @roundwinnerforbonus.increment!(:gamepoints, by = @bonuspoints)
+    end
 
     render :nothing => true
   end

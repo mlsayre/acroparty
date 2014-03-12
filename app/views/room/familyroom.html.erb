@@ -48,7 +48,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 <div class="row">
   <div id="resultsdiv" class="small-12 columns centerall" style="display: inline; font-size:100%;">
     <p id="roundwinnerannounce" class="centerall">
-      Winner, <%= @roundwinner.username %>! <%= image_tag @roundwinner.avatar.url(:small) %></br>
+      Winner, <%= @roundwinner.username %>! <%= image_tag @roundwinner.avatar.url(:small) %> <%= @bonuspointsshow %> bonus points!</br>
     </p>
     <% Famroomanswer.order('points DESC').each do |answer| %>
     <li class="answerresultinfo" style="float:left; font-size:85%; margin-right:4px; display:none;">
