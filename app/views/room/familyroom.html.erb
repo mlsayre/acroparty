@@ -34,13 +34,14 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 
 <div class="row">
   <div id="votediv" class="small-12 columns animated flip" style="display: inline; font-size:110%;">
-    <% @famroomanswers.shuffle.each do |answer| %>
+    <% @famroomanswersminusplayer.shuffle.each do |answer| %>
       <div style="float: left; font-size:70%; margin-right:4px;">
-      <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id , :method => "put"}, :class => "votebuttons", remote: true %>
+        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id, :method => "put"}, :class => "votebuttons", remote: true %>
       </div>
       "<%= answer.answer %>"
     </br></br>
     <% end %>
+    Yours: "<%= @noownvote %>"
   </div>
 </div>
 

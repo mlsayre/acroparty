@@ -323,9 +323,26 @@ class RoomController < ApplicationController
 
     @winninganswervoters = User.where('answervotedfor = ?', @roundwinneranswer)
 
+    # don't show vote button for player's answer
+    if Famroomanswer.all == [] || Famroomanswer.where("user_id = ?", current_user.id) == []
+      @noownvote = "..."
+    elsif Famroomanswer.where("user_id = ?", current_user.id) != []
+      @noownvote = Famroomanswer.where("user_id = ?", current_user.id).first.answer
+    else
+      @noownvote = "..."
+    end
+
+    if Famroomanswer.all == [] || Famroomanswer.where("user_id = ?", current_user.id) == []
+      @famroomanswersminusplayer = @famroomanswers
+    elsif Famroomanswer.where("user_id = ?", current_user.id) != []
+      @famroomanswersminusplayer = Famroomanswer.where("user_id != ?", current_user.id).all
+    else
+      @famroomanswersminusplayer = @famroomanswers
+    end
   end
 
   def updategamepoints
+    # update fastestanswer points
     if Famroomanswer.where('points > ?', 0).order('created_at ASC')
                     .first != nil && Famroomanswer.where('points > ?', 0).order('created_at ASC')
                     .first.user.id == current_user.id
@@ -333,6 +350,8 @@ class RoomController < ApplicationController
                        .order('created_at ASC').first
       @fastestanswer.user.increment!(:gamepoints, by = 2)
     end
+
+    # update voted for winner points
     @roundwinneranswer = Famroomanswer.order('points DESC, created_at ASC')
                      .first.id
     if User.where('answervotedfor = ? AND id = ?', @roundwinneranswer, current_user.id)
@@ -340,6 +359,14 @@ class RoomController < ApplicationController
       @winninganswervoters = User.where('answervotedfor = ? AND id = ?', @roundwinneranswer, current_user.id).first
       @winninganswervoters.increment!(:gamepoints, by = 1)
     end
+
+    # update vote points
+    if Famroomanswer.where('user_id = ?', current_user.id) != []
+      @roundpointstoadd = Famroomanswer.where('user_id = ?', current_user.id).first.points
+    else
+      @roundpointstoadd = 0
+    end
+    User.where('id = ?', current_user.id).first.increment!(:gamepoints, by = @roundpointstoadd)
 
     render :nothing => true
   end

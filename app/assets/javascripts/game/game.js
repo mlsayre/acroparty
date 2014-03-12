@@ -363,12 +363,12 @@ function resultsRound() {
     $("#winninganswervoters").show();
   }
   function updatePoints(){
-  $.ajax({
-    url: "/room/updategamepoints",
-    type: "POST"
-  });
-
-}
+    $.ajax({
+      url: "/room/updategamepoints",
+      type: "POST"
+    });
+    $("#userlistbox").load("/room/familyroom #userlistbox");
+  }
   setTimeout(showAllAnswers, 1500);
   setTimeout(showFastestAnswer, 3000);
   setTimeout(showWinningVoters, 4500);
