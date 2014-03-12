@@ -27,6 +27,8 @@ Acroparty::Application.routes.draw do
 
   resources :room do
     collection do
+      post 'playerenterinit'
+      post 'roundprep'
       post 'votefor'
       post 'resetfamroom'
       post 'updategamepoints'

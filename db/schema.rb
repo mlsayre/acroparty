@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140311092343) do
+ActiveRecord::Schema.define(:version => 20140312212748) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -144,9 +144,22 @@ ActiveRecord::Schema.define(:version => 20140311092343) do
     t.string   "time_zone"
     t.integer  "answervotedfor"
     t.integer  "gamepoints",             :default => 0
+    t.integer  "points_alltime",         :default => 0
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+
+  create_table "winninganswers", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "answer"
+    t.integer  "points",      :default => 0
+    t.string   "category"
+    t.string   "acroletters"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.float    "answertime",  :default => 0.0
+    t.string   "roomname"
+  end
 
 end

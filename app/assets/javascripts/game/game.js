@@ -1,3 +1,21 @@
+// init player when entering room
+function playerEnterInit(){
+  $.ajax({
+    url: "/room/playerenterinit",
+    type: "POST"
+  });
+  $("#userlistbox").load("/room/familyroom #userlistbox");
+}
+
+// to clear the answers during round prep
+// init player when entering room
+function roundPrep(){
+  $.ajax({
+    url: "/room/roundprep",
+    type: "POST"
+  });
+}
+
 // Writing and voting timer
 function wtimer() {
   var answercount=61; // Answer write time (s)

@@ -6,10 +6,7 @@
       <%= image_tag current_user.avatar.url(:small) %>
     <% end %>
     <p class="acrofont"; style="margin-top:0px; margin-bottom:0px; font-size:120%; font-weight:normal;">Welcome, <%= @username %>!</p>
-    Points (all-time): 1,286
-    Points (this month): 412
-    Points (this week): 108
-    Points (today): 10
+    Points (all-time): <%= @points_alltime %>
     <% if @username == "Matt" %>
       <%= button_to "reset room", { :controller => :room, :action => 'resetfamroom' }, remote: true %>
     <% end %>
@@ -22,15 +19,20 @@
     <p class="acrofont">Rooms:</p>
     <div class="roomslisttable">
       <div id="roomslist" style="margin-top:6px">
-        <%= link_to "Living Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players<br/>
-        <%= link_to "Living Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players<br/>
-        <%= link_to "Living Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players<br/>
+        <%= link_to "Family Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players<br/>
       </div>
     </div>
     <div id="roomsrefresh" class="button tiny round centerall" style="margin-top:6px">Refresh room list</div>
   </div>
   <div class="small-5 columns" style="margin-top:18px; margin-bottom:4px;">
-      <p class="acrofont">High Scores</p>
+      <p class="acrofont">Latest Winners</p>
+      <div class="roomslisttable">
+        <% Winninganswer.all.reverse.each do |winner| %>
+          <li id="winnerslist" style="margin:6px">
+            <%= winner.user.username %>: "<%= winner.answer %>" (<i><%= winner.category %></i> - <%= winner.acroletters %>, in <%= winner.roomname %>, time:<%= winner.answertime %>s)
+        <% end %>
+        </li>
+      </div>
 
   </div>
 

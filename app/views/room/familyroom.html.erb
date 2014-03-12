@@ -112,7 +112,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" style="padding-left:6px; background:#d1fffe;">
       <div id="userlistbox"><u><%= @playerlist.count %>/12 players:</u><br />
-        <% @playerlist.each do |player| %>
+        <% @playerlist.order('gamepoints DESC').each do |player| %>
           <%= player.name %><span style="float:right; padding-right:6px;"><%= player.user.gamepoints%></span><br />
         <% end %>
       </div>
@@ -149,6 +149,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 
 // decide which JS event(game round) the player will join next, set up board
 function joinInProgress() {
+  playerEnterInit();
   $("#acceptedtext").hide();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
@@ -182,6 +183,7 @@ function r1prep() {
 }
 
 function r1write() {
+  roundPrep();
   var roundnumber = 1;
   $("#answerroundnumber").val(roundnumber);
   var roundstarted = "<%= @timer1write + 8.75.seconds %>";
@@ -224,7 +226,6 @@ function r1res() {
   $("#votediv").dialog('close');
   $("#votediv").hide();
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 1 - Results");
   setTimeout(r2prep, <%= @r2restime %>*1000);

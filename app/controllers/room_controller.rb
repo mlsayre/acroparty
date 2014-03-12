@@ -341,25 +341,42 @@ class RoomController < ApplicationController
     end
 
     # show bonus points in results
-    if Famroomanswer.first.round == 1 ||
-      Famroomanswer.first.round == 6
-      @bonuspointsshow = 3
-    elsif Famroomanswer.first.round == 2 ||
-      Famroomanswer.first.round == 7
-      @bonuspointsshow = 4
-    elsif Famroomanswer.first.round == 3 ||
-      Famroomanswer.first.round == 8
-      @bonuspointsshow = 5
-    elsif Famroomanswer.first.round == 4 ||
-      Famroomanswer.first.round == 9
-      @bonuspointsshow = 6
-    elsif Famroomanswer.first.round == 5 ||
-      Famroomanswer.first.round == 10
-      @bonuspointsshow = 7
-    else
-      @bonuspointsshow = 0
+    if Famroomanswer.all != []
+      if Famroomanswer.first.round == 1 ||
+        Famroomanswer.first.round == 6
+        @bonuspointsshow = 3
+      elsif Famroomanswer.first.round == 2 ||
+        Famroomanswer.first.round == 7
+        @bonuspointsshow = 4
+      elsif Famroomanswer.first.round == 3 ||
+        Famroomanswer.first.round == 8
+        @bonuspointsshow = 5
+      elsif Famroomanswer.first.round == 4 ||
+        Famroomanswer.first.round == 9
+        @bonuspointsshow = 6
+      elsif Famroomanswer.first.round == 5 ||
+        Famroomanswer.first.round == 10
+        @bonuspointsshow = 7
+      else
+        @bonuspointsshow = 0
+      end
     end
+
   end
+
+  def playerenterinit
+    User.where('id = ?', current_user.id).first.update_attributes(:answervotedfor => nil,
+      :gamepoints => 0)
+
+    render :nothing => true
+  end
+
+  def roundprep
+    Famroomanswer.delete_all
+
+    render :nothing => true
+  end
+
 
   def updategamepoints
     # update fastestanswer points
@@ -368,7 +385,10 @@ class RoomController < ApplicationController
                     .first.user.id == current_user.id
       @fastestanswer = Famroomanswer.where('points > ?', 0)
                        .order('created_at ASC').first
-      @fastestanswer.user.increment!(:gamepoints, by = 2)
+      if User.where('id = ?', current_user.id).first.answervotedfor != nil
+        @fastestanswer.user.increment!(:gamepoints, by = 2)
+        @fastestanswer.user.increment!(:points_alltime, by = 2)
+      end
     end
 
     # update voted for winner points
@@ -378,6 +398,7 @@ class RoomController < ApplicationController
        .first != nil
       @winninganswervoters = User.where('answervotedfor = ? AND id = ?', @roundwinneranswer, current_user.id).first
       @winninganswervoters.increment!(:gamepoints, by = 1)
+      @winninganswervoters.increment!(:points_alltime, by = 1)
     end
 
     # update vote points
@@ -386,7 +407,10 @@ class RoomController < ApplicationController
     else
       @roundpointstoadd = 0
     end
-    User.where('id = ?', current_user.id).first.increment!(:gamepoints, by = @roundpointstoadd)
+    if User.where('id = ?', current_user.id).first.answervotedfor != nil
+      User.where('id = ?', current_user.id).first.increment!(:gamepoints, by = @roundpointstoadd)
+      User.where('id = ?', current_user.id).first.increment!(:points_alltime, by = @roundpointstoadd)
+    end
 
     # add bonus points to winner
     if Famroomanswer.first.round == 1 ||
@@ -408,8 +432,26 @@ class RoomController < ApplicationController
       @bonuspoints = 0
     end
     @roundwinnerforbonus = Famroomanswer.order('points DESC, created_at ASC').first.user
-    if @roundwinnerforbonus.id == current_user.id
+    if @roundwinnerforbonus.id == current_user.id &&
+      User.where('id = ?', current_user.id).first.answervotedfor != nil
       @roundwinnerforbonus.increment!(:gamepoints, by = @bonuspoints)
+      @roundwinnerforbonus.increment!(:points_alltime, by = @bonuspoints)
+    end
+
+    # keep winning acro and some of its info
+    @roundanswertosave = Famroomanswer.order('points DESC, created_at ASC')
+                     .first
+    if @roundanswertosave.user.id == current_user.id
+      @rats_answer = @roundanswertosave.answer
+      @rats_user = @roundanswertosave.user_id
+      @rats_points = @roundanswertosave.points
+      @rats_acroletters = @roundanswertosave.acroletters
+      @rats_category = @roundanswertosave.category
+      @rats_answertime = @roundanswertosave.answertime
+      Winninganswer.create(:answer => @rats_answer, :user_id => @rats_user,
+        :points => @rats_points, :acroletters => @rats_acroletters,
+        :category => @rats_category, :answertime => @rats_answertime,
+        :roomname => "Family Room")
     end
 
     render :nothing => true
@@ -438,6 +480,7 @@ class RoomController < ApplicationController
     end
     User.find(:first, :conditions => ["id = ?", current_user.id])
       .update_attributes(:answervotedfor => params[:id])
+
     render :nothing => true
   end
 
