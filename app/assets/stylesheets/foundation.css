@@ -156,6 +156,21 @@ body {
   display: block;
   height: 160px;
   border: 1px solid black;
+  overflow-y: auto;
+}
+
+.winanswertable {
+  display: block;
+  height: 240px;
+  border: 1px solid black;
+  overflow-y: auto;
+}
+
+.topplayertable {
+  display: block;
+  height: 200px;
+  border: 1px solid black;
+  overflow-y: auto;
 }
 
 .chattable {

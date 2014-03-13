@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140312212748) do
+ActiveRecord::Schema.define(:version => 20140313003247) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -112,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20140312212748) do
     t.integer "user_id"
     t.string  "name"
     t.string  "room"
+    t.integer "gamepoints"
   end
 
   create_table "users", :force => true do |t|

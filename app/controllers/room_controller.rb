@@ -7,7 +7,9 @@ class RoomController < ApplicationController
     @famroomacroletters = Famroomacroletters.all
     @famroomgamestate = Famroomgamestate.all
     @user = User.all
-    @player = Player.create(:name => current_user.username, :room => "familyroom", :user_id => current_user.id)
+    @gp = User.where('id = ?', current_user.id).first.gamepoints
+    @player = Player.create(:name => current_user.username, :room => "familyroom",
+      :user_id => current_user.id, :gamepoints => current_user.gamepoints)
     @playerlist = Player.where(:room => "familyroom")
     gon.playerlistcount = @playerlist.count
     @famroomanswers = Famroomanswer.all
@@ -453,6 +455,9 @@ class RoomController < ApplicationController
         :category => @rats_category, :answertime => @rats_answertime,
         :roomname => "Family Room")
     end
+    # and only allow the last 25 winning answers
+    Winninganswer.destroy_all(['id NOT IN (?)', Winninganswer.last(25)
+      .collect(&:id)])
 
     render :nothing => true
   end

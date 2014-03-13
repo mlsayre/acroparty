@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  attr_accessible :name, :room, :user_id
+  attr_accessible :name, :room, :user_id, :gamepoints
 
   validates_uniqueness_of :name, :scope => :room
 
