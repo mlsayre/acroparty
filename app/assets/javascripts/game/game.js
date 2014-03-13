@@ -8,7 +8,6 @@ function playerEnterInit(){
 }
 
 // to clear the answers during round prep
-// init player when entering room
 function roundPrep(){
   $.ajax({
     url: "/room/roundprep",
@@ -21,6 +20,7 @@ function wtimer() {
   var answercount=61; // Answer write time (s)
   var writecounter=setInterval(writingtimer, 1000);
   $("#timertext").css('color', 'black');
+  $("#timertext").show();
   function writingtimer() {
     answercount=answercount-1;
     if ( answercount == 0 )
@@ -101,6 +101,7 @@ function showLetters() {
         wtimer();
         $("#answertextfield").removeAttr("disabled");
         $("#answersubmit").removeAttr("disabled");
+        document.getElementById("answertextfield").style.visibility="visible";
         $('#answerfield').removeClass('animated fadeOutDown');
         $('#answerfield').addClass('animated rubberBand');
       }
@@ -120,8 +121,8 @@ function submitAnswerFX() {
   }
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
-  setTimeout(addPulse, 30);
   $('#acceptedtext').removeClass('animated flip');
+  setTimeout(addPulse, 30);
   setTimeout(addAcceptedTextFlip, 230);
 }
 
@@ -221,31 +222,39 @@ function acroValidate(roundletters) {
         notJustLetters();
         return false;
       }
-    }
-    else if (eachletter.length == 4) {
-      if (words.length == 4 &&
-         ((words[0].charAt(0) != eachletter[0]) ||
-         (words[1].charAt(0) != eachletter[1]) ||
-         (words[2].charAt(0) != eachletter[2]) ||
-         (words[3].charAt(0) != eachletter[3])))
-        {
-          notAnAcronym();
-          return false;
-        }
-      else if ((words.length < 4) || (words.length > 4))
-        {
-          incorrectLength();
-          return false;
-        }
-      else if (words.length == 4 &&
-         ((words[0] == eachletter[0]) &&
-         (words[1] == eachletter[1]) &&
-         (words[2] == eachletter[2]) &&
-         (words[3] == eachletter[3])))
-        {
-          notJustLetters();
-          return false;
-        }
+      else {
+        submitAnswerFX();
+        return( true );
+      }
+  }
+  else if (eachletter.length == 4) {
+    if (words.length == 4 &&
+       ((words[0].charAt(0) != eachletter[0]) ||
+       (words[1].charAt(0) != eachletter[1]) ||
+       (words[2].charAt(0) != eachletter[2]) ||
+       (words[3].charAt(0) != eachletter[3])))
+      {
+        notAnAcronym();
+        return false;
+      }
+    else if ((words.length < 4) || (words.length > 4))
+      {
+        incorrectLength();
+        return false;
+      }
+    else if (words.length == 4 &&
+       ((words[0] == eachletter[0]) &&
+       (words[1] == eachletter[1]) &&
+       (words[2] == eachletter[2]) &&
+       (words[3] == eachletter[3])))
+      {
+        notJustLetters();
+        return false;
+      }
+      else {
+        submitAnswerFX();
+        return( true );
+      }
     }
     else if (eachletter.length == 5) {
       if (words.length == 5 &&
@@ -272,6 +281,10 @@ function acroValidate(roundletters) {
         {
           notJustLetters();
           return false;
+        }
+        else {
+          submitAnswerFX();
+          return( true );
         }
     }
     else if (eachletter.length == 6) {
@@ -301,6 +314,10 @@ function acroValidate(roundletters) {
         {
           notJustLetters();
           return false;
+        }
+        else {
+          submitAnswerFX();
+          return( true );
         }
     }
     else if (eachletter.length == 7) {
@@ -333,10 +350,11 @@ function acroValidate(roundletters) {
           notJustLetters();
           return false;
         }
+        else {
+          submitAnswerFX();
+          return( true );
+        }
     }
-
-  submitAnswerFX();
-  return( true );
 }
 
 function votingRound() {
@@ -370,6 +388,7 @@ function resultsRound() {
 
     });
   $("#resultsdiv").dialog('open');
+  $("#resultsdiv").addClass("centerall");
   $("#roundwinnerannounce").show();
   function showAllAnswers() {
     $(".answerresultinfo").show();
@@ -391,4 +410,13 @@ function resultsRound() {
   setTimeout(showFastestAnswer, 3000);
   setTimeout(showWinningVoters, 4500);
   setTimeout(updatePoints, 5000);
+}
+
+function hideResultsDialog() {
+  $("#roundwinnerannounce").hide();
+  $(".answerresultinfo").hide();
+  $("#fastestanswer").hide();
+  $("#winninganswervoters").hide();
+  $("#resultsdiv").dialog('close');
+  $("#resultsdiv").hide();
 }

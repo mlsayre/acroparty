@@ -30,7 +30,7 @@
       <div class="winanswertable">
         <% Winninganswer.all.reverse.each do |winner| %>
           <li id="winnerslist" style="margin:6px;">
-            <%= winner.user.username %>: <b>"<%= winner.answer %>" </b>(<i><%= winner.category %></i> - <%= winner.acroletters %>, in <%= winner.roomname %>, time:<%= winner.answertime %>s)
+            <%= winner.user.username %>: <b>"<%= winner.answer %>" </b>(<i><%= winner.category %></i> - <%= winner.acroletters %> in <%= winner.roomname %>, time: <%= winner.answertime %>s)
         <% end %>
         </li>
       </div>

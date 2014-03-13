@@ -96,15 +96,15 @@ class RoomController < ApplicationController
     @r1preptime = 2         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
-    @r1restime = 30          #15
-    @r2preptime = 15         #15
-    @r2writetime = 72
+    @r1restime = 24          #15
+    @r2preptime = 3        #15
+    @r2writetime = 71.5
     @r2votetime = 30
-    @r2restime = 15
-    @r3preptime = 15
-    @r3writetime = 74
+    @r2restime = 24
+    @r3preptime = 3
+    @r3writetime = 73
     @r3votetime = 30
-    @r3restime = 15
+    @r3restime = 24
     @r4preptime = 15
     @r4writetime = 70
     @r4votetime = 30
@@ -374,11 +374,22 @@ class RoomController < ApplicationController
   end
 
   def roundprep
-    Famroomanswer.delete_all
+    Famroomanswer.destroy_all
 
     render :nothing => true
   end
 
+  def validationfail
+    if Famroomanswer.where(:user_id => current_user.id).first != nil
+      Famroomanswer.where(:user_id => current_user.id).delete_all
+    end
+    render :nothing => true
+  end
+
+  def famroomanswercreate
+    Famroomanswer.create!(params[:famroomanswer])
+    render :nothing => true
+  end
 
   def updategamepoints
     # update fastestanswer points
@@ -469,6 +480,10 @@ class RoomController < ApplicationController
     if @famroomplayerlist.count < 1
       Famroomroundtime.destroy_all
       eventArray = []
+      Famroomanswer.destroy_all
+      Famroomacroletters.destroy_all
+      Famroomcat.destroy_all
+
     end
 
     respond_to do |format|
@@ -493,6 +508,7 @@ class RoomController < ApplicationController
     Famroomacroletters.destroy_all
     Famroomroundtime.destroy_all
     Famroomcat.destroy_all
+    Message.destroy_all
     render :nothing => true
   end
 

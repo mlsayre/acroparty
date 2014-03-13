@@ -27,6 +27,7 @@ Acroparty::Application.routes.draw do
 
   resources :room do
     collection do
+      post 'validationfail'
       post 'playerenterinit'
       post 'roundprep'
       post 'votefor'

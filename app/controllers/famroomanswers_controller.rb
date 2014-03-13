@@ -5,6 +5,7 @@ class FamroomanswersController < ApplicationController
   end
 
   def create
+    Famroomanswer.create(params[:famroomanswer])
     @famroomanswer = Famroomanswer.create!(params[:famroomanswer])
     render :nothing => true
   end
