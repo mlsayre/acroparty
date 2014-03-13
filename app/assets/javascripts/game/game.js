@@ -420,3 +420,33 @@ function hideResultsDialog() {
   $("#resultsdiv").dialog('close');
   $("#resultsdiv").hide();
 }
+
+function gameOver() {
+  $("#endofgamediv").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "640",
+
+    });
+  $("#endofgamediv").dialog('open');
+  $("#endofgamediv").addClass("centerall");
+  $("#endofgamediv").show();
+  function updateStats(){
+    $.ajax({
+      url: "/room/endofgamestatsinit",
+      type: "POST"
+    });
+  }
+  setTimeout(updateStats, 400);
+  function readyNewGame(){
+    $.ajax({
+      url: "/room/newgamegetready",
+      type: "POST"
+    });
+  }
+  setTimeout(readyNewGame, 13500);
+}

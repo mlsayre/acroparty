@@ -6,7 +6,9 @@
       <%= image_tag current_user.avatar.url(:small) %>
     <% end %>
     <p class="acrofont"; style="margin-top:0px; margin-bottom:0px; font-size:120%; font-weight:normal;">Welcome, <%= @username %>!</p>
-    Points (all-time): <%= @points_alltime %>
+    Points (all-time): <%= @points_alltime %></br>
+    Games won: <%= @gameswon %></br>
+    Games played: <%= @gamesplayed %></br>
     <% if @username == "Matt" %>
       <%= button_to "reset room", { :controller => :room, :action => 'resetfamroom' }, remote: true %>
     <% end %>

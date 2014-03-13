@@ -6,5 +6,7 @@ class PagesController < ApplicationController
     Player.delete_all(["name = ?", current_user.username])
     @points_alltime = @current_user.points_alltime
     @winninganswers = Winninganswer.all
+    @gamesplayed = @current_user.gamesplayed
+    @gameswon = @current_user.gameswon
   end
 end

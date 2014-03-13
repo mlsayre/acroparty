@@ -96,44 +96,44 @@ class RoomController < ApplicationController
     @r1preptime = 2         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
-    @r1restime = 24          #15
-    @r2preptime = 3        #15
+    @r1restime = 21          #15
+    @r2preptime = 2        #15
     @r2writetime = 71.5
     @r2votetime = 30
-    @r2restime = 24
-    @r3preptime = 3
+    @r2restime = 21
+    @r3preptime = 2
     @r3writetime = 73
     @r3votetime = 30
-    @r3restime = 24
-    @r4preptime = 15
-    @r4writetime = 70
+    @r3restime = 21
+    @r4preptime = 2
+    @r4writetime = 74.5
     @r4votetime = 30
-    @r4restime = 15
-    @r5preptime = 15
-    @r5writetime = 70
+    @r4restime = 21
+    @r5preptime = 2
+    @r5writetime = 76
     @r5votetime = 30
-    @r5restime = 15
-    @r6preptime = 15
+    @r5restime = 21
+    @r6preptime = 2
     @r6writetime = 70
     @r6votetime = 30
-    @r6restime = 15
-    @r7preptime = 15
-    @r7writetime = 70
+    @r6restime = 21
+    @r7preptime = 2
+    @r7writetime = 71.5
     @r7votetime = 30
-    @r7restime = 15
-    @r8preptime = 15
-    @r8writetime = 70
+    @r7restime = 21
+    @r8preptime = 2
+    @r8writetime = 73
     @r8votetime = 30
-    @r8restime = 15
-    @r9preptime = 15
-    @r9writetime = 70
+    @r8restime = 21
+    @r9preptime = 2
+    @r9writetime = 74.5
     @r9votetime = 30
-    @r9restime = 15
-    @r10preptime = 15
-    @r10writetime = 70
+    @r9restime = 21
+    @r10preptime = 2
+    @r10writetime = 76
     @r10votetime = 30
-    @r10restime = 15
-    @finalresultstime = 30
+    @r10restime = 21
+    @finalresultstime = 15
 
     roundTimeArray = [@newgamestartstime, @r1preptime, @r1writetime, @r1votetime, @r1restime,
                       @r2preptime, @r2writetime, @r2votetime, @r2restime,
@@ -364,11 +364,15 @@ class RoomController < ApplicationController
       end
     end
 
+    @gamewinner = User.order('gamepoints DESC').first
+
   end
 
   def playerenterinit
     User.where('id = ?', current_user.id).first.update_attributes(:answervotedfor => nil,
       :gamepoints => 0)
+    Player.where('user_id = ?', current_user.id).first
+          .update_attributes(:gamepoints => 0)
 
     render :nothing => true
   end
@@ -376,13 +380,6 @@ class RoomController < ApplicationController
   def roundprep
     Famroomanswer.destroy_all
 
-    render :nothing => true
-  end
-
-  def validationfail
-    if Famroomanswer.where(:user_id => current_user.id).first != nil
-      Famroomanswer.where(:user_id => current_user.id).delete_all
-    end
     render :nothing => true
   end
 
@@ -509,6 +506,25 @@ class RoomController < ApplicationController
     Famroomroundtime.destroy_all
     Famroomcat.destroy_all
     Message.destroy_all
+    render :nothing => true
+  end
+
+  def endofgamestatsinit
+    @gamewinner = User.order('gamepoints DESC').first
+    @playerlist = Player.where(:room => "familyroom")
+    if @playerlist.count > 2
+      @gamewinner.increment!(:gameswon, by = 1)
+      User.where(:id => current_user.id).first.increment!(:gamesplayed, by = 1)
+    end
+
+    render :nothing => true
+  end
+
+  def newgamegetready
+    Famroomacroletters.destroy_all
+    Famroomroundtime.destroy_all
+    Famroomcat.destroy_all
+
     render :nothing => true
   end
 
