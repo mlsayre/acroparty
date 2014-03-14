@@ -25,6 +25,9 @@
         <%= link_to "Family Room", room_familyroom_path %> - <%= @familyroomplayers.count %>/12 players<br/>
       </div>
     </div>
+    <% if flash[:notice] %>
+      <div class="notice" style="color:red; margin-top:6px;"><%= flash[:notice] %></div>
+    <% end %>
     <div id="roomsrefresh" class="button tiny round centerall" style="margin-top:6px">Refresh room list</div>
   </div>
   <div class="small-5 columns" style="margin-top:18px; margin-bottom:4px;">
@@ -39,7 +42,7 @@
 
       <p class="acrofont">Top Players</p>
       <div class="topplayertable">
-        <% User.order('points_alltime DESC').each do |top| %>
+        <% User.where('username != ?', "none").order('points_alltime DESC').each do |top| %>
           <li id="winnerslist" style="margin:6px; list-style-type: decimal;">
             <%= top.username %>
             <span style="float:right; padding-right:6px;">

@@ -4,7 +4,10 @@ function playerEnterInit(){
     url: "/room/playerenterinit",
     type: "POST"
   });
-  $("#userlistbox").load("/room/familyroom #userlistbox");
+  function updateUserBox() {
+    $("#userlistbox").load("/room/familyroom #userlistbox");
+  }
+  setTimeout(updateUserBox, 500);
 }
 
 // to clear the answers during round prep
@@ -117,11 +120,12 @@ function submitAnswerFX() {
   function addAcceptedTextFlip() {
     $('#acceptedtext').addClass('animated flip');
     $("#acceptedtext").show();
-    $("#acceptedtext").load("/room/familyroom #acceptedtext", ".");
   }
+  $("#acceptedtext").hide();
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
   $('#acceptedtext').removeClass('animated flip');
+  $("#acceptedtext").load("/room/familyroom #acceptedtext", ".");
   setTimeout(addPulse, 30);
   setTimeout(addAcceptedTextFlip, 230);
 }
@@ -406,6 +410,7 @@ function resultsRound() {
     });
     $("#userlistbox").load("/room/familyroom #userlistbox");
   }
+  $(".votebuttons").removeAttr("disabled");
   setTimeout(showAllAnswers, 1500);
   setTimeout(showFastestAnswer, 3000);
   setTimeout(showWinningVoters, 4500);

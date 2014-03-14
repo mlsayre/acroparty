@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  before_filter :authenticate_user!
+
   def foyer
     @username = current_user.username
     @familyroomplayers = Player.where(:room => "familyroom")

@@ -141,8 +141,8 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
     </div>
   </div>
   <div class="small-2 columns centerall">
-      <%= link_to "SFX: On", foyer_path, :class => "button small radius", :style => "margin-top:10px" %>
-      <%= link_to "Music: On", foyer_path, :class => "button small radius" %>
+      <%= link_to "SFX: On", foyer_path, :class => "button small radius", :style => "margin-top:10px; visibility:hidden;" %>
+      <%= link_to "Music: On", foyer_path, :class => "button small radius", :style => "visibility:hidden;" %>
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>
@@ -157,7 +157,7 @@ function joinInProgress() {
   $("#acceptedtext").hide();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
-  $("#acroletters").html("<br/>Waiting to<br/> join next round...");
+  $("#acroletters").html("<br/>Waiting to join...<br/>(about <%= @timetojoin %>s)");
   slideRoundText();
   $("#roundtext").text("Joining next round...");
   $('#answerfield').addClass('animated fadeOutDown');
@@ -221,7 +221,7 @@ function r1vote() {
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
-  $("#votediv").load("/room/familyroom #votediv", ".");
+  $("#votediv").load("/room/familyroom #votediv");
   setTimeout(votingRound, 400);
   vtimer();
   setTimeout(r1res, <%= @r1votetime %>*1000);
@@ -777,23 +777,6 @@ function endOfGame() {
   $("#endofgamediv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(gameOver, 700);
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
-}
-
-function readyForNewGame() {
-  playerEnterInit();
-  $("#acceptedtext").hide();
-  document.getElementById("submittedtext").style.visibility="hidden";
-  $("#acroletters").css('fontSize', '100%');
-  $("#acroletters").html("<br/>Waiting to<br/> start new game...");
-  slideRoundText();
-  $("#roundtext").text("Joining next round...");
-  $('#answerfield').addClass('animated fadeOutDown');
-  $("#answertextfield").attr("disabled", true);
-  $("#answersubmit").attr("disabled", true);
-  $("#votediv").hide();
-  $("#resultsdiv").hide();
-  $("#endofgamediv").hide();
-  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
 

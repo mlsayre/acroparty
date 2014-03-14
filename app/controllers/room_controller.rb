@@ -1,6 +1,6 @@
 class RoomController < ApplicationController
 
-  # before_filter :set_cache_buster
+  before_filter :authenticate_user!
 
   def familyroom
     @messages = Message.all
@@ -71,8 +71,8 @@ class RoomController < ApplicationController
                         :r2cat => @randomcategory.sample,
                         :r3cat => @randomcategory.sample,
                         :r4cat => @randomcategory.sample,
-                        :r5cat => @randomcategory.sample)
-      Famroomcat.create(:r6cat => @randomcategory.sample,
+                        :r5cat => @randomcategory.sample,
+                        :r6cat => @randomcategory.sample,
                         :r7cat => @randomcategory.sample,
                         :r8cat => @randomcategory.sample,
                         :r9cat => @randomcategory.sample,
@@ -92,44 +92,44 @@ class RoomController < ApplicationController
 
 
     # ROUND TIMINGS
-    @newgamestartstime = 2  #10
-    @r1preptime = 2         #15
+    @newgamestartstime = 3  #10
+    @r1preptime = 3         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
     @r1restime = 21          #15
-    @r2preptime = 2        #15
+    @r2preptime = 3        #15
     @r2writetime = 71.5
     @r2votetime = 30
     @r2restime = 21
-    @r3preptime = 2
+    @r3preptime = 3
     @r3writetime = 73
     @r3votetime = 30
     @r3restime = 21
-    @r4preptime = 2
+    @r4preptime = 3
     @r4writetime = 74.5
     @r4votetime = 30
     @r4restime = 21
-    @r5preptime = 2
+    @r5preptime = 3
     @r5writetime = 76
     @r5votetime = 30
     @r5restime = 21
-    @r6preptime = 2
+    @r6preptime = 3
     @r6writetime = 70
     @r6votetime = 30
     @r6restime = 21
-    @r7preptime = 2
+    @r7preptime = 3
     @r7writetime = 71.5
     @r7votetime = 30
     @r7restime = 21
-    @r8preptime = 2
+    @r8preptime = 3
     @r8writetime = 73
     @r8votetime = 30
     @r8restime = 21
-    @r9preptime = 2
+    @r9preptime = 3
     @r9writetime = 74.5
     @r9votetime = 30
     @r9restime = 21
-    @r10preptime = 2
+    @r10preptime = 3
     @r10writetime = 76
     @r10votetime = 30
     @r10restime = 21
@@ -154,16 +154,16 @@ class RoomController < ApplicationController
       eventArray = []
     end
 
-    if @playerlist.count < 1 && Famroomgamestate.find(:first).activity != "waiting"
+    if @playerlist.count == 0 && Famroomgamestate.find(:first).activity != "waiting"
       Famroomgamestate.create(:activity => "waiting")
-    elsif @playerlist.count < 1
+    elsif @playerlist.count == 0
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
       Famroomcat.destroy_all
       eventArray = []
 
     elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
-      Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 2.seconds,
+      Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 5.seconds,
                              :r1prep => DateTime.now.utc + roundTimeArray.take(1).sum.seconds,
                              :r1write => DateTime.now.utc + roundTimeArray.take(2).sum.seconds,
                              :r1vote => DateTime.now.utc + roundTimeArray.take(3).sum.seconds,
@@ -209,47 +209,47 @@ class RoomController < ApplicationController
     end
 
     @timernewgamestarts = Famroomroundtime.find(:first).newgamestarts.utc
-    @timer1prep = Famroomroundtime.find(:first).r1prep.utc + 2.seconds
-    @timer1write = Famroomroundtime.find(:first).r1write.utc + 2.seconds
-    @timer1vote = Famroomroundtime.find(:first).r1vote.utc + 2.seconds
-    @timer1res = Famroomroundtime.find(:first).r1res.utc + 2.seconds
-    @timer2prep = Famroomroundtime.find(:first).r2prep.utc + 2.seconds
-    @timer2write = Famroomroundtime.find(:first).r2write.utc + 2.seconds
-    @timer2vote = Famroomroundtime.find(:first).r2vote.utc + 2.seconds
-    @timer2res = Famroomroundtime.find(:first).r2res.utc + 2.seconds
-    @timer3prep = Famroomroundtime.find(:first).r3prep.utc + 2.seconds
-    @timer3write = Famroomroundtime.find(:first).r3write.utc + 2.seconds
-    @timer3vote = Famroomroundtime.find(:first).r3vote.utc + 2.seconds
-    @timer3res = Famroomroundtime.find(:first).r3res.utc + 2.seconds
-    @timer4prep = Famroomroundtime.find(:first).r4prep.utc + 2.seconds
-    @timer4write = Famroomroundtime.find(:first).r4write.utc + 2.seconds
-    @timer4vote = Famroomroundtime.find(:first).r4vote.utc + 2.seconds
-    @timer4res = Famroomroundtime.find(:first).r4res.utc + 2.seconds
-    @timer5prep = Famroomroundtime.find(:first).r5prep.utc + 2.seconds
-    @timer5write = Famroomroundtime.find(:first).r5write.utc + 2.seconds
-    @timer5vote = Famroomroundtime.find(:first).r5vote.utc + 2.seconds
-    @timer5res = Famroomroundtime.find(:first).r5res.utc + 2.seconds
-    @timer6prep = Famroomroundtime.find(:first).r6prep.utc + 2.seconds
-    @timer6write = Famroomroundtime.find(:first).r6write.utc + 2.seconds
-    @timer6vote = Famroomroundtime.find(:first).r6vote.utc + 2.seconds
-    @timer6res = Famroomroundtime.find(:first).r6res.utc + 2.seconds
-    @timer7prep = Famroomroundtime.find(:first).r7prep.utc + 2.seconds
-    @timer7write = Famroomroundtime.find(:first).r7write.utc + 2.seconds
-    @timer7vote = Famroomroundtime.find(:first).r7vote.utc + 2.seconds
-    @timer7res = Famroomroundtime.find(:first).r7res.utc + 2.seconds
-    @timer8prep = Famroomroundtime.find(:first).r8prep.utc + 2.seconds
-    @timer8write = Famroomroundtime.find(:first).r8write.utc + 2.seconds
-    @timer8vote = Famroomroundtime.find(:first).r8vote.utc + 2.seconds
-    @timer8res = Famroomroundtime.find(:first).r8res.utc + 2.seconds
-    @timer9prep = Famroomroundtime.find(:first).r9prep.utc + 2.seconds
-    @timer9write = Famroomroundtime.find(:first).r9write.utc + 2.seconds
-    @timer9vote = Famroomroundtime.find(:first).r9vote.utc + 2.seconds
-    @timer9res = Famroomroundtime.find(:first).r9res.utc + 2.seconds
-    @timer10prep = Famroomroundtime.find(:first).r10prep.utc + 2.seconds
-    @timer10write = Famroomroundtime.find(:first).r10write.utc + 2.seconds
-    @timer10vote = Famroomroundtime.find(:first).r10vote.utc + 2.seconds
-    @timer10res = Famroomroundtime.find(:first).r10res.utc + 2.seconds
-    @timerfinalresults = Famroomroundtime.find(:first).finalresults.utc + 2.seconds
+    @timer1prep = Famroomroundtime.find(:first).r1prep.utc + 5.seconds
+    @timer1write = Famroomroundtime.find(:first).r1write.utc + 5.seconds
+    @timer1vote = Famroomroundtime.find(:first).r1vote.utc + 5.seconds
+    @timer1res = Famroomroundtime.find(:first).r1res.utc + 5.seconds
+    @timer2prep = Famroomroundtime.find(:first).r2prep.utc + 5.seconds
+    @timer2write = Famroomroundtime.find(:first).r2write.utc + 5.seconds
+    @timer2vote = Famroomroundtime.find(:first).r2vote.utc + 5.seconds
+    @timer2res = Famroomroundtime.find(:first).r2res.utc + 5.seconds
+    @timer3prep = Famroomroundtime.find(:first).r3prep.utc + 5.seconds
+    @timer3write = Famroomroundtime.find(:first).r3write.utc + 5.seconds
+    @timer3vote = Famroomroundtime.find(:first).r3vote.utc + 5.seconds
+    @timer3res = Famroomroundtime.find(:first).r3res.utc + 5.seconds
+    @timer4prep = Famroomroundtime.find(:first).r4prep.utc + 5.seconds
+    @timer4write = Famroomroundtime.find(:first).r4write.utc + 5.seconds
+    @timer4vote = Famroomroundtime.find(:first).r4vote.utc + 5.seconds
+    @timer4res = Famroomroundtime.find(:first).r4res.utc + 5.seconds
+    @timer5prep = Famroomroundtime.find(:first).r5prep.utc + 5.seconds
+    @timer5write = Famroomroundtime.find(:first).r5write.utc + 5.seconds
+    @timer5vote = Famroomroundtime.find(:first).r5vote.utc + 5.seconds
+    @timer5res = Famroomroundtime.find(:first).r5res.utc + 5.seconds
+    @timer6prep = Famroomroundtime.find(:first).r6prep.utc + 5.seconds
+    @timer6write = Famroomroundtime.find(:first).r6write.utc + 5.seconds
+    @timer6vote = Famroomroundtime.find(:first).r6vote.utc + 5.seconds
+    @timer6res = Famroomroundtime.find(:first).r6res.utc + 5.seconds
+    @timer7prep = Famroomroundtime.find(:first).r7prep.utc + 5.seconds
+    @timer7write = Famroomroundtime.find(:first).r7write.utc + 5.seconds
+    @timer7vote = Famroomroundtime.find(:first).r7vote.utc + 5.seconds
+    @timer7res = Famroomroundtime.find(:first).r7res.utc + 5.seconds
+    @timer8prep = Famroomroundtime.find(:first).r8prep.utc + 5.seconds
+    @timer8write = Famroomroundtime.find(:first).r8write.utc + 5.seconds
+    @timer8vote = Famroomroundtime.find(:first).r8vote.utc + 5.seconds
+    @timer8res = Famroomroundtime.find(:first).r8res.utc + 5.seconds
+    @timer9prep = Famroomroundtime.find(:first).r9prep.utc + 5.seconds
+    @timer9write = Famroomroundtime.find(:first).r9write.utc + 5.seconds
+    @timer9vote = Famroomroundtime.find(:first).r9vote.utc + 5.seconds
+    @timer9res = Famroomroundtime.find(:first).r9res.utc + 5.seconds
+    @timer10prep = Famroomroundtime.find(:first).r10prep.utc + 5.seconds
+    @timer10write = Famroomroundtime.find(:first).r10write.utc + 5.seconds
+    @timer10vote = Famroomroundtime.find(:first).r10vote.utc + 5.seconds
+    @timer10res = Famroomroundtime.find(:first).r10res.utc + 5.seconds
+    @timerfinalresults = Famroomroundtime.find(:first).finalresults.utc + 5.seconds
 
     eventArray = [@timernewgamestarts,
                   @timer1prep, @timer1write, @timer1vote, @timer1res,
@@ -265,6 +265,15 @@ class RoomController < ApplicationController
                   @timerfinalresults]
 
     @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
+
+    if @timerfinalresults < DateTime.now.utc
+      Famroomacroletters.destroy_all
+      Famroomroundtime.destroy_all
+      Famroomcat.destroy_all
+      redirect_to foyer_path
+      flash[:notice] = "The room had a weird smell. We lit some candles.
+                       Please try again. :)"
+    end
 
     @timetonextround = @nextround.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
 
@@ -306,7 +315,7 @@ class RoomController < ApplicationController
 
     # the player with the most votes at the end of the round
     if Famroomanswer.all == []
-      @roundwinner = User.first
+      @roundwinner = User.where(username: "none").first
     elsif Famroomanswer.all != []
       @roundwinner = Famroomanswer.order('points DESC, created_at ASC')
                      .first.user
@@ -317,7 +326,7 @@ class RoomController < ApplicationController
     # the player with the fastest answer receiving a vote
     if Famroomanswer.all == [] || Famroomanswer.where('points > ?', 0)
        .all == []
-      @fastestanswer = User.first
+      @fastestanswer = User.where(username: "none").first
     else
       @fastestanswer = Famroomanswer.where('points > ?', 0)
                        .order('created_at ASC').first.user
