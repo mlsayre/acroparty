@@ -27,6 +27,7 @@ Acroparty::Application.routes.draw do
 
   resources :room do
     collection do
+      post 'familyroom'
       post 'newgamegetready'
       post 'endofgamestatsinit'
       post 'playerenterinit'

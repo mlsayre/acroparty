@@ -73,7 +73,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 </div>
 
 <div class="row">
-  <div id="endofgamediv" class="small-12 columns centerall" style="font-size:100%;">
+  <div id="endofgamediv" class="small-12 columns centerall animated fadeIn" style="text-align:center; font-size:110%;">
       Congratulations, <%= @gamewinner.username %> with <%= @gamewinner.gamepoints %> points! </br></br>
       <%= image_tag @gamewinner.avatar.url(:small) %></br></br>
       You've now won <%= @gamewinner.gameswon %> games! </br></br>
@@ -168,7 +168,7 @@ function joinInProgress() {
   $("#votediv").hide();
   $("#resultsdiv").hide();
   $("#endofgamediv").hide();
-  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
+  setTimeout(r10vote, 1000);
 }
 
 joinInProgress();
@@ -769,8 +769,15 @@ function endOfGame() {
   slideRoundText();
   hideResultsDialog();
   $("#roundtext").text("The winner is...");
-  $("#endofgamediv").load("/room/familyroom #resultsdiv", ".");
+  $("#endofgamediv").load("/room/familyroom #endofgamediv");
   setTimeout(gameOver, 700);
+  function newTimesAndLetters(){
+    $.ajax({
+      url: "/room/familyroom",
+      type: "POST"
+    });
+  }
+  setTimeout(newTimesAndLetters, 12500);
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
 }
 
@@ -779,15 +786,13 @@ function readyForNewGame() {
   $("#acceptedtext").hide();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
-  $("#acroletters").html("<br/>Waiting to join...<br/>(about <%= @timetojoin %>s)");
+  $("#acroletters").html("<br/>Stay tuned for<br/>new game...");
   slideRoundText();
-  $("#roundtext").text("Joining next round...");
+  $("#roundtext").text("Get ready...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
-  $("#votediv").hide();
-  $("#resultsdiv").hide();
-  $("#endofgamediv").hide();
+  hideEndGameDialog();
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 </script>

@@ -427,7 +427,6 @@ function hideResultsDialog() {
 }
 
 function hideEndGameDialog() {
-  $("#endofgamediv").hide();
   $("#endofgamediv").dialog('close');
   $("#endofgamediv").hide();
 }
@@ -445,7 +444,6 @@ function gameOver() {
 
       });
     $("#endofgamediv").dialog('open');
-    $("#endofgamediv").addClass("centerall");
     $("#endofgamediv").show();
   }
   setTimeout(openDialog, 1250);
