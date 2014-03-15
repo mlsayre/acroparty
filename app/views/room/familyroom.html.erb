@@ -46,8 +46,8 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 </div>
 
 <div class="row">
-  <div id="resultsdiv" class="small-12 columns centerall animated fadeIn" style="display: inline; font-size:100%;">
-    <% if @playerlist.count == 1 %>
+  <div id="resultsdiv" class="small-12 columns centerall animated fadeIn" style="display: inline; text-align:center; font-size:100%;">
+    <% if @playerlist.count < 3 %>
       <font color="red">(Non-scoring practice round with under 3 players)</font>
     <% end %>
     <div id="roundwinnerannounce" class="small-12 columns centerall">
@@ -75,7 +75,9 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 <div class="row">
   <div id="endofgamediv" class="small-12 columns centerall" style="font-size:100%;">
       Congratulations, <%= @gamewinner.username %> with <%= @gamewinner.gamepoints %> points! </br></br>
-      <%= image_tag @gamewinner.avatar.url(:small) %>
+      <%= image_tag @gamewinner.avatar.url(:small) %></br></br>
+      You've now won <%= @gamewinner.gameswon %> games! </br></br>
+      Next game coming right up...
   </div>
 </div>
 
@@ -276,7 +278,6 @@ function r2vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 2 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -335,7 +336,6 @@ function r3vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 3 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -394,7 +394,6 @@ function r4vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 4 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -453,7 +452,6 @@ function r5vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 5 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -477,6 +475,7 @@ function r5res() {
 
 function r6prep() {
   slideRoundText();
+  hideResultsDialog();
   $("#roundtext").text("Round 6/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
   setTimeout(r6write, <%= @r6preptime %>*1000);
@@ -571,7 +570,6 @@ function r7vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 7 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -630,7 +628,6 @@ function r8vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 8 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -689,7 +686,6 @@ function r9vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 9 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -748,7 +744,6 @@ function r10vote() {
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
-  document.getElementById("acceptedtext").style.visibility="hidden";
   $("#roundtext").text("Round 10 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -779,5 +774,20 @@ function endOfGame() {
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
 }
 
-
+function readyForNewGame() {
+  playerEnterInit();
+  $("#acceptedtext").hide();
+  document.getElementById("submittedtext").style.visibility="hidden";
+  $("#acroletters").css('fontSize', '100%');
+  $("#acroletters").html("<br/>Waiting to join...<br/>(about <%= @timetojoin %>s)");
+  slideRoundText();
+  $("#roundtext").text("Joining next round...");
+  $('#answerfield').addClass('animated fadeOutDown');
+  $("#answertextfield").attr("disabled", true);
+  $("#answersubmit").attr("disabled", true);
+  $("#votediv").hide();
+  $("#resultsdiv").hide();
+  $("#endofgamediv").hide();
+  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
+}
 </script>

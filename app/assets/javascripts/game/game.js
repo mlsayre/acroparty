@@ -118,6 +118,7 @@ function submitAnswerFX() {
     $('#answerfield').addClass('animated pulse');
   }
   function addAcceptedTextFlip() {
+    $("#acceptedtext").load("/room/familyroom #acceptedtext");
     $('#acceptedtext').addClass('animated flip');
     $("#acceptedtext").show();
   }
@@ -125,7 +126,6 @@ function submitAnswerFX() {
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
   $('#acceptedtext').removeClass('animated flip');
-  $("#acceptedtext").load("/room/familyroom #acceptedtext", ".");
   setTimeout(addPulse, 30);
   setTimeout(addAcceptedTextFlip, 230);
 }
@@ -426,27 +426,36 @@ function hideResultsDialog() {
   $("#resultsdiv").hide();
 }
 
-function gameOver() {
-  $("#endofgamediv").dialog({
-      autoOpen: false,
-      closeOnEscape: false,
-      draggable: false,
-      resizable: false,
-      position: { my: "center top", at: "center top-10", of: "#categorytext" },
-      title: "Pick your favorite...",
-      width: "640",
+function hideEndGameDialog() {
+  $("#endofgamediv").hide();
+  $("#endofgamediv").dialog('close');
+  $("#endofgamediv").hide();
+}
 
-    });
-  $("#endofgamediv").dialog('open');
-  $("#endofgamediv").addClass("centerall");
-  $("#endofgamediv").show();
+function gameOver() {
+  function openDialog() {
+    $("#endofgamediv").dialog({
+        autoOpen: false,
+        closeOnEscape: false,
+        draggable: false,
+        resizable: false,
+        position: { my: "center top", at: "center top-10", of: "#categorytext" },
+        title: "Pick your favorite...",
+        width: "640",
+
+      });
+    $("#endofgamediv").dialog('open');
+    $("#endofgamediv").addClass("centerall");
+    $("#endofgamediv").show();
+  }
+  setTimeout(openDialog, 1250);
   function updateStats(){
     $.ajax({
       url: "/room/endofgamestatsinit",
       type: "POST"
     });
   }
-  setTimeout(updateStats, 400);
+  setTimeout(updateStats, 500);
   function readyNewGame(){
     $.ajax({
       url: "/room/newgamegetready",
