@@ -47,7 +47,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 
 <div class="row">
   <div id="resultsdiv" class="small-12 columns centerall animated fadeIn" style="font-size:100%;">
-    <div id="roundwinnerannounce" class="small-12 columns centerall">
+    <div id="roundwinnerannounce" class="centerall">
       Winner, <%= @roundwinner.username %>! <%= image_tag @roundwinner.avatar.url(:small) %> <%= @bonuspointsshow %> bonus points!</br>
     </div>
     <% Famroomanswer.order('points DESC').each do |answer| %>
@@ -67,14 +67,10 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
       (+1 point!)
     </p>
     <p id="nonvoters" class="centerall" style="display:none;">
-      Nonvoters (tsk, tsk):
-      <font color="red"><% @nonvoters.each do |non| %>
-      <%= non.username %>,
-      <% end %>
-      (No points)
+      (non-voters receive no points, tsk, tsk...)
     </p>
-    <% if @playerlist.count == 1 %>
-      (Non-scoring practice round with under 3 players)</font>
+    <% if @playerlist.count < 3 %>
+      <font-color="red">(Non-scoring practice round with under 3 players)</font-color>
     <% end %>
   </div>
 </div>

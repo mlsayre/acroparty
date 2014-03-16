@@ -323,7 +323,7 @@ class RoomController < ApplicationController
 
     @winninganswervoters = User.where('answervotedfor = ?', @roundwinneranswer)
 
-    @nonvoters = User.where('answervotedfor = ?', nil)
+    # @nonvoters = User.where('answervotedfor = ?', nil)
 
 
     # don't show vote button for player's answer
