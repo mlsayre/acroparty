@@ -291,6 +291,7 @@ button.ui-button::-moz-focus-inner {
 	display: none;
 }
 .ui-dialog .ui-dialog-content {
+	text-align:center;
 	position: relative;
 	border: 0;
 	padding: 0em 1em;
