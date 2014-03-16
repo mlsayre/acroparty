@@ -149,6 +149,35 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
   </div>
 </div>
 
+<div id="rndletters" style="display:none">
+  ANRPOQLSJHEUDIJSNMSHERUHPLEDIHSWJEUIFHJDYHFGRBNMAHSTGERSTE<%= @round5letters %>DHJNAKSTECHGEYTCHJDHYUTHUHSJIPOWLKEIUTHYHFGYSTTREYAGHTSYRDTEGYFTDYHNDKJIOWKLPLWIJEHYFTGRAFTERDUHGFTYRTGETSJKIWYTGH<%= @round1letters %>WPJDKSIIRJWKALPFBFBFFBFFSCSCSDLCNCJKDLDK<%= @round2letters %>UQKLSDFREDFBYTMDFREESDHJKPS<%= @round3letters %>GWJHBDCJBVHBNCKSNUIHWEUIHUIJDFBJUIGBDCVUDUCHBDCVCVKJBCKYSHSCXGSKIGHOUJPGUDRRSWEQCDSXVCNBMNKLGJDFGDGCDJVKDHSTWEQWAFFGOJOJJGHFY<%= @round8letters %>YJHPQOWUDRGCBVJGKDHSGSTRFJJLKIYYRFRWESHFJBNBBSDSSAQQGEKIHJPJIOFMNXGZXRSHG<%= @round4letters %>EEAGDJVKCFGCFJFKLGHFGDFJGHLJPIOGLFKRTEFSGVCNNOJJFVFDSWAFDHGKHGKFNHDUFYTJGPJOJOHOIISDYSDTSEESRTDJGOLHRRSGHDKJVBUGHFKBLBFYDTGGSKFPBHIGYYSFSSWAQQQSZSGHDKJGGLPJLYHN<%= @round10letters %>GHFUVDFVYHHQTDHGFJHKLGHSYWASRQESGFIKHGJDBSKVG<%= @round7letters %>BVYHHIOKPLOKJIHYHGTFRDESWAWZXZSFFVBGNHHMJJLMIHGOPFIUETWQEQDSGHSKSDJHFGGFGOQTYRFUGKDGDFVVKJGJHDFSDFOJKIGGSEWQH<%= @round9letters %>FOODHDFWSREDSHFKPPGLGOGHKJIUUTGTEREWWQWAXXCVCH<%= @round6letters %>BKJJLOKIOPEDIWYLAKSJHFBVGFHUTHFJERGYSFSGSHSRQDDHJGOLJOGVHJVNCKSFSDCXCKVGVRSWQFSDJBLJPKKIGGCDASAZAXSGDCHGJHLJJGHDFXXZSACFDJNPOHJFGVDALSKCHCUUDS
+
+
+
+  <span id="catr1"><%= @round1cat %></span>
+  <span id="catr2"><%= @round2cat %></span>
+  <span id="catr3"><%= @round3cat %></span>
+  <span id="catr4"><%= @round4cat %></span>
+  <span id="catr5"><%= @round5cat %></span>
+  <span id="catr6"><%= @round6cat %></span>
+  <span id="catr7"><%= @round7cat %></span>
+  <span id="catr8"><%= @round8cat %></span>
+  <span id="catr9"><%= @round9cat %></span>
+  <span id="catr10"><%= @round10cat %></span>
+
+  <span id="rnd1start"><%= @timer1write + 8.75.seconds %></span>
+  <span id="rnd2start"><%= @timer2write + 10.25.seconds %></span>
+  <span id="rnd3start"><%= @timer3write + 11.75.seconds %></span>
+  <span id="rnd4start"><%= @timer4write + 13.25.seconds %></span>
+  <span id="rnd5start"><%= @timer5write + 14.75.seconds %></span>
+  <span id="rnd6start"><%= @timer6write + 8.75.seconds %></span>
+  <span id="rnd7start"><%= @timer7write + 10.25.seconds %></span>
+  <span id="rnd8start"><%= @timer8write + 11.75.seconds %></span>
+  <span id="rnd9start"><%= @timer9write + 13.25.seconds %></span>
+  <span id="rnd10start"><%= @timer10write + 14.75.seconds %></span>
+
+</div>
+
 <%= javascript_include_tag "game/scrollbardown" %>
 <%= javascript_include_tag "game/game" %>
 
@@ -168,7 +197,7 @@ function joinInProgress() {
   $("#votediv").hide();
   $("#resultsdiv").hide();
   $("#endofgamediv").hide();
-  setTimeout(r10vote, 1000);
+  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 
 joinInProgress();
@@ -192,24 +221,24 @@ function r1prep() {
 function r1write() {
   roundPrep();
   var roundnumber = 1;
+  var letters = $("#rndletters").text().match("GH(...)WP");
+  var catfromdiv = $("#catr1").text();
+  var rndstart = $("#rnd1start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer1write + 8.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round1cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round1letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 1 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round1cat %>"');
-  $("#acroletters").text("<%= @round1letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 7000);
-  $("#answerform").submit(function() {
-    return acroValidate(gon.round1letters);
+  $("#answerform").on('submit', function() {
+    return acroValidate(letters[1]);
   });
   setTimeout(r1vote, <%= @r1writetime %>*1000);
 }
@@ -252,30 +281,31 @@ function r2prep() {
 function r2write() {
   roundPrep();
   var roundnumber = 2;
+  var letters = $("#rndletters").text().match("DK(....)UQ");
+  var catfromdiv = $("#catr2").text();
+  var rndstart = $("#rnd2start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer2write + 10.25.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round2cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round2letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 2 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round2cat %>"');
-  $("#acroletters").text("<%= @round2letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 8500);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round2letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r2vote, <%= @r2writetime %>*1000);
 }
 
 function r2vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 2 - Vote");
@@ -292,6 +322,7 @@ function r2res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -310,30 +341,31 @@ function r3prep() {
 function r3write() {
   roundPrep();
   var roundnumber = 3;
+  var letters = $("#rndletters").text().match("PS(.....)GW");
+  var catfromdiv = $("#catr3").text();
+  var rndstart = $("#rnd3start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer3write + 11.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round3cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round3letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 3 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round3cat %>"');
-  $("#acroletters").text("<%= @round3letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 10000);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round3letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r3vote, <%= @r3writetime %>*1000);
 }
 
 function r3vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 3 - Vote");
@@ -350,6 +382,7 @@ function r3res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -368,30 +401,31 @@ function r4prep() {
 function r4write() {
   roundPrep();
   var roundnumber = 4;
+  var letters = $("#rndletters").text().match("HG(......)EE");
+  var catfromdiv = $("#catr4").text();
+  var rndstart = $("#rnd4start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer4write + 13.25.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round4cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round4letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 4 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round4cat %>"');
-  $("#acroletters").text("<%= @round4letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 11500);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round4letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r4vote, <%= @r4writetime %>*1000);
 }
 
 function r4vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 4 - Vote");
@@ -408,6 +442,7 @@ function r4res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -426,30 +461,31 @@ function r5prep() {
 function r5write() {
   roundPrep();
   var roundnumber = 5;
+  var letters = $("#rndletters").text().match("TE(.......)DH");
+  var catfromdiv = $("#catr5").text();
+  var rndstart = $("#rnd5start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer5write + 14.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round5cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round5letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 5 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round5cat %>"');
-  $("#acroletters").text("<%= @round5letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 13000);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round5letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r5vote, <%= @r5writetime %>*1000);
 }
 
 function r5vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 5 - Vote");
@@ -466,6 +502,7 @@ function r5res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -484,24 +521,24 @@ function r6prep() {
 function r6write() {
   roundPrep();
   var roundnumber = 6;
+  var letters = $("#rndletters").text().match("CH(...)BK");
+  var catfromdiv = $("#catr6").text();
+  var rndstart = $("#rnd6start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer6write + 8.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round6cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round6letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 6 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round6cat %>"');
-  $("#acroletters").text("<%= @round6letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 7000);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round6letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r6vote, <%= @r6writetime %>*1000);
 }
@@ -526,6 +563,7 @@ function r6res() {
   $("#votediv").dialog('close');
   $("#votediv").hide();
   $("#timertext").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -544,30 +582,31 @@ function r7prep() {
 function r7write() {
   roundPrep();
   var roundnumber = 7;
+  var letters = $("#rndletters").text().match("VG(....)BV");
+  var catfromdiv = $("#catr7").text();
+  var rndstart = $("#rnd7start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer7write + 10.25.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round7cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round7letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 7 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round7cat %>"');
-  $("#acroletters").text("<%= @round7letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 8500);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round7letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r7vote, <%= @r7writetime %>*1000);
 }
 
 function r7vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 7 - Vote");
@@ -584,6 +623,7 @@ function r7res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -602,30 +642,31 @@ function r8prep() {
 function r8write() {
   roundPrep();
   var roundnumber = 8;
+  var letters = $("#rndletters").text().match("FY(.....)YJ");
+  var catfromdiv = $("#catr8").text();
+  var rndstart = $("#rnd8start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer8write + 11.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round8cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round8letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 8 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round8cat %>"');
-  $("#acroletters").text("<%= @round8letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 10000);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round8letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r8vote, <%= @r8writetime %>*1000);
 }
 
 function r8vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 8 - Vote");
@@ -642,6 +683,7 @@ function r8res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -660,30 +702,31 @@ function r9prep() {
 function r9write() {
   roundPrep();
   var roundnumber = 9;
+  var letters = $("#rndletters").text().match("QH(......)FO");
+  var catfromdiv = $("#catr9").text();
+  var rndstart = $("#rnd9start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer9write + 13.25.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round9cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round9letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 9 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round9cat %>"');
-  $("#acroletters").text("<%= @round9letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 11500);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round9letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r9vote, <%= @r9writetime %>*1000);
 }
 
 function r9vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 9 - Vote");
@@ -700,6 +743,7 @@ function r9res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -718,30 +762,31 @@ function r10prep() {
 function r10write() {
   roundPrep();
   var roundnumber = 10;
+  var letters = $("#rndletters").text().match("HN(.......)GH");
+  var catfromdiv = $("#catr10").text();
+  var rndstart = $("#rnd10start").text();
   $("#answerroundnumber").val(roundnumber);
-  var roundstarted = "<%= @timer10write + 14.75.seconds %>";
-  $("#answerroundstarted").val(roundstarted);
-  var anscategory = "<%= @round10cat %>";
-  $("#answercategory").val(anscategory);
-  var ansletters = "<%= @round10letters %>";
-  $("#answeracroletters").val(ansletters);
+  $("#answerroundstarted").val(rndstart);
+  $("#answercategory").val(catfromdiv);
+  $("#answeracroletters").val(letters[1]);
   slideRoundText();
   $("#roundtext").text("Round 10 - Write");
   enterCatText();
-  $("#categorytext").text('"<%= @round10cat %>"');
-  $("#acroletters").text("<%= @round10letters %>");
+  $("#categorytext").text(catfromdiv);
+  $("#acroletters").text(letters[1]);
   document.getElementById("acroletters").style.visibility="hidden";
   showLetters();
   $("#submittedtext").load("/room/familyroom #submittedtext");
   setTimeout(checkSubmittedNumber, 13000);
   $("#answerform").submit(function() {
-    return acroValidate(gon.round10letters);
+    return acroValidate(letters[1]);
   });
   setTimeout(r10vote, <%= @r10writetime %>*1000);
 }
 
 function r10vote() {
   slideRoundText();
+  $("#acceptedtext").hide();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 10 - Vote");
@@ -758,6 +803,7 @@ function r10res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
@@ -772,10 +818,12 @@ function endOfGame() {
   $("#endofgamediv").load("/room/familyroom #endofgamediv");
   setTimeout(gameOver, 700);
   function newTimesAndLetters(){
-    $.ajax({
-      url: "/room/familyroom",
-      type: "POST"
-    });
+    if (<%= @timernewgamestarts.to_i %> < <%= DateTime.now.utc.to_i %>) {
+      $.ajax({
+        url: "/room/familyroom",
+        type: "POST"
+      });
+    }
   }
   setTimeout(newTimesAndLetters, 12500);
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
@@ -784,15 +832,18 @@ function endOfGame() {
 function readyForNewGame() {
   playerEnterInit();
   $("#acceptedtext").hide();
+  $("#acroletters").show();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Stay tuned for<br/>new game...");
+  $("#acroletters").removeClass('animated fadeOutUp');
   slideRoundText();
-  $("#roundtext").text("Get ready...");
+  $("#roundtext").text("Take a breath...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
   hideEndGameDialog();
+  $("#rndletters").load("/room/familyroom #rndletters");
   setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
 }
 </script>

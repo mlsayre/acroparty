@@ -11,7 +11,7 @@ class RoomController < ApplicationController
     @player = Player.create(:name => current_user.username, :room => "familyroom",
       :user_id => current_user.id, :gamepoints => current_user.gamepoints)
     @playerlist = Player.where(:room => "familyroom")
-    gon.playerlistcount = @playerlist.count
+    # gon.playerlistcount = @playerlist.count
     @famroomanswers = Famroomanswer.all
     if @playerlist.count > 12
       redirect_to foyer_path
@@ -60,17 +60,6 @@ class RoomController < ApplicationController
     @round8letters = Famroomacroletters.find(:last).let5
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
-
-    gon.round1letters = @round1letters
-    gon.round2letters = @round2letters
-    gon.round3letters = @round3letters
-    gon.round4letters = @round4letters
-    gon.round5letters = @round5letters
-    gon.round6letters = @round6letters
-    gon.round7letters = @round7letters
-    gon.round8letters = @round8letters
-    gon.round9letters = @round9letters
-    gon.round10letters = @round10letters
 
     if Famroomcat.select("r1cat").first == nil
       Famroomcat.create(:r1cat => @randomcategory.sample,
@@ -261,11 +250,10 @@ class RoomController < ApplicationController
                   @timer10prep, @timer10write, @timer10vote, @timer10res,
                   @timerfinalresults]
 
-    if @nextround == nil
-      @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
-      @timetonextround = @nextround.change(:usec => 0) - DateTime.now
-                         .utc.change(:usec => 0)
-    end
+    @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
+    @timetonextround = @nextround.change(:usec => 0) - DateTime.now
+                       .utc.change(:usec => 0)
+
 
     if @timerfinalresults < DateTime.now.utc
       Famroomacroletters.destroy_all
@@ -482,7 +470,11 @@ class RoomController < ApplicationController
 
   def destroyplayer
     @famroomplayerlist = Player.where(:room => "familyroom")
-    Player.delete_all(["name = ? AND room = ?", current_user.username, 'familyroom'])
+    Player.delete_all(["name = ? AND room = ?", current_user
+          .username, 'familyroom'])
+
+    User.where('id = ?', current_user.id).first
+        .update_attributes(:answervotedfor => nil, :gamepoints => 0)
 
     if @famroomplayerlist.count < 1
       Famroomroundtime.destroy_all
