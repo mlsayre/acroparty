@@ -27,8 +27,8 @@ function buildPrivatePub(doc) {
       self.fayeClient = new Faye.Client(self.subscriptions.server);
       self.fayeClient.addExtension(self.fayeExtension);
       // PUT THESE TWO LINES IN FOR PRODUCTION...
-      // self.fayeClient.setHeader('Access-Control-Allow-Origin', '*');
-      // Faye.Transport.WebSocket.isUsable = function($, _, c){c(false)};
+      self.fayeClient.setHeader('Access-Control-Allow-Origin', '*');
+      Faye.Transport.WebSocket.isUsable = function($, _, c){c(false)};
       //
       for (var i=0; i < self.fayeCallbacks.length; i++) {
         self.fayeCallbacks[i](self.fayeClient);
