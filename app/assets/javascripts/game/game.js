@@ -4,6 +4,36 @@ function playerEnterInit(){
     url: "/room/playerenterinit",
     type: "POST"
   });
+  $("#votediv").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "640",
+
+    });
+  $("#resultsdiv").dialog({
+      autoOpen: false,
+      closeOnEscape: false,
+      draggable: false,
+      resizable: false,
+      position: { my: "center top", at: "center top-10", of: "#categorytext" },
+      title: "Pick your favorite...",
+      width: "640",
+
+    });
+  $("#endofgamediv").dialog({
+        autoOpen: false,
+        closeOnEscape: false,
+        draggable: false,
+        resizable: false,
+        position: { my: "center top", at: "center top-10", of: "#categorytext" },
+        title: "Pick your favorite...",
+        width: "640",
+
+      });
   function updateUserBox() {
     $("#userlistbox").load("/room/familyroom #userlistbox");
   }
@@ -362,16 +392,6 @@ function acroValidate(roundletters) {
 }
 
 function votingRound() {
-  $("#votediv").dialog({
-      autoOpen: false,
-      closeOnEscape: false,
-      draggable: false,
-      resizable: false,
-      position: { my: "center top", at: "center top-10", of: "#categorytext" },
-      title: "Pick your favorite...",
-      width: "640",
-
-    });
   $("#votediv").dialog('open');
   $("#votediv").show();
   $("#votediv").submit(function() {
@@ -381,16 +401,6 @@ function votingRound() {
 }
 
 function resultsRound() {
-  $("#resultsdiv").dialog({
-      autoOpen: false,
-      closeOnEscape: false,
-      draggable: false,
-      resizable: false,
-      position: { my: "center top", at: "center top-10", of: "#categorytext" },
-      title: "Pick your favorite...",
-      width: "640",
-
-    });
   $("#resultsdiv").dialog('open');
   $("#resultsdiv").addClass("centerall");
   $("#roundwinnerannounce").show();
@@ -438,16 +448,6 @@ function hideEndGameDialog() {
 
 function gameOver() {
   function openDialog() {
-    $("#endofgamediv").dialog({
-        autoOpen: false,
-        closeOnEscape: false,
-        draggable: false,
-        resizable: false,
-        position: { my: "center top", at: "center top-10", of: "#categorytext" },
-        title: "Pick your favorite...",
-        width: "640",
-
-      });
     $("#endofgamediv").dialog('open');
     $("#endofgamediv").show();
   }
