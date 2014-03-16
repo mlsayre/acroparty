@@ -414,10 +414,10 @@ function resultsRound() {
     $("#userlistbox").load("/room/familyroom #userlistbox");
   }
   $(".votebuttons").removeAttr("disabled");
-  setTimeout(showAllAnswers, 1000);
-  setTimeout(showFastestAnswer, 2000);
-  setTimeout(showWinningVoters, 3000);
-  setTimeout(showNonVoters, 4300);
+  setTimeout(showAllAnswers, 1500);
+  setTimeout(showFastestAnswer, 3000);
+  setTimeout(showWinningVoters, 4500);
+  setTimeout(showNonVoters, 6000);
   setTimeout(updatePoints, 5000);
 }
 
