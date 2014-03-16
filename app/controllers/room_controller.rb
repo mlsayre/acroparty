@@ -11,8 +11,14 @@ class RoomController < ApplicationController
     @player = Player.create(:name => current_user.username, :room => "familyroom",
       :user_id => current_user.id, :gamepoints => current_user.gamepoints)
     @playerlist = Player.where(:room => "familyroom")
-    gon.playerlistcount = @playerlist.count
+    # gon.playerlistcount = @playerlist.count
     @famroomanswers = Famroomanswer.all
+    if @playerlist.count > 12
+      redirect_to foyer_path
+      flash[:notice] = "The room has maximum players. We may need to call the fire marshall.
+                        Try again soon."
+    end
+
     @letterpool = ["A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
                   "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
                   "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
@@ -54,17 +60,6 @@ class RoomController < ApplicationController
     @round8letters = Famroomacroletters.find(:last).let5
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
-
-    gon.round1letters = @round1letters
-    gon.round2letters = @round2letters
-    gon.round3letters = @round3letters
-    gon.round4letters = @round4letters
-    gon.round5letters = @round5letters
-    gon.round6letters = @round6letters
-    gon.round7letters = @round7letters
-    gon.round8letters = @round8letters
-    gon.round9letters = @round9letters
-    gon.round10letters = @round10letters
 
     if Famroomcat.select("r1cat").first == nil
       Famroomcat.create(:r1cat => @randomcategory.sample,
@@ -148,15 +143,6 @@ class RoomController < ApplicationController
                       @finalresultstime]
 
     if @playerlist.count == 0
-      Famroomroundtime.destroy_all
-      Famroomacroletters.destroy_all
-      Famroomcat.destroy_all
-      eventArray = []
-    end
-
-    if @playerlist.count == 0 && Famroomgamestate.find(:first).activity != "waiting"
-      Famroomgamestate.create(:activity => "waiting")
-    elsif @playerlist.count == 0
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
       Famroomcat.destroy_all
@@ -265,17 +251,20 @@ class RoomController < ApplicationController
                   @timerfinalresults]
 
     @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
+    @timetonextround = @nextround.change(:usec => 0) - DateTime.now
+                       .utc.change(:usec => 0)
+
 
     if @timerfinalresults < DateTime.now.utc
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
       Famroomcat.destroy_all
+      eventArray = []
       redirect_to foyer_path
       flash[:notice] = "The room had a weird smell. We lit some candles.
                        Please try again. :)"
     end
 
-    @timetonextround = @nextround.change(:usec => 0) - DateTime.now.utc.change(:usec => 0)
 
     jsRoundFunctionArray = ["newGameStarts",
                             "r1prep", "r1write", "r1vote", "r1res",
@@ -484,7 +473,11 @@ class RoomController < ApplicationController
 
   def destroyplayer
     @famroomplayerlist = Player.where(:room => "familyroom")
-    Player.delete_all(["name = ? AND room = ?", current_user.username, 'familyroom'])
+    Player.delete_all(["name = ? AND room = ?", current_user
+          .username, 'familyroom'])
+
+    User.where('id = ?', current_user.id).first
+        .update_attributes(:answervotedfor => nil, :gamepoints => 0)
 
     if @famroomplayerlist.count < 1
       Famroomroundtime.destroy_all
@@ -538,6 +531,10 @@ class RoomController < ApplicationController
     Famroomcat.destroy_all
 
     render :nothing => true
+  end
+
+  def newroundtimeoffset
+    DateTime.now.utc
   end
 
   def sauna
