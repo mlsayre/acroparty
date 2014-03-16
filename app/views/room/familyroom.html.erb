@@ -46,10 +46,7 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
 </div>
 
 <div class="row">
-  <div id="resultsdiv" class="small-12 columns centerall animated fadeIn" style="display: inline; font-size:100%;">
-    <% if @playerlist.count == 1 %>
-      <font color="red">(Non-scoring practice round with under 3 players)</font>
-    <% end %>
+  <div id="resultsdiv" class="small-12 columns centerall animated fadeIn" style="font-size:100%;">
     <div id="roundwinnerannounce" class="small-12 columns centerall">
       Winner, <%= @roundwinner.username %>! <%= image_tag @roundwinner.avatar.url(:small) %> <%= @bonuspointsshow %> bonus points!</br>
     </div>
@@ -69,6 +66,16 @@ document.cookie = 'time_zone_offset='+utcOffset+';';
       <% end %>
       (+1 point!)
     </p>
+    <p id="nonvoters" class="centerall" style="display:none;">
+      Nonvoters (tsk, tsk):
+      <font color="red"><% @nonvoters.each do |non| %>
+      <%= non.username %>,
+      <% end %>
+      (No points)
+    </p>
+    <% if @playerlist.count == 1 %>
+      (Non-scoring practice round with under 3 players)</font>
+    <% end %>
   </div>
 </div>
 
