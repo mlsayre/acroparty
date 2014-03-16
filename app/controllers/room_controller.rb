@@ -237,6 +237,16 @@ class RoomController < ApplicationController
     @timer10res = Famroomroundtime.find(:first).r10res.utc + 5.seconds
     @timerfinalresults = Famroomroundtime.find(:first).finalresults.utc + 5.seconds
 
+    if @timerfinalresults < DateTime.now.utc
+      Famroomacroletters.destroy_all
+      Famroomroundtime.destroy_all
+      Famroomcat.destroy_all
+      eventArray = []
+      redirect_to foyer_path
+      flash[:notice] = "The room had a weird smell. We lit some candles.
+                       Please try again. :)"
+    end
+
     eventArray = [@timernewgamestarts,
                   @timer1prep, @timer1write, @timer1vote, @timer1res,
                   @timer2prep, @timer2write, @timer2vote, @timer2res,
@@ -253,18 +263,6 @@ class RoomController < ApplicationController
     @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
     @timetonextround = @nextround.change(:usec => 0) - DateTime.now
                        .utc.change(:usec => 0)
-
-
-    if @timerfinalresults < DateTime.now.utc
-      Famroomacroletters.destroy_all
-      Famroomroundtime.destroy_all
-      Famroomcat.destroy_all
-      eventArray = []
-      redirect_to foyer_path
-      flash[:notice] = "The room had a weird smell. We lit some candles.
-                       Please try again. :)"
-    end
-
 
     jsRoundFunctionArray = ["newGameStarts",
                             "r1prep", "r1write", "r1vote", "r1res",
