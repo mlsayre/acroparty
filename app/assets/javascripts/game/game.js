@@ -40,6 +40,13 @@ function playerEnterInit(){
   setTimeout(updateUserBox, 500);
 }
 
+function hideTextStart() {
+  $("#acceptedtext").hide();
+  $("#votediv").hide();
+  $("#resultsdiv").hide();
+  $("#endofgamediv").hide();
+}
+
 // to clear the answers during round prep
 function roundPrep(){
   $.ajax({
@@ -393,6 +400,7 @@ function acroValidate(roundletters) {
 
 function votingRound() {
   $("#votediv").dialog('open');
+  $("#votediv").dialog('moveToTop');
   $("#votediv").show();
   $("#votediv").submit(function() {
     $(".votebuttons").attr("disabled", true);

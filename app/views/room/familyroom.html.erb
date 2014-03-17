@@ -108,7 +108,7 @@ $(window).on('beforeunload', function () {
       <%= a.hidden_field :roundstarted, :id => "answerroundstarted" %>
       <%= a.hidden_field :category, :id => "answercategory" %>
       <%= a.hidden_field :acroletters, :id => "answeracroletters" %>
-      <%= a.text_field :answer, :id => "answertextfield", :style => "font-size:1.7em; visibility:hidden; height:44px", :placeholder => "Enter your acro here..." %>
+      <%= a.text_field :answer, :id => "answertextfield", :style => "font-size:1.7em; visibility:hidden; height:44px", :placeholder => "Write your acro here, press Enter to submit..." %>
     </div>
     <%= a.submit "", :id => "answersubmit", :style => "display:none;" %>
   <% end %>
@@ -197,10 +197,6 @@ function joinInProgress() {
   var roundtojoin = window[roundtojoinraw];
   var timetojoin = $("#timetojoindiv").text();
   playerEnterInit();
-  $("#acceptedtext").hide();
-  $("#votediv").hide();
-  $("#resultsdiv").hide();
-  $("#endofgamediv").hide();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Waiting to join...<br/>(about " + timetojoin + "s)");
@@ -212,6 +208,7 @@ function joinInProgress() {
   setTimeout(roundtojoin, timetojoin*1000);
 }
 
+hideTextStart();
 setTimeout(joinInProgress, 1500);
 
 // waiting for players
@@ -247,6 +244,7 @@ function r1prep() {
 
 function r1write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 1;
   var letters = $("#rndletters").text().match("GH(...)WP");
   var catfromdiv = $("#catr1").text();
@@ -300,7 +298,7 @@ function r1res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, (timetojoin*1000) - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -315,6 +313,7 @@ function r2prep() {
 
 function r2write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 2;
   var letters = $("#rndletters").text().match("DK(....)UQ");
   var catfromdiv = $("#catr2").text();
@@ -368,7 +367,7 @@ function r2res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -383,6 +382,7 @@ function r3prep() {
 
 function r3write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 3;
   var letters = $("#rndletters").text().match("PS(.....)GW");
   var catfromdiv = $("#catr3").text();
@@ -436,7 +436,7 @@ function r3res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -451,6 +451,7 @@ function r4prep() {
 
 function r4write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 4;
   var letters = $("#rndletters").text().match("HG(......)EE");
   var catfromdiv = $("#catr4").text();
@@ -504,7 +505,7 @@ function r4res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -519,6 +520,7 @@ function r5prep() {
 
 function r5write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 5;
   var letters = $("#rndletters").text().match("TE(.......)DH");
   var catfromdiv = $("#catr5").text();
@@ -572,7 +574,7 @@ function r5res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -587,6 +589,7 @@ function r6prep() {
 
 function r6write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 6;
   var letters = $("#rndletters").text().match("CH(...)BK");
   var catfromdiv = $("#catr6").text();
@@ -641,7 +644,7 @@ function r6res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -656,6 +659,7 @@ function r7prep() {
 
 function r7write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 7;
   var letters = $("#rndletters").text().match("VG(....)BV");
   var catfromdiv = $("#catr7").text();
@@ -709,7 +713,7 @@ function r7res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -724,6 +728,7 @@ function r8prep() {
 
 function r8write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 8;
   var letters = $("#rndletters").text().match("FY(.....)YJ");
   var catfromdiv = $("#catr8").text();
@@ -777,7 +782,7 @@ function r8res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -792,6 +797,7 @@ function r9prep() {
 
 function r9write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 9;
   var letters = $("#rndletters").text().match("QH(......)FO");
   var catfromdiv = $("#catr9").text();
@@ -845,7 +851,7 @@ function r9res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -860,6 +866,7 @@ function r10prep() {
 
 function r10write() {
   roundPrep();
+  $("#rndletters").load("/room/familyroom #rndletters");
   var roundnumber = 10;
   var letters = $("#rndletters").text().match("HN(.......)GH");
   var catfromdiv = $("#catr10").text();
@@ -912,7 +919,7 @@ function r10res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000 - 9000);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -955,8 +962,8 @@ function readyForNewGame() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 20);
+    setTimeout(roundtojoin, timetojoin*1000);
   }
-  setTimeout(stayInSync, 10000);
+  setTimeout(stayInSync, 3000);
 }
 </script>
