@@ -300,7 +300,7 @@ function r1res() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
     var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000);
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
   }
   setTimeout(stayInSync, 10000);
 }
@@ -363,7 +363,14 @@ function r2res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 2 - Results");
-  setTimeout(r3prep, <%= @r2restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r3prep() {
@@ -424,7 +431,14 @@ function r3res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 3 - Results");
-  setTimeout(r4prep, <%= @r3restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r4prep() {
@@ -485,7 +499,14 @@ function r4res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 4 - Results");
-  setTimeout(r5prep, <%= @r4restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r5prep() {
@@ -546,7 +567,14 @@ function r5res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 5 - Results");
-  setTimeout(r6prep, <%= @r5restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r6prep() {
@@ -608,7 +636,14 @@ function r6res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 6 - Results");
-  setTimeout(r7prep, <%= @r6restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r7prep() {
@@ -669,7 +704,14 @@ function r7res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 7 - Results");
-  setTimeout(r8prep, <%= @r7restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r8prep() {
@@ -730,7 +772,14 @@ function r8res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 8 - Results");
-  setTimeout(r9prep, <%= @r8restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r9prep() {
@@ -791,7 +840,14 @@ function r9res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 9 - Results");
-  setTimeout(r10prep, <%= @r9restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r10prep() {
@@ -851,7 +907,14 @@ function r10res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 10 - Results");
-  setTimeout(endOfGame, <%= @r10restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function endOfGame() {
@@ -887,6 +950,13 @@ function readyForNewGame() {
   $("#answersubmit").attr("disabled", true);
   hideEndGameDialog();
   $("#rndletters").load("/room/familyroom #rndletters");
-  setTimeout(roundtojoin, timetojoin*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000 - 20);
+  }
+  setTimeout(stayInSync, 10000);
 }
 </script>

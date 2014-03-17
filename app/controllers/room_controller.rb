@@ -93,8 +93,8 @@ class RoomController < ApplicationController
     @r1preptime = 3         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
-    @r1restime = 21          #15
-    @r2preptime = 3        #15
+    @r1restime = 21  #When changing restime ALSO CHANGE @synctime
+    @r2preptime = 3        #15              (votetime - 10)
     @r2writetime = 71.5
     @r2votetime = 30
     @r2restime = 21
