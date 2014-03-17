@@ -38,6 +38,7 @@ class RoomController < ApplicationController
                       "Music", "Art", "Animals", "Science", "Government", "Fashion",
                       "Books", "Travel", "Celebrities", "Romance", "Technology",
                       "Family", "School", "Nature", "Health"]
+
     if Famroomacroletters.select("let3").first == nil
       Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
                                 :let4 => @letterpool.sample(4).join,
@@ -50,6 +51,7 @@ class RoomController < ApplicationController
                                 :let6 => @letterpool.sample(6).join,
                                 :let7 => @letterpool.sample(7).join)
     end
+
     @round1letters = Famroomacroletters.find(:first).let3
     @round2letters = Famroomacroletters.find(:first).let4
     @round3letters = Famroomacroletters.find(:first).let5
@@ -142,13 +144,13 @@ class RoomController < ApplicationController
                       @r10preptime, @r10writetime, @r10votetime, @r10restime,
                       @finalresultstime]
 
-    if @playerlist.count == 0
+    if @playerlist.count < 3
       Famroomacroletters.destroy_all
       Famroomroundtime.destroy_all
       Famroomcat.destroy_all
       eventArray = []
 
-    elsif @playerlist.count >= 1 && Famroomroundtime.select("r1write").first == nil
+    elsif @playerlist.count > 2 && Famroomroundtime.select("r1write").first == nil
       Famroomroundtime.create(:newgamestarts => DateTime.now.utc + 5.seconds,
                              :r1prep => DateTime.now.utc + roundTimeArray.take(1).sum.seconds,
                              :r1write => DateTime.now.utc + roundTimeArray.take(2).sum.seconds,
@@ -191,8 +193,6 @@ class RoomController < ApplicationController
                              :r10vote => DateTime.now.utc + roundTimeArray.take(39).sum.seconds,
                              :r10res => DateTime.now.utc + roundTimeArray.take(40).sum.seconds,
                              :finalresults => DateTime.now.utc + roundTimeArray.take(41).sum.seconds)
-
-    end
 
     @timernewgamestarts = Famroomroundtime.find(:first).newgamestarts.utc
     @timer1prep = Famroomroundtime.find(:first).r1prep.utc + 5.seconds
@@ -250,18 +250,20 @@ class RoomController < ApplicationController
                   @timer10prep, @timer10write, @timer10vote, @timer10res,
                   @timerfinalresults]
 
-    @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
-    @timetonextround = @nextround.change(:usec => 0) - DateTime.now
-                       .utc.change(:usec => 0)
+      @nextround = eventArray.bsearch {|x| x > DateTime.now.utc }
+      @timetonextround = @nextround.change(:usec => 0) - DateTime.now
+                         .utc.change(:usec => 0)
 
-    if @timerfinalresults < DateTime.now.utc
-      Famroomacroletters.destroy_all
-      Famroomroundtime.destroy_all
-      Famroomcat.destroy_all
-      eventArray = []
-      redirect_to foyer_path
-      flash[:notice] = "The room had a weird smell. We lit some candles.
-                       Please try again. :)"
+      if @timerfinalresults < DateTime.now.utc
+        Famroomacroletters.destroy_all
+        Famroomroundtime.destroy_all
+        Famroomcat.destroy_all
+        eventArray = []
+        redirect_to foyer_path
+        flash[:notice] = "The room had a weird smell. We lit some candles.
+                         Please try again. :)"
+      end
+
     end
 
     jsRoundFunctionArray = ["newGameStarts",
@@ -284,12 +286,17 @@ class RoomController < ApplicationController
       @submissiontime = 1.11
     end
 
-    eventArray.zip(jsRoundFunctionArray).each do |roundtime, function|
-      if @nextround == roundtime
-        @timetojoin = roundtime.change(:usec => 0) -
-                      DateTime.now.utc.change(:usec => 0)
-        @roundtojoin = function
+    if @playerlist.count >= 3
+      eventArray.zip(jsRoundFunctionArray).each do |roundtime, function|
+        if @nextround == roundtime
+          @timetojoin = roundtime.change(:usec => 0) -
+                        DateTime.now.utc.change(:usec => 0)
+          @roundtojoin = function
+        end
       end
+    elsif @playerlist.count < 3
+      @roundtojoin = "waitingForPlayers;"
+      @timetojoin = 4
     end
 
     # only one answer per user

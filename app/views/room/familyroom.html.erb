@@ -164,17 +164,24 @@ $(window).on('beforeunload', function () {
   <span id="catr9"><%= @round9cat %></span>
   <span id="catr10"><%= @round10cat %></span>
 
-  <span id="rnd1start"><%= @timer1write + 8.75.seconds %></span>
-  <span id="rnd2start"><%= @timer2write + 10.25.seconds %></span>
-  <span id="rnd3start"><%= @timer3write + 11.75.seconds %></span>
-  <span id="rnd4start"><%= @timer4write + 13.25.seconds %></span>
-  <span id="rnd5start"><%= @timer5write + 14.75.seconds %></span>
-  <span id="rnd6start"><%= @timer6write + 8.75.seconds %></span>
-  <span id="rnd7start"><%= @timer7write + 10.25.seconds %></span>
-  <span id="rnd8start"><%= @timer8write + 11.75.seconds %></span>
-  <span id="rnd9start"><%= @timer9write + 13.25.seconds %></span>
-  <span id="rnd10start"><%= @timer10write + 14.75.seconds %></span>
+  <% if @playerlist.count >= 3 %>
+    <span id="rnd1start"><%= @timer1write + 8.75.seconds %></span>
+    <span id="rnd2start"><%= @timer2write + 10.25.seconds %></span>
+    <span id="rnd3start"><%= @timer3write + 11.75.seconds %></span>
+    <span id="rnd4start"><%= @timer4write + 13.25.seconds %></span>
+    <span id="rnd5start"><%= @timer5write + 14.75.seconds %></span>
+    <span id="rnd6start"><%= @timer6write + 8.75.seconds %></span>
+    <span id="rnd7start"><%= @timer7write + 10.25.seconds %></span>
+    <span id="rnd8start"><%= @timer8write + 11.75.seconds %></span>
+    <span id="rnd9start"><%= @timer9write + 13.25.seconds %></span>
+    <span id="rnd10start"><%= @timer10write + 14.75.seconds %></span>
+  <% end %>
 
+</div>
+
+<div id="gamedata" style="display:none">
+  <span id="roundtojoindiv"><%= @roundtojoin %></span>
+  <span id="timetojoindiv"><%= @timetojoin %></span>
 </div>
 
 <%= javascript_include_tag "game/scrollbardown" %>
@@ -182,6 +189,10 @@ $(window).on('beforeunload', function () {
 
 <script>
 // decide which JS event(game round) the player will join next, set up board
+var roundtojoinraw = $("#roundtojoindiv").text();
+var roundtojoin = window[roundtojoinraw];
+var timetojoin = $("#timetojoindiv").text();
+
 function joinInProgress() {
   playerEnterInit();
   $("#acceptedtext").hide();
@@ -190,16 +201,30 @@ function joinInProgress() {
   $("#endofgamediv").hide();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
-  $("#acroletters").html("<br/>Waiting to join...<br/>(about <%= @timetojoin %>s)");
+  $("#acroletters").html("<br/>Waiting to join...<br/>(about " + timetojoin + "s)");
   slideRoundText();
   $("#roundtext").text("Joining next round...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
-  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
+  setTimeout(roundtojoin, timetojoin*1000);
 }
 
-joinInProgress();
+function goToRound() {
+  roundtojoin();
+}
+
+setTimeout(joinInProgress, 1500);
+
+// waiting for players
+function waitingForPlayers() {
+  $("#acroletters").text("");
+  $('#answerfield').addClass('animated fadeOutDown');
+  slideRoundText();
+  $("#roundtext").text("Waiting for 3 players...");
+  $("#acroletters").html("<br/>Need 3 players<br/>to begin game...");
+  setTimeout(r1prep, <%= @newgamestartstime %>*1000);
+}
 
 // gameplay rounds
 function newGameStarts() {
@@ -843,6 +868,6 @@ function readyForNewGame() {
   $("#answersubmit").attr("disabled", true);
   hideEndGameDialog();
   $("#rndletters").load("/room/familyroom #rndletters");
-  setTimeout(<%= @roundtojoin %>, <%= @timetojoin %>*1000);
+  setTimeout(roundtojoin, timetojoin*1000);
 }
 </script>
