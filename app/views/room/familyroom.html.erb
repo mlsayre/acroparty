@@ -182,6 +182,7 @@ $(window).on('beforeunload', function () {
 <div id="gamedata" style="display:none">
   <span id="roundtojoindiv"><%= @roundtojoin %></span>
   <span id="timetojoindiv"><%= @timetojoin %></span>
+  <span id="playercountdiv"><%= @playerlist.count %></span>
 </div>
 
 <%= javascript_include_tag "game/scrollbardown" %>
@@ -189,11 +190,12 @@ $(window).on('beforeunload', function () {
 
 <script>
 // decide which JS event(game round) the player will join next, set up board
-var roundtojoinraw = $("#roundtojoindiv").text();
-var roundtojoin = window[roundtojoinraw];
-var timetojoin = $("#timetojoindiv").text();
+
 
 function joinInProgress() {
+  var roundtojoinraw = $("#roundtojoindiv").text();
+  var roundtojoin = window[roundtojoinraw];
+  var timetojoin = $("#timetojoindiv").text();
   playerEnterInit();
   $("#acceptedtext").hide();
   $("#votediv").hide();
@@ -210,20 +212,21 @@ function joinInProgress() {
   setTimeout(roundtojoin, timetojoin*1000);
 }
 
-function goToRound() {
-  roundtojoin();
-}
-
 setTimeout(joinInProgress, 1500);
 
 // waiting for players
 function waitingForPlayers() {
+  var roundtojoinraw = $("#roundtojoindiv").text();
+  var roundtojoin = window[roundtojoinraw];
+  var timetojoin = $("#timetojoindiv").text();
   $("#acroletters").text("");
   $('#answerfield').addClass('animated fadeOutDown');
   slideRoundText();
-  $("#roundtext").text("Waiting for 3 players...");
+  $("#roundtext").text(". . .");
   $("#acroletters").html("<br/>Need 3 players<br/>to begin game...");
-  setTimeout(r1prep, <%= @newgamestartstime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  $("#rndletters").load("/room/familyroom #rndletters");
+  setTimeout(roundtojoin, timetojoin*1000);
 }
 
 // gameplay rounds
@@ -279,6 +282,7 @@ function r1vote() {
   $("#votediv").load("/room/familyroom #votediv");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r1res, <%= @r1votetime %>*1000);
 }
 
@@ -291,7 +295,14 @@ function r1res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 1 - Results");
-  setTimeout(r2prep, <%= @r2restime %>*1000);
+  $("#gamedata").load("/room/familyroom #gamedata");
+  function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000);
+  }
+  setTimeout(stayInSync, 10000);
 }
 
 function r2prep() {
@@ -339,6 +350,7 @@ function r2vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r2res, <%= @r2votetime %>*1000);
 }
 
@@ -399,6 +411,7 @@ function r3vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r3res, <%= @r3votetime %>*1000);
 }
 
@@ -459,6 +472,7 @@ function r4vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r4res, <%= @r4votetime %>*1000);
 }
 
@@ -519,6 +533,7 @@ function r5vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r5res, <%= @r5votetime %>*1000);
 }
 
@@ -579,6 +594,7 @@ function r6vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r6res, <%= @r6votetime %>*1000);
 }
 
@@ -640,6 +656,7 @@ function r7vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r7res, <%= @r7votetime %>*1000);
 }
 
@@ -700,6 +717,7 @@ function r8vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r8res, <%= @r8votetime %>*1000);
 }
 
@@ -760,6 +778,7 @@ function r9vote() {
   $("#votediv").load("/room/familyroom #votediv", ".");
   setTimeout(votingRound, 400);
   vtimer();
+  playerCountCheck();
   setTimeout(r9res, <%= @r9votetime %>*1000);
 }
 

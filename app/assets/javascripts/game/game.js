@@ -467,3 +467,10 @@ function gameOver() {
   }
   setTimeout(readyNewGame, 13500);
 }
+
+function playerCountCheck(){
+  $.ajax({
+    url: "/room/playercountcheck",
+    type: "POST"
+  });
+}
