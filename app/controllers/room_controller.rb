@@ -492,7 +492,6 @@ class RoomController < ApplicationController
       Famroomanswer.destroy_all
       Famroomacroletters.destroy_all
       Famroomcat.destroy_all
-
     end
 
     respond_to do |format|

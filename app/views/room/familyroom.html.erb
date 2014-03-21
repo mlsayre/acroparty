@@ -15,7 +15,10 @@ function userLeaves(){
 }
 
 $(window).on('beforeunload', function () {
-  userLeaves()
+  userLeaves();
+});
+$(window).unload(function () {
+  userLeaves();
 });
 </script>
 
@@ -75,7 +78,7 @@ $(window).on('beforeunload', function () {
   <div id="endofgamediv" class="small-12 columns centerall animated fadeIn" style="font-size:110%;">
       Congratulations, <%= @gamewinner.username %> with <%= @gamewinner.gamepoints %> points! </br></br>
       <%= image_tag @gamewinner.avatar.url(:small) %></br></br>
-      You've now won <%= @gamewinner.gameswon %> games! </br></br>
+      <%= @gamewinner.username %> has now won <%= @gamewinner.gameswon %> games! </br></br>
       Next game coming right up...
   </div>
 </div>
@@ -84,8 +87,10 @@ $(window).on('beforeunload', function () {
   <div class="small-4 columns centerall">
     <p id="submittedtext" style="height:16px; margin-top:14px;">Answers Submitted: <%= Famroomanswer.count %></p>
   </div>
-  <h3><div id="categorytext" class="small-4 columns centerall">
-  </div></h3>
+  <h3>
+    <div id="categorytext" class="small-4 columns centerall">
+    </div>
+  </h3>
   <div class="small-4 columns centerall">
     <p id="acceptedtext" style="font-size:120%; color:green; height:16px;">Answer Accepted (<%= @submissiontime %>s)
     </p>

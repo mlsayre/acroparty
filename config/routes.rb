@@ -23,6 +23,8 @@ Acroparty::Application.routes.draw do
 
   resources :messages
 
+  resources :updates
+
   resources :famroomanswers
 
   resources :room do

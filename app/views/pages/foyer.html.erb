@@ -15,7 +15,7 @@
 
     <%= link_to "Your Stats", foyer_path, :class => "button round", :style => "margin-top:10px" %>
     <%= link_to "Edit Profile", edit_user_registration_path, :class => "button round" %>
-    <%= link_to "Rules", foyer_path, :class => "button round" %>
+    <%= link_to "How To Play", foyer_path, :class => "button round" %>
   </br>Found a bug or have a suggestion? Email: <a href="mailto:matt@acroparty.com">matt@acroparty.com</a>
   </div>
   <div class="small-4 columns centerall" style="margin-top:18px; margin-bottom:4px;">
@@ -29,6 +29,23 @@
       <div class="notice" style="color:red; margin-top:6px;"><%= flash[:notice] %></div>
     <% end %>
     <div id="roomsrefresh" class="button tiny round centerall" style="margin-top:6px">Refresh room list</div>
+    <p class="acrofont">News:</p>
+    <div class="roomslisttable text-left">
+      <div id="newslist" style="margin:6px">
+        <% Update.last(25).reverse_each do |news| %>
+          <u><i style="font-size:80%;"><%= news.created_at.strftime("%b %d, %Y") %> - <%= news.created_at.strftime("%l:%M%P")  %>:</br></i></u>
+          <%= news.news %> <i style="font-size:80%">- posted by <%= news.user.username %></i></br><%= link_to 'Delete', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <div class="centerall">- - - - -</div>
+        <% end %>
+      </div>
+    </div>
+    <% if @username == "Matt" %>
+      <%= form_for Update.new, :remote => true do |f| %>
+        <%= f.text_area :news, :placeholder => "Enter news here..." %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+        <%= f.submit "Post News", :class => "button tiny radius centerall", :style => "margin-top:2px; margin-left:-6px" %>
+      <% end %>
+    <% end %>
   </div>
   <div class="small-5 columns" style="margin-top:18px; margin-bottom:4px;">
       <p class="acrofont">Latest Winners</p>
