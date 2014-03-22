@@ -22,22 +22,22 @@ class RoomController < ApplicationController
     @letterpool = ["A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
                   "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
                   "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","Q","R","R","R","S","S",
+                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
                   "S","S","T","T","T","T","U","U","V","V","W","W","X","Y","Y","Z",
                   "A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
                   "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
                   "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","Q","R","R","R","S","S",
+                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
                   "S","S","T","T","T","T","U","U","V","V","W","W","Y","Y","Z",
                   "A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
                   "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
                   "I","I","I","I","J","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","Q","R","R","R","S","S",
+                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
                   "S","S","T","T","T","T","U","U","V","V","W","W","Y","Y","Z"]
     @randomcategory = ["General", "Sports", "Food", "Movies", "Television", "History",
                       "Music", "Art", "Animals", "Science", "Government", "Fashion",
                       "Books", "Travel", "Celebrities", "Romance", "Technology",
-                      "Family", "School", "Nature", "Health"]
+                      "Family", "School", "Nature", "Health", "Humor", "Current Events"]
 
     if Famroomacroletters.select("let3").first == nil
       Famroomacroletters.create(:let3 => @letterpool.sample(3).join,

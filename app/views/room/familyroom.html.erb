@@ -17,9 +17,6 @@ function userLeaves(){
 $(window).on('beforeunload', function () {
   userLeaves();
 });
-$(window).unload(function () {
-  userLeaves();
-});
 </script>
 
 <div class="row">
@@ -243,6 +240,7 @@ function newGameStarts() {
 function r1prep() {
   slideRoundText();
   $("#roundtext").text("Round 1/10 - Get ready!");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
   setTimeout(r1write, <%= @r1preptime %>*1000);
 }
@@ -298,6 +296,7 @@ function r1res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 1 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -367,6 +366,7 @@ function r2res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 2 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -436,6 +436,7 @@ function r3res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 3 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -505,6 +506,7 @@ function r4res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 4 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -574,6 +576,7 @@ function r5res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 5 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -644,6 +647,7 @@ function r6res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 6 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -713,6 +717,7 @@ function r7res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 7 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -782,6 +787,7 @@ function r8res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 8 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -851,6 +857,7 @@ function r9res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 9 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -919,6 +926,7 @@ function r10res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
   setTimeout(resultsRound, 700);
   $("#roundtext").text("Round 10 - Results");
+  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
@@ -936,7 +944,7 @@ function endOfGame() {
   $("#endofgamediv").load("/room/familyroom #endofgamediv");
   setTimeout(gameOver, 700);
   function newTimesAndLetters(){
-    if (<%= @timernewgamestarts.to_i %> < <%= DateTime.now.utc.to_i %>) {
+    if (<%= Player.order('user_id ASC').first.user_id %> == <%= current_user.id %>) {
       $.ajax({
         url: "/room/familyroom",
         type: "POST"

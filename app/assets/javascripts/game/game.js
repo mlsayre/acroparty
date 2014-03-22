@@ -4,6 +4,7 @@ function playerEnterInit(){
     url: "/room/playerenterinit",
     type: "POST"
   });
+  $.ui.dialog.prototype._focusTabbable = function(){};
   $("#votediv").dialog({
       autoOpen: false,
       closeOnEscape: false,
