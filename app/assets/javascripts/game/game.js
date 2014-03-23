@@ -15,6 +15,7 @@ function playerEnterInit(){
       width: "640",
 
     });
+  $.ui.dialog.prototype._focusTabbable = function(){};
   $("#resultsdiv").dialog({
       autoOpen: false,
       closeOnEscape: false,
@@ -25,6 +26,7 @@ function playerEnterInit(){
       width: "640",
 
     });
+  $.ui.dialog.prototype._focusTabbable = function(){};
   $("#endofgamediv").dialog({
         autoOpen: false,
         closeOnEscape: false,
@@ -433,11 +435,11 @@ function resultsRound() {
     $("#userlistbox").load("/room/familyroom #userlistbox");
   }
   $(".votebuttons").removeAttr("disabled");
-  setTimeout(showAllAnswers, 1500);
-  setTimeout(showFastestAnswer, 3000);
-  setTimeout(showWinningVoters, 4500);
-  setTimeout(showNonVoters, 6000);
-  setTimeout(updatePoints, 5000);
+  setTimeout(showAllAnswers, 500);
+  setTimeout(showFastestAnswer, 1000);
+  setTimeout(showWinningVoters, 2000);
+  setTimeout(showNonVoters, 2500);
+  setTimeout(updatePoints, 3000);
 }
 
 function hideResultsDialog() {
@@ -474,7 +476,7 @@ function gameOver() {
       type: "POST"
     });
   }
-  setTimeout(readyNewGame, 13500);
+  setTimeout(readyNewGame, 12500);
 }
 
 function playerCountCheck(){

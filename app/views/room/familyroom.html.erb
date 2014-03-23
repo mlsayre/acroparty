@@ -224,6 +224,8 @@ function waitingForPlayers() {
   $('#answerfield').addClass('animated fadeOutDown');
   slideRoundText();
   $("#roundtext").text(". . .");
+  document.getElementById("acroletters").style.visibility="visible";
+  $("#acroletters").show();
   $("#acroletters").html("<br/>Need 3 players<br/>to begin game...");
   $("#gamedata").load("/room/familyroom #gamedata");
   setTimeout(roundtojoin, timetojoin*1000);
@@ -282,7 +284,8 @@ function r1vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r1res, <%= @r1votetime %>*1000);
@@ -294,8 +297,8 @@ function r1res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -352,7 +355,8 @@ function r2vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r2res, <%= @r2votetime %>*1000);
@@ -364,8 +368,8 @@ function r2res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 2 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -422,7 +426,8 @@ function r3vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r3res, <%= @r3votetime %>*1000);
@@ -434,8 +439,8 @@ function r3res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 3 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -492,7 +497,8 @@ function r4vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r4res, <%= @r4votetime %>*1000);
@@ -504,8 +510,8 @@ function r4res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 4 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -562,7 +568,8 @@ function r5vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r5res, <%= @r5votetime %>*1000);
@@ -574,8 +581,8 @@ function r5res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 5 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -632,7 +639,8 @@ function r6vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r6res, <%= @r6votetime %>*1000);
@@ -645,8 +653,8 @@ function r6res() {
   $("#timertext").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 6 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -703,7 +711,8 @@ function r7vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r7res, <%= @r7votetime %>*1000);
@@ -715,8 +724,8 @@ function r7res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 7 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -773,7 +782,8 @@ function r8vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r8res, <%= @r8votetime %>*1000);
@@ -785,8 +795,8 @@ function r8res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 8 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -843,7 +853,8 @@ function r9vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r9res, <%= @r9votetime %>*1000);
@@ -855,8 +866,8 @@ function r9res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 9 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -913,8 +924,10 @@ function r10vote() {
   $("#acroletters").addClass('animated fadeOutUp');
   document.getElementById("answertextfield").style.visibility="hidden";
   $("#votediv").load("/room/familyroom #votediv", ".");
-  setTimeout(votingRound, 400);
+  setTimeout(votingRound, 1500);
+  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
+  playerCountCheck();
   setTimeout(r10res, <%= @r10votetime %>*1000);
 }
 
@@ -924,8 +937,8 @@ function r10res() {
   $("#votediv").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
-  $("#resultsdiv").load("/room/familyroom #resultsdiv", ".");
-  setTimeout(resultsRound, 700);
+  $("#resultsdiv").load("/room/familyroom #resultsdiv");
+  setTimeout(resultsRound, 1500);
   $("#roundtext").text("Round 10 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");

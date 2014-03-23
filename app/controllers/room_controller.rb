@@ -515,6 +515,7 @@ class RoomController < ApplicationController
   def resetfamroom
     Famroomacroletters.destroy_all
     Famroomroundtime.destroy_all
+    eventArray = []
     Famroomcat.destroy_all
     Message.destroy_all
     render :nothing => true
@@ -535,7 +536,7 @@ class RoomController < ApplicationController
     Famroomacroletters.destroy_all
     Famroomroundtime.destroy_all
     Famroomcat.destroy_all
-
+    eventArray = []
     render :nothing => true
   end
 
