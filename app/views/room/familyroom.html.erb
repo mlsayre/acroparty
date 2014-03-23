@@ -3,6 +3,7 @@
 <%= subscribe_to "/familyroom/game" %>
 
 <script>
+// keep player chat and score list current, check for 3+ players
 setInterval(function() {
   $("#userlistbox").load("/room/familyroom #userlistbox");
 }, 5000 );
@@ -219,12 +220,12 @@ function waitingForPlayers() {
   var roundtojoin = window[roundtojoinraw];
   var timetojoin = $("#timetojoindiv").text();
   $("#acroletters").text("");
+  $(".ui-dialog-content").dialog("close");
   $('#answerfield').addClass('animated fadeOutDown');
   slideRoundText();
   $("#roundtext").text(". . .");
   $("#acroletters").html("<br/>Need 3 players<br/>to begin game...");
   $("#gamedata").load("/room/familyroom #gamedata");
-  $("#rndletters").load("/room/familyroom #rndletters");
   setTimeout(roundtojoin, timetojoin*1000);
 }
 
@@ -937,7 +938,7 @@ function r10res() {
   setTimeout(stayInSync, 10000);
 }
 
-function endOfGame() {
+function finalResults() {
   slideRoundText();
   hideResultsDialog();
   $("#roundtext").text("The winner is...");
