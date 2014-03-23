@@ -4499,10 +4499,10 @@ $.widget( "ui.dialog", {
 
 		if ( this.overlay ) {
 			$.ui.dialog.overlayInstances--;
-
-			if ( !$.ui.dialog.overlayInstances ) {
-				this.document.unbind( "focusin.dialog" );
-			}
+			// UNCOMMENTED THESE LINES TO RETURN NORMAL FOCUS BEHAVIOR
+			// if ( !$.ui.dialog.overlayInstances ) {
+			// 	this.document.unbind( "focusin.dialog" );
+			// }
 			this.overlay.remove();
 			this.overlay = null;
 		}

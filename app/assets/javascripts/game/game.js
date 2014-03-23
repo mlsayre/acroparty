@@ -15,7 +15,6 @@ function playerEnterInit(){
       width: "640",
 
     });
-  $.ui.dialog.prototype._focusTabbable = function(){};
   $("#resultsdiv").dialog({
       autoOpen: false,
       closeOnEscape: false,
@@ -26,7 +25,6 @@ function playerEnterInit(){
       width: "640",
 
     });
-  $.ui.dialog.prototype._focusTabbable = function(){};
   $("#endofgamediv").dialog({
         autoOpen: false,
         closeOnEscape: false,
