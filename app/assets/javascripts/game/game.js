@@ -241,7 +241,7 @@ function acroValidate(roundletters) {
   var letters = roundletters;
   var eachletter = letters.split('');
   var submission = document.getElementById("answertextfield").value;
-  var words = submission.toUpperCase().split(' ');
+  var words = submission.toUpperCase().match(/\S+/g);
   if (eachletter.length == 3) {
     if (words.length == 3 &&
        ((words[0].charAt(0) != eachletter[0]) ||

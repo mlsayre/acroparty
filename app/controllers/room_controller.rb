@@ -37,7 +37,8 @@ class RoomController < ApplicationController
     @randomcategory = ["General", "Sports", "Food", "Movies", "Television", "History",
                       "Music", "Art", "Animals", "Science", "Government", "Fashion",
                       "Books", "Travel", "Celebrities", "Romance", "Technology",
-                      "Family", "School", "Nature", "Health", "Humor", "Current Events"]
+                      "Family", "School", "Nature", "Health", "Humor", "Current Events",
+                      "General", "General", "Work", "Give Some Advice", "Definitions"]
 
     if Famroomacroletters.select("let3").first == nil
       Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
