@@ -3991,20 +3991,20 @@ $.widget( "ui.dialog", {
 		// 3. Tabbable element inside the buttonpane
 		// 4. The close button
 		// 5. The dialog itself
-		var hasFocus = this.element.find("[autofocus]");
-		if ( !hasFocus.length ) {
-			hasFocus = this.element.find(":tabbable");
-		}
-		if ( !hasFocus.length ) {
-			hasFocus = this.uiDialogButtonPane.find(":tabbable");
-		}
-		if ( !hasFocus.length ) {
-			hasFocus = this.uiDialogTitlebarClose.filter(":tabbable");
-		}
-		if ( !hasFocus.length ) {
-			hasFocus = this.uiDialog;
-		}
-		hasFocus.eq( 0 ).focus();
+		// var hasFocus = this.element.find("[autofocus]");
+		// if ( !hasFocus.length ) {
+		// 	hasFocus = this.element.find(":tabbable");
+		// }
+		// if ( !hasFocus.length ) {
+		// 	hasFocus = this.uiDialogButtonPane.find(":tabbable");
+		// }
+		// if ( !hasFocus.length ) {
+		// 	hasFocus = this.uiDialogTitlebarClose.filter(":tabbable");
+		// }
+		// if ( !hasFocus.length ) {
+		// 	hasFocus = this.uiDialog;
+		// }
+		// hasFocus.eq( 0 ).focus();
 	},
 
 	_keepFocus: function( event ) {
