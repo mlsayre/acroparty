@@ -11,7 +11,7 @@ function playerEnterInit(){
       resizable: false,
       position: { my: "center top", at: "center top-10", of: "#categorytext" },
       title: "Pick your favorite...",
-      width: "640",
+      width: "auto",
 
     });
   $("#resultsdiv").dialog({
@@ -21,7 +21,7 @@ function playerEnterInit(){
       resizable: false,
       position: { my: "center top", at: "center top-10", of: "#categorytext" },
       title: "Pick your favorite...",
-      width: "640",
+      width: "auto",
 
     });
   $("#endofgamediv").dialog({
@@ -31,7 +31,7 @@ function playerEnterInit(){
         resizable: false,
         position: { my: "center top", at: "center top-10", of: "#categorytext" },
         title: "Pick your favorite...",
-        width: "640",
+        width: "auto",
 
       });
   function updateUserBox() {
@@ -67,6 +67,10 @@ function wtimer() {
     {
       $("#answertextfield").attr("disabled", true);
       $("#answersubmit").attr("disabled", true);
+      function loadTheAnswers(){
+        $("#votediv").load("/room/familyroom #votediv");
+      }
+      setTimeout(loadTheAnswers, 500);
     }
     if ( answercount <= -1 )
     {
@@ -99,6 +103,10 @@ function vtimer() {
       {
         $(".votebuttons").attr("disabled", true);
         $("#roundtext").text("Voting complete...");
+        function loadTheResults(){
+        $("#resultsdiv").load("/room/familyroom #resultsdiv");
+      }
+      setTimeout(loadTheResults, 500);
       }
     if ( votecount <= -1 )
     {

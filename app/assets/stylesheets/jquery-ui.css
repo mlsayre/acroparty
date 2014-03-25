@@ -253,26 +253,37 @@ input.ui-button {
 
 /* workarounds */
 /* reset extra padding in Firefox, see h5bp.com/l */
+
+.ui-dialog,
+.ui-dialog,
+.ui-widget,
+.ui-widget-content,
+.ui-corner-all,
+.foo,
+.ui-draggable,
+.ui-resizable {
+	background:rgba(15,150,140,0.18)!important;
+	}
 input.ui-button::-moz-focus-inner,
 button.ui-button::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
 .ui-dialog {
+	text-align:center;
 	overflow: hidden;
 	position: absolute;
-	top: 0;
-	left: 0;
 	padding: .2em;
 	outline: 0;
 }
 .ui-dialog .ui-dialog-titlebar {
+	text-align:center;
 	padding: .1em .1em;
 	position: relative;
 	display: none;
 }
 .ui-dialog .ui-dialog-title {
-	float: left;
+	text-align:center;
 	margin: .1em 0;
 	white-space: nowrap;
 	width: 90%;
@@ -295,8 +306,9 @@ button.ui-button::-moz-focus-inner {
 	position: relative;
 	border: 0;
 	padding: 0em 1em;
+	padding-bottom:5px;
 	background: none;
-	overflow: auto;
+	overflow: hidden;
 }
 .ui-dialog .ui-dialog-buttonpane {
 	text-align: left;
@@ -313,6 +325,7 @@ button.ui-button::-moz-focus-inner {
 	cursor: pointer;
 }
 .ui-dialog .ui-resizable-se {
+	text-align:center;
 	width: 12px;
 	height: 12px;
 	right: -5px;
