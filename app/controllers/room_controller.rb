@@ -373,7 +373,8 @@ class RoomController < ApplicationController
       end
     end
 
-    @gamewinner = User.order('gamepoints DESC').first
+    @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
+                      .order('gamepoints DESC').first
 
   end
 
@@ -523,7 +524,8 @@ class RoomController < ApplicationController
   end
 
   def endofgamestatsinit
-    @gamewinner = User.order('gamepoints DESC').first
+    @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
+                      .order('gamepoints DESC').first
     @playerlist = Player.where(:room => "familyroom")
     if @playerlist.count > 2
       @gamewinner.increment!(:gameswon, by = 1)
