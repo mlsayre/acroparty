@@ -126,6 +126,7 @@ GEM
       minitest-metadata (~> 0.4)
       minitest-rails (~> 0.9.1)
     multi_json (1.8.2)
+    newrelic_rpm (3.7.3.204)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     orm_adapter (0.5.0)
@@ -220,6 +221,7 @@ DEPENDENCIES
   launchy
   minitest-rails
   minitest-rails-capybara
+  newrelic_rpm
   paperclip
   papercrop
   pg
