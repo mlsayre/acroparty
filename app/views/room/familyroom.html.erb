@@ -245,6 +245,7 @@ function r1prep() {
   $("#roundtext").text("Round 1/10 - Get ready!");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r1write, <%= @r1preptime %>*1000);
 }
 
@@ -316,6 +317,7 @@ function r2prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 2/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r2write, <%= @r2preptime %>*1000);
 }
 
@@ -387,6 +389,7 @@ function r3prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 3/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r3write, <%= @r3preptime %>*1000);
 }
 
@@ -458,6 +461,7 @@ function r4prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 4/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r4write, <%= @r4preptime %>*1000);
 }
 
@@ -529,6 +533,7 @@ function r5prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 5/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r5write, <%= @r5preptime %>*1000);
 }
 
@@ -600,6 +605,7 @@ function r6prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 6/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r6write, <%= @r6preptime %>*1000);
 }
 
@@ -672,6 +678,7 @@ function r7prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 7/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r7write, <%= @r7preptime %>*1000);
 }
 
@@ -743,6 +750,7 @@ function r8prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 8/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r8write, <%= @r8preptime %>*1000);
 }
 
@@ -814,6 +822,7 @@ function r9prep() {
   hideResultsDialog();
   $("#roundtext").text("Round 9/10 - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r9write, <%= @r9preptime %>*1000);
 }
 
@@ -885,6 +894,7 @@ function r10prep() {
   hideResultsDialog();
   $("#roundtext").text("Last round - Get ready!");
   $("#answerformdiv").load("/room/familyroom #answerformdiv");
+  $("#submittedtext").text("0");
   setTimeout(r10write, <%= @r10preptime %>*1000);
 }
 
