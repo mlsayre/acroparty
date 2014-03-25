@@ -389,7 +389,8 @@ class RoomController < ApplicationController
 
   def roundprep
     Famroomanswer.destroy_all
-
+    User.where('id = ?', current_user.id).first
+        .update_attributes(:answervotedfor => nil)
     render :nothing => true
   end
 
@@ -541,6 +542,8 @@ class RoomController < ApplicationController
     Famroomcat.destroy_all
     eventArray = []
     render :nothing => true
+    User.where('id = ?', current_user.id).first.update_attributes(:answervotedfor => nil,
+      :gamepoints => 0)
   end
 
   def playercountcheck
