@@ -532,7 +532,6 @@ class RoomController < ApplicationController
       @gamewinner.increment!(:gameswon, by = 1)
       User.where(:id => current_user.id).first.increment!(:gamesplayed, by = 1)
     end
-
     render :nothing => true
   end
 
