@@ -13,7 +13,7 @@ Acroparty::Application.routes.draw do
 
   get "room/update"
 
-  devise_for :users
+  devise_for :users, controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   authenticated :user do
     root :to => 'pages#foyer'

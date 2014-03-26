@@ -41,18 +41,24 @@
       <div class="countdown centerall"></div>
   </fieldset>
 
-<div class="small-3 centerall" style="margin-top:20px"><%= f.label :current_password, :style => "color:red;" %> <i style="font-size:.7em; color: red;">(we need your current password to confirm your changes)</i>
-  <%= f.password_field :current_password %></div>
+<div class="small-3 centerall" style="margin-top:20px">
+  <% if f.object.encrypted_password.present? %>
+    <%= f.label :current_password, :style => "color:red;" %> <i style="font-size:.7em; color: red;">(we need your current password to confirm your changes)</i>
+    <%= f.password_field :current_password %></div>
+  <% end %>
 
-  <div class="large-2 centerall" style="margin-top:12px"><%= f.submit "Update", :class => "button" %></div>
+  <div class="centerall" style="margin-top:12px"><%= f.submit "Update", :class => "button" %></div>
 
 <% end %>
 <div class="centerall">
   <%= link_to "Back", :back %>
 </div>
-<h4 style="text-align:right; margin-right:40px">Delete my account</h4>
+</div>
+<div class = "small-12" style="text-align:right">
+  <h4 style="margin-right:40px; margin-top:100px;">Delete my account</h4>
 
-<p style="text-align:right; margin-right:40px; font-size:.8em">Leave the party forever? <%= button_to "Delete my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny alert round", :style => "float:right; margin-right:40px" %></p>
+  <p style="font-size:.8em; margin-right:40px;">Leave the party forever? <%= button_to "Delete my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => "button tiny alert round", :style => "margin-right:40px;" %></p>
+</div>
 
 <script>
 function updateCountdown() {

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140321185403) do
+ActiveRecord::Schema.define(:version => 20140326044647) do
 
   create_table "famroomacroletters", :force => true do |t|
     t.string "let3"
@@ -153,6 +153,8 @@ ActiveRecord::Schema.define(:version => 20140321185403) do
     t.integer  "answervotedfor"
     t.integer  "gamepoints",             :default => 0
     t.integer  "points_alltime",         :default => 0
+    t.string   "provider"
+    t.string   "uid"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

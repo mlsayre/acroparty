@@ -10,11 +10,13 @@
     <div class="small-3 centerall"><%= f.label :email %>
     <%= f.email_field :email %></div>
 
-    <div class="small-3 centerall"><%= f.label :password %>
-    <%= f.password_field :password %></div>
+    <% if f.object.password_required? %>
+      <div class="small-3 centerall"><%= f.label :password %>
+      <%= f.password_field :password %></div>
 
-    <div class="small-3 centerall"><%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation %></div>
+      <div class="small-3 centerall"><%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation %></div>
+    <% end %>
 
   <div class="centerall">
     (Your email address and all other information will never be shared with anyone.)
