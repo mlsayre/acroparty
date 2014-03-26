@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
         user.avatar = auth["info"]["image"].sub("_normal", "")
       else
         user.email = auth["info"]["email"]
-        user.avatar = auth["info"]["image"]
+        user.avatar = auth.info.image.split("=")[0] << "=large"
       end
 
     end
