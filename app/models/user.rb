@@ -53,7 +53,8 @@ class User < ActiveRecord::Base
         user.email = auth.info.nickname + "@twitter.com"
         user.avatar = auth["info"]["image"].sub("_normal", "")
       else
-        user.email = auth.info.email
+        user.email = auth["info"]["email"]
+        user.avatar = auth["info"]["image"]
       end
 
     end

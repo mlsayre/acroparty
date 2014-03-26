@@ -15,6 +15,7 @@ gem 'figaro'
 gem 'papercrop'
 gem 'newrelic_rpm'
 gem 'omniauth-twitter'
+gem 'omniauth-facebook'
 
 # Gems used only for assets and not required
 # in production environments by default.
