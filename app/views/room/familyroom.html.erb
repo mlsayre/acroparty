@@ -48,7 +48,7 @@ $(window).on('beforeunload', function () {
       Winner, <%= @roundwinner.username %>! <%= image_tag @roundwinner.avatar.url(:small) %> <%= @bonuspointsshow %> bonus points!</br>
     </div>
     <% Famroomanswer.order('points DESC').each do |answer| %>
-    <li class="answerresultinfo" style="display:none; font-size:85%; margin-right:4px;">
+      <li class="answerresultinfo" style="display:none; font-size:85%; margin-right:4px;">
         <%= answer.points %> votes for <%= answer.user.username %>:
         "<%= answer.answer %>" (<%= answer.answertime %>s)</li>
       </br>
@@ -66,9 +66,7 @@ $(window).on('beforeunload', function () {
     <p id="nonvoters" class="centerall" style="display:none;">
       Non-voters receive no points.
     </p>
-    <% if @playerlist.count < 3 %>
-      <font-color="red">(Non-scoring practice round with under 3 players)</font-color>
-    <% end %>
+
   </div>
 </div>
 
