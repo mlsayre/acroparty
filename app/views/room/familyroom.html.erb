@@ -143,8 +143,8 @@ $(window).on('beforeunload', function () {
     </div>
   </div>
   <div class="small-2 columns centerall">
-      <%= link_to "SFX: On", foyer_path, :class => "button small radius", :style => "margin-top:10px; visibility:hidden;" %>
-      <%= link_to "Music: On", foyer_path, :class => "button small radius", :style => "visibility:hidden;" %>
+      <%= button_tag "Sounds: On", :id => "sfxbutton", :class => "button small radius", :style => "margin-top:10px;" %>
+      <%= link_to "Music: On", foyer_path, :id => "musicbutton", :class => "button small radius", :style => "visibility:hidden;" %>
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>
@@ -232,6 +232,7 @@ function waitingForPlayers() {
 function newGameStarts() {
   $("#acroletters").text("");
   $('#answerfield').addClass('animated fadeOutDown');
+  $("#rndletters").load("/room/familyroom #rndletters");
   slideRoundText();
   $("#roundtext").text("New game starting...");
   setTimeout(r1prep, <%= @newgamestartstime %>*1000);

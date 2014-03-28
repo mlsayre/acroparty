@@ -63,6 +63,9 @@ function wtimer() {
   $("#timertext").show();
   function writingtimer() {
     answercount=answercount-1;
+    if ( answercount == 60 ) {
+      gameplayMUS.play();
+    }
     if ( answercount == 0 )
     {
       $("#answertextfield").attr("disabled", true);
@@ -144,6 +147,9 @@ function showLetters() {
       $("#acroletters").removeClass('animated fadeOutUp');
       $('#acroletters').addClass('animated fadeIn');
       typeWriter();
+      if (character > 0 && character <= length) {
+        letterTurnSFX.play();
+      }
       if (character == length + 1) {
         clearTimeout(timeOut);
         wtimer();
@@ -168,11 +174,13 @@ function submitAnswerFX() {
     $("#acceptedtext").show();
   }
   $("#acceptedtext").hide();
+  $("#acceptedtext").css('color', 'green');
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(addPulse, 30);
   setTimeout(addAcceptedTextFlip, 230);
+  answerAcceptSFX.play();
 }
 
 function slideRoundText() {
@@ -216,9 +224,11 @@ function notAnAcronym() {
     $("#acceptedtext").show();
   }
   $("#acceptedtext").hide();
+  $("#acceptedtext").css('color', 'red');
   $('#acceptedtext').text("Not an acronym!");
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(invalidAcceptedTextFlip, 230);
+  badAnswerSFX.play();
 }
 
 function incorrectLength() {
@@ -227,9 +237,11 @@ function incorrectLength() {
     $("#acceptedtext").show();
   }
   $("#acceptedtext").hide();
+  $("#acceptedtext").css('color', 'red');
   $('#acceptedtext').text("Incorrect length!");
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(invalidAcceptedTextFlip, 230);
+  badAnswerSFX.play();
 }
 
 function notJustLetters() {
@@ -238,9 +250,11 @@ function notJustLetters() {
     $("#acceptedtext").show();
   }
   $("#acceptedtext").hide();
+  $("#acceptedtext").css('color', 'red');
   $('#acceptedtext').text("Not feeling creative?");
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(invalidAcceptedTextFlip, 230);
+  badAnswerSFX.play();
 }
 
 // acronym validation
@@ -417,6 +431,7 @@ function votingRound() {
 }
 
 function resultsRound() {
+  resultsMUS.play();
   $("#resultsdiv").dialog('open');
   $("#resultsdiv").addClass("centerall");
   $("#roundwinnerannounce").show();
@@ -490,3 +505,17 @@ function playerCountCheck(){
     type: "POST"
   });
 }
+
+// Audio
+function clickSfxButton() {
+  if ($("#sfxbutton").text() == "Sounds: On"){
+    Howler.mute();
+    $("#sfxbutton").text("Sounds: Off")
+  }
+  else if ($("#sfxbutton").text() == "Sounds: Off"){
+    Howler.unmute();
+    $("#sfxbutton").text("Sounds: On")
+  }
+}
+
+$("#sfxbutton").click(clickSfxButton);
