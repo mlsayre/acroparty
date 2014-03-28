@@ -1,3 +1,6 @@
+var allSFX = [letterTurnSFX, answerAcceptSFX, badAnswerSFX];
+var allMUS = [gameplayMUS, resultsMUS];
+
 // Music
 var gameplayMUS = new Howl({
   urls: ['/assets/Energize.mp3'],

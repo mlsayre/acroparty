@@ -144,7 +144,7 @@ $(window).on('beforeunload', function () {
   </div>
   <div class="small-2 columns centerall">
       <%= button_tag "Sounds: On", :id => "sfxbutton", :class => "button small radius", :style => "margin-top:10px;" %>
-      <%= link_to "Music: On", foyer_path, :id => "musicbutton", :class => "button small radius", :style => "visibility:hidden;" %>
+      <%= button_tag "Music: On", :id => "musicbutton", :class => "button small radius" %>
       <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
   </div>
 </div>

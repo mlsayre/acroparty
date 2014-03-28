@@ -509,13 +509,26 @@ function playerCountCheck(){
 // Audio
 function clickSfxButton() {
   if ($("#sfxbutton").text() == "Sounds: On"){
-    Howler.mute();
+    allSFX.mute();
     $("#sfxbutton").text("Sounds: Off")
   }
   else if ($("#sfxbutton").text() == "Sounds: Off"){
-    Howler.unmute();
+    allSFX.unmute();
     $("#sfxbutton").text("Sounds: On")
   }
 }
 
-$("#sfxbutton").click(clickSfxButton);
+$("#sfxbutton").click(clickMusicButton);
+
+function clickMusButton() {
+  if ($("#musicbutton").text() == "Music: On"){
+    allMUS.mute();
+    $("#musicbutton").text("Music: Off")
+  }
+  else if ($("#musicbutton").text() == "Music: Off"){
+    allMUS.unmute();
+    $("#musicbutton").text("Music: On")
+  }
+}
+
+$("#musicbutton").click(clickMusicButton);
