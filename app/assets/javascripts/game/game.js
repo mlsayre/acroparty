@@ -102,6 +102,9 @@ function vtimer() {
   var votecounter=setInterval(votingtimer, 1000);
   function votingtimer() {
     votecount=votecount-1;
+    if ( votecount == 25 ) {
+      voteMUS.play();
+    }
     if (votecount == 0)
       {
         $(".votebuttons").attr("disabled", true);
@@ -158,6 +161,7 @@ function showLetters() {
         document.getElementById("answertextfield").style.visibility="visible";
         $('#answerfield').removeClass('animated fadeOutDown');
         $('#answerfield').addClass('animated rubberBand');
+        answerFieldAppearSFX.play();
       }
     }, 1500);
   };
@@ -427,6 +431,7 @@ function votingRound() {
   $("#votediv").submit(function() {
     $(".votebuttons").attr("disabled", true);
     $("#roundtext").text("Vote accepted...");
+    voteClickSFX.play();
   });
 }
 
@@ -509,26 +514,28 @@ function playerCountCheck(){
 // Audio
 function clickSfxButton() {
   if ($("#sfxbutton").text() == "Sounds: On"){
-    allSFX.mute();
+    Howler.mute();
     $("#sfxbutton").text("Sounds: Off")
   }
   else if ($("#sfxbutton").text() == "Sounds: Off"){
-    allSFX.unmute();
+    Howler.unmute();
     $("#sfxbutton").text("Sounds: On")
   }
 }
 
-$("#sfxbutton").click(clickMusicButton);
+$("#sfxbutton").click(clickSfxButton);
 
-function clickMusButton() {
+/* function clickMusicButton() {
   if ($("#musicbutton").text() == "Music: On"){
-    allMUS.mute();
+    allMUS.forEach(mute);
     $("#musicbutton").text("Music: Off")
   }
   else if ($("#musicbutton").text() == "Music: Off"){
-    allMUS.unmute();
+    allMUS.forEach(unmute);
     $("#musicbutton").text("Music: On")
   }
 }
 
 $("#musicbutton").click(clickMusicButton);
+*/
+
