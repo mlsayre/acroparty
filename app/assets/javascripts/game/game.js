@@ -486,6 +486,7 @@ function gameOver() {
   function openDialog() {
     $("#endofgamediv").dialog('open');
     $("#endofgamediv").show();
+    endOfGameMUS.play();
   }
   setTimeout(openDialog, 1250);
   function updateStats(){

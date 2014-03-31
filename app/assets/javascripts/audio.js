@@ -1,19 +1,21 @@
-var allSFX = [letterTurnSFX, answerAcceptSFX, badAnswerSFX];
-var allMUS = [gameplayMUS, resultsMUS];
-
 // Music
 var gameplayMUS = new Howl({
   urls: ['/assets/Gameplay.mp3'],
-  volume: 0.15
+  volume: 0.25
 });
 
 var voteMUS = new Howl({
   urls: ['/assets/Vote.mp3'],
-  volume: 0.15
+  volume: 0.25
 });
 
 var resultsMUS = new Howl({
-  urls: ['/assets/Results.mp3'],
+  urls: ['/assets/ResultsCheer.mp3'],
+  volume: 0.3
+});
+
+var endOfGameMUS = new Howl({
+  urls: ['/assets/EndOfGame.mp3'],
   volume: 0.3
 });
 
