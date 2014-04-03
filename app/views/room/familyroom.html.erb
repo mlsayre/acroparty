@@ -209,6 +209,9 @@ function joinInProgress() {
 }
 
 hideTextStart();
+$("#chat").append('<font color="purple">Host: Welcome to the Family Room! This room is meant for all ages so please keep your acros and chat family friendly. And have fun!</font>');
+$("#chatbox").scrollTop(10000);
+
 setTimeout(joinInProgress, 1500);
 
 // waiting for players
@@ -222,8 +225,8 @@ function waitingForPlayers() {
   slideRoundText();
   $("#roundtext").text(". . .");
   document.getElementById("acroletters").style.visibility="visible";
-  $("#acroletters").show();
-  $("#acroletters").html("<br/>Need 3 players<br/>to begin game...");
+  $("#acroletters").show()
+                   .html("<br/>Need 3 players<br/>to begin game...");
   $("#gamedata").load("/room/familyroom #gamedata");
   setTimeout(roundtojoin, timetojoin*1000);
 }
@@ -970,6 +973,10 @@ function r10res() {
   $("#roundtext").text("Round 10 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  function prepareToShowWinner() {
+    $("#endofgamediv").load("/room/familyroom #endofgamediv");
+  }
+  setTimeout(prepareToShowWinner, 9000);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -985,15 +992,6 @@ function finalResults() {
   $("#roundtext").text("The winner is...");
   $("#endofgamediv").load("/room/familyroom #endofgamediv");
   setTimeout(gameOver, 1500);
-  function newTimesAndLetters(){
-    if (<%= Player.order('user_id ASC').first.user_id %> == <%= current_user.id %>) {
-      $.ajax({
-        url: "/room/familyroom",
-        type: "POST"
-      });
-    }
-  }
-  setTimeout(newTimesAndLetters, 12500);
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
 }
 
@@ -1002,17 +1000,29 @@ function readyForNewGame() {
   $("#acceptedtext").hide();
   $("#acroletters").show();
   document.getElementById("submittedtext").style.visibility="hidden";
-  $("#acroletters").css('fontSize', '100%');
-  $("#acroletters").html("<br/>Stay tuned for<br/>new game...");
-  $("#acroletters").removeClass('animated fadeOutUp');
+  $("#acroletters").css('fontSize', '100%')
+                   .html("<br/>Stay tuned for<br/>new game...")
+                   .removeClass('animated fadeOutUp');
   slideRoundText();
   $("#roundtext").text("Take a breath...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
   hideEndGameDialog();
-  $("#rndletters").load("/room/familyroom #rndletters");
-  $("#gamedata").load("/room/familyroom #gamedata");
+  function newTimesAndLetters(){
+    if (<%= Player.order('user_id ASC').first.user_id %> == <%= current_user.id %>) {
+      $.ajax({
+        url: "/room/familyroom",
+        type: "POST"
+      });
+    }
+  }
+  setTimeout(newTimesAndLetters, 100);
+  function loadNewData(){
+    $("#rndletters").load("/room/familyroom #rndletters");
+    $("#gamedata").load("/room/familyroom #gamedata");
+  }
+  setTimeout(loadNewData, 1750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];

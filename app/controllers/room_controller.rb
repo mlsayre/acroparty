@@ -90,7 +90,7 @@ class RoomController < ApplicationController
 
 
     # ROUND TIMINGS
-    @newgamestartstime = 3  #10
+    @newgamestartstime = 5  #10
     @r1preptime = 5         #15
     @r1writetime = 70        #70
     @r1votetime = 30         #30
@@ -374,13 +374,12 @@ class RoomController < ApplicationController
     end
 
     @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
-                      .order('gamepoints DESC').first
+                      .order('users.gamepoints DESC').first
 
   end
 
   def playerenterinit
-    User.where('id = ?', current_user.id).first.update_attributes(:answervotedfor => nil,
-      :gamepoints => 0)
+    current_user.update_attributes(:answervotedfor => nil, :gamepoints => 0)
     Player.where('user_id = ?', current_user.id).first
           .update_attributes(:gamepoints => 0)
 
@@ -526,12 +525,10 @@ class RoomController < ApplicationController
 
   def endofgamestatsinit
     @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
-                      .order('gamepoints DESC').first
+                      .order('users.gamepoints DESC').first
     @playerlist = Player.where(:room => "familyroom")
-    if @playerlist.count > 2
-      @gamewinner.increment!(:gameswon, by = 1)
-      User.where(:id => current_user.id).first.increment!(:gamesplayed, by = 1)
-    end
+    @gamewinner.increment!(:gameswon, by = 1)
+    current_user.increment!(:gamesplayed, by = 1)
     render :nothing => true
   end
 
