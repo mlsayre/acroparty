@@ -21,7 +21,8 @@ var endOfGameMUS = new Howl({
 
 //Sound effects
 var letterTurnSFX = new Howl({
-  urls: ['/assets/LetterTurn.mp3']
+  urls: ['/assets/LetterTurn.mp3'],
+  volume: 0.6
 });
 
 var answerAcceptSFX = new Howl({
@@ -33,7 +34,8 @@ var badAnswerSFX = new Howl({
 });
 
 var answerFieldAppearSFX = new Howl({
-  urls: ['/assets/AnswerFieldAppear.mp3']
+  urls: ['/assets/AnswerFieldAppear.mp3'],
+  volume: 0.6
 });
 
 var voteClickSFX = new Howl({
