@@ -183,7 +183,7 @@ function submitAnswerFX() {
   $('#answerfield').removeClass('animated rubberBand');
   $('#acceptedtext').removeClass('animated flip');
   setTimeout(addPulse, 30);
-  setTimeout(addAcceptedTextFlip, 230);
+  setTimeout(addAcceptedTextFlip, 370);
   answerAcceptSFX.play();
 }
 

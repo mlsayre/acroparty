@@ -5,6 +5,8 @@ class RoomController < ApplicationController
   def familyroom
     @messages = Message.all
     @famroomacroletters = Famroomacroletters.all
+    Famroomacroletters.createletters
+    Famroomcat.createcats
     @famroomgamestate = Famroomgamestate.all
     @user = User.all
     @gp = User.where('id = ?', current_user.id).first.gamepoints
@@ -19,40 +21,6 @@ class RoomController < ApplicationController
                         Try again soon."
     end
 
-    @letterpool = ["A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
-                  "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
-                  "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
-                  "S","S","T","T","T","T","U","U","V","V","W","W","X","Y","Y","Z",
-                  "A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
-                  "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
-                  "I","I","I","I","J","K","K","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
-                  "S","S","T","T","T","T","U","U","V","V","W","W","Y","Y","Z",
-                  "A","A","A","A","B","B","B","B","C","C","C","C","D","D","D","D",
-                  "E","E","E","E","E","F","F","F","F","G","G","G","G","H","H","H","H",
-                  "I","I","I","I","J","L","L","L","L","M","M","M","M","N",
-                  "N","N","N","O","O","O","P","P","P","P","Q","R","R","R","S","S",
-                  "S","S","T","T","T","T","U","U","V","V","W","W","Y","Y","Z"]
-    @randomcategory = ["General", "Sports", "Food", "Movies", "Television", "History",
-                      "Music", "Art", "Animals", "Science", "Government", "Fashion",
-                      "Books", "Travel", "Celebrities", "Romance", "Technology",
-                      "Family", "School", "Nature", "Health", "Humor", "Current Events",
-                      "General", "General", "Work", "Give Some Advice", "Definitions"]
-
-    if Famroomacroletters.select("let3").first == nil
-      Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
-                                :let4 => @letterpool.sample(4).join,
-                                :let5 => @letterpool.sample(5).join,
-                                :let6 => @letterpool.sample(6).join,
-                                :let7 => @letterpool.sample(7).join)
-      Famroomacroletters.create(:let3 => @letterpool.sample(3).join,
-                                :let4 => @letterpool.sample(4).join,
-                                :let5 => @letterpool.sample(5).join,
-                                :let6 => @letterpool.sample(6).join,
-                                :let7 => @letterpool.sample(7).join)
-    end
-
     @round1letters = Famroomacroletters.find(:first).let3
     @round2letters = Famroomacroletters.find(:first).let4
     @round3letters = Famroomacroletters.find(:first).let5
@@ -63,19 +31,6 @@ class RoomController < ApplicationController
     @round8letters = Famroomacroletters.find(:last).let5
     @round9letters = Famroomacroletters.find(:last).let6
     @round10letters = Famroomacroletters.find(:last).let7
-
-    if Famroomcat.select("r1cat").first == nil
-      Famroomcat.create(:r1cat => @randomcategory.sample,
-                        :r2cat => @randomcategory.sample,
-                        :r3cat => @randomcategory.sample,
-                        :r4cat => @randomcategory.sample,
-                        :r5cat => @randomcategory.sample,
-                        :r6cat => @randomcategory.sample,
-                        :r7cat => @randomcategory.sample,
-                        :r8cat => @randomcategory.sample,
-                        :r9cat => @randomcategory.sample,
-                        :r10cat => @randomcategory.sample)
-    end
 
     @round1cat = Famroomcat.find(:first).r1cat
     @round2cat = Famroomcat.find(:first).r2cat
