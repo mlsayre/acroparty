@@ -286,6 +286,18 @@ class RoomController < ApplicationController
 
     @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
                       .order('users.gamepoints DESC').first
+    if Winninganswer.where('user_id = ?', current_user.id) != []
+      @tweetacroletters = Winninganswer.where('user_id = ?', current_user.id)
+                                       .last.acroletters
+      @tweetcat = Winninganswer.where('user_id = ?', current_user.id)
+                               .last.category
+      @tweetanswer = Winninganswer.where('user_id = ?', current_user.id)
+                                  .last.answer
+    else
+      @tweetacroletters = "ABCDEF"
+      @tweetcat = "Category"
+      @tweetanswer = "Answer"
+    end
 
   end
 
@@ -462,6 +474,16 @@ class RoomController < ApplicationController
       Famroomacroletters.destroy_all
       Famroomcat.destroy_all
     end
+    render :nothing => true
+  end
+
+  def updatewinnertweet
+    @tweetacroletters = Winninganswer.where('user_id = ?', current_user.id)
+                                     .last.acroletters
+    @tweetcat = Winninganswer.where('user_id = ?', current_user.id)
+                             .last.category
+    @tweetanswer = Winninganswer.where('user_id = ?', current_user.id)
+                                .last.answer
     render :nothing => true
   end
 

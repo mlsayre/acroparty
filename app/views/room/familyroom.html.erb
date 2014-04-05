@@ -143,9 +143,16 @@ $(window).on('beforeunload', function () {
     </div>
   </div>
   <div class="small-2 columns centerall">
-      <%= button_tag "Sounds: On", :id => "sfxbutton", :class => "button small radius", :style => "margin-top:10px;" %>
-      <%= button_tag "Music: On", :id => "musicbutton", :class => "button small radius", :style => "visibility:hidden;" %>
-      <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
+    <%= button_tag "Sounds: On", :id => "sfxbutton", :class => "button small radius", :style => "margin-top:10px;" %>
+    <%= button_tag "Music: On", :id => "musicbutton", :class => "button small radius", :style => "visibility:hidden;" %>
+    <%= link_to "Leave room", foyer_path, :class => "alert button small radius" %>
+    <div id="tweetwinner">
+      <% if @roundwinner.id == current_user.id %>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://acroparty.com" data-text='My winning acro! <%= @tweetacroletters %>: "<%= @tweetanswer %>" (<%= @tweetcat %>) Come play!' data-via="AcroParty" data-count="none">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <span style="font-size:85%">your winner!</span>
+      <% end %>
+    </div>
   </div>
 </div>
 
@@ -211,6 +218,23 @@ function joinInProgress() {
 hideTextStart();
 $("#chat").append('<font color="purple">[Host] Welcome to the Family Room! This room is meant for all ages so please keep your acros and chat family friendly. And have fun!</font>');
 $("#chatbox").scrollTop(10000);
+
+function showTweet() {
+  $("#tweetwinner").load("/room/familyroom #tweetwinner", function() {
+    $.getScript('https://platform.twitter.com/widgets.js', function(){
+      $("#tweetwinner").show();
+      twttr.widgets.load();
+    });
+  });
+}
+
+function loadTweet() {
+  $.ajax({
+    url: "/room/updatewinnertweet",
+    type: "POST",
+    success: showTweet
+  });
+}
 
 setTimeout(joinInProgress, 1500);
 
@@ -306,6 +330,8 @@ function r1res() {
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -380,6 +406,8 @@ function r2res() {
   $("#roundtext").text("Round 2 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -454,6 +482,8 @@ function r3res() {
   $("#roundtext").text("Round 3 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -528,6 +558,8 @@ function r4res() {
   $("#roundtext").text("Round 4 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -602,6 +634,8 @@ function r5res() {
   $("#roundtext").text("Round 5 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -677,6 +711,8 @@ function r6res() {
   $("#roundtext").text("Round 6 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -751,6 +787,8 @@ function r7res() {
   $("#roundtext").text("Round 7 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -825,6 +863,8 @@ function r8res() {
   $("#roundtext").text("Round 8 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -899,6 +939,8 @@ function r9res() {
   $("#roundtext").text("Round 9 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function stayInSync() {
     var roundtojoinraw = $("#roundtojoindiv").text();
     var roundtojoin = window[roundtojoinraw];
@@ -973,6 +1015,8 @@ function r10res() {
   $("#roundtext").text("Round 10 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
   function prepareToShowWinner() {
     $("#endofgamediv").load("/room/familyroom #endofgamediv");
   }
