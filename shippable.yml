@@ -5,5 +5,5 @@ language: ruby
 rvm:
  - 2.1.0
 
- before_script:
-  - psql -c 'create database acroparty_test;' -U postgres
+before_script:
+ - psql -c 'create database acroparty_test;' -U postgres
