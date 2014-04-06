@@ -7,3 +7,6 @@ rvm:
 
 before_script:
  - psql -c 'create database acroparty_test;' -U matt
+
+before_install:
+  - sudo apt-get update && sudo apt-get --reinstall install -qq language-pack-en
