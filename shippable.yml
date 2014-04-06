@@ -7,3 +7,4 @@ rvm:
 
 before_script:
  - psql -c 'create database acroparty_development;' -U matt
+ - psql -c 'create database acroparty_test;' -U matt
