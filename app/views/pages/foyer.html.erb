@@ -32,13 +32,15 @@
     <p class="acrofont">News:</p>
     <div class="roomslisttable text-left">
       <div id="newslist" style="margin:6px">
-        <% Update.last(25).reverse_each do |news| %>
-          <u><i style="font-size:80%;"><%= news.created_at.strftime("%b %d, %Y") %> - <%= news.created_at.strftime("%l:%M%P")  %>:</br></i></u>
-          <%= news.news %> <i style="font-size:80%">- posted by <%= news.user.username %></i></br>
-          <% if @username == "Matt" %>
-            <%= link_to 'Delete', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if Update.last != nil %>
+          <% Update.last(25).reverse_each do |news| %>
+            <u><i style="font-size:80%;"><%= news.created_at.strftime("%b %d, %Y") %> - <%= news.created_at.strftime("%l:%M%P")  %>:</br></i></u>
+            <%= news.news %> <i style="font-size:80%">- posted by <%= news.user.username %></i></br>
+            <% if @username == "Matt" %>
+              <%= link_to 'Delete', news, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <% end %>
+            <div class="centerall">- - - - -</div>
           <% end %>
-          <div class="centerall">- - - - -</div>
         <% end %>
       </div>
     </div>
