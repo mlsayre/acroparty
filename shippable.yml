@@ -1,7 +1,7 @@
 # language setting
 language: ruby
 
-# version numbers
+# version number
 rvm:
  - 2.1.0
 
