@@ -7,7 +7,7 @@ rvm:
 
 env:
   global:
-    - secret_token = ENV['SECRET_TOKEN']
+    - config.secret_token = ENV['SECRET_TOKEN']
 
 before_script:
   - cp config/database.shippable.yml config/database.yml
