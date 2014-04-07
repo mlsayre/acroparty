@@ -2,7 +2,8 @@
 language: ruby
 
 # version numbers
+rvm:
+  - 2.1.0
 
 before_script:
-  - psql -c 'create database acroparty_development;' -U matt -w
-  - psql -c 'create database acroparty_test;' -U matt -w
+  - psql -c 'create database acroparty_test;' -U matt
