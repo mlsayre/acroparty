@@ -13,4 +13,4 @@ before_script:
   - cp config/database.shippable.yml config/database.yml
   - psql -c 'create database acroparty_development;' -U postgres
   - psql -c 'create database acroparty_test;' -U postgres
-#  - rake db:migrate
+  - rake db:migrate
