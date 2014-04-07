@@ -5,6 +5,10 @@ language: ruby
 rvm:
   - 2.1.0
 
+env:
+  global:
+    - secret_token = ENV['SECRET_TOKEN']
+
 before_script:
   - cp config/database.shippable.yml config/database.yml
   - psql -c 'create database acroparty_development;' -U postgres
