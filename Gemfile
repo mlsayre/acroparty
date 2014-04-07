@@ -43,6 +43,7 @@ group :test do
   gem 'turn'
   gem 'launchy'
   gem 'simplecov', :require => false
+  rake
 end
 
 # To use ActiveModel has_secure_password
