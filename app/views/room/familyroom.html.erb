@@ -313,7 +313,6 @@ function r1vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r1res, <%= @r1votetime %>*1000);
@@ -329,7 +328,22 @@ function r1res() {
   setTimeout(resultsRound, 2500);
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
-  $("#gamedata").load("/room/familyroom #gamedata");
+  var loadTimesCounter = 0;
+  var loadTimes = $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
+    if ( status == "error" ) {
+      if (loadTimesCounter <= 5) {
+        loadTimesCounter++;
+        loadTimes();
+        console.log('ERROR loading gamedata, try number' + loadTimesCounter);
+      }
+      else {
+        waitingForPlayers;
+        console.log('ERROR, CANNOT LOAD gamedata after 5 tries. Returning to waiting state.');
+      }
+    }
+    console.log('SUCCESS loading gamedata');
+    loadTimeCounter = 0;
+    );
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
   function stayInSync() {
