@@ -197,6 +197,28 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
+// try 5 times to load game time data for sync checks
+var loadTimesCounter = 0;
+var loadTimes = function() {
+  $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
+    if ( status == "error" ) {
+      if (loadTimesCounter < 5) {
+        loadTimesCounter++;
+        loadTimes();
+        console.log('ERROR loading gamedata, try number ' + loadTimesCounter);
+      }
+      else {
+        waitingForPlayers;
+        console.log('ERROR, CANNOT LOAD gamedata after 5 tries. Returning to waiting state.');
+      }
+    }
+    else {
+      console.log('SUCCESS loading gamedata');
+      loadTimeCounter = 0;
+    }
+    });
+  };
+
 // decide which JS event(game round) the player will join next, set up board
 
 function joinInProgress() {
@@ -328,22 +350,7 @@ function r1res() {
   setTimeout(resultsRound, 2500);
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
-  var loadTimesCounter = 0;
-  var loadTimes = $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
-    if ( status == "error" ) {
-      if (loadTimesCounter <= 5) {
-        loadTimesCounter++;
-        loadTimes();
-        console.log('ERROR loading gamedata, try number' + loadTimesCounter);
-      }
-      else {
-        waitingForPlayers;
-        console.log('ERROR, CANNOT LOAD gamedata after 5 tries. Returning to waiting state.');
-      }
-    }
-    console.log('SUCCESS loading gamedata');
-    loadTimeCounter = 0;
-    );
+  loadTimes();
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
   function stayInSync() {
