@@ -201,14 +201,15 @@ $(window).on('beforeunload', function () {
 var loadTimesCounter = 0;
 var loadTimes = function(currentround) {
   $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
-    if ( status == "error" || $("#roundtojoindiv").text() == currentround) {
+    if ( status == "error" || $("#roundtojoindiv").text() != currentround) {
       if (loadTimesCounter < 5) {
         loadTimesCounter++;
         loadTimes();
         console.log('ERROR loading gamedata, try number ' + loadTimesCounter);
       }
       else {
-        CODE TO KEEP TRYING, notify player (similar to waitingforplayers)
+        // CODE TO KEEP TRYING, notify player (similar to waitingforplayers)
+        // make sure to cancel stayinsync settimeout
         loadTimesCounter = 0;
         console.log('ERROR - Connection problem after 5 data load tries - now in holding pattern...');
       }
@@ -351,7 +352,7 @@ function r1res() {
   setTimeout(resultsRound, 2500);
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
-  loadTimes();
+  loadTimes(r2prep); // expect next round to be r2prep or show error
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
   function stayInSync() {
