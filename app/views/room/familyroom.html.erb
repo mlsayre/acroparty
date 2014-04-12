@@ -199,17 +199,18 @@ $(window).on('beforeunload', function () {
 <script>
 // try 5 times to load game time data for sync checks
 var loadTimesCounter = 0;
-var loadTimes = function() {
+var loadTimes = function(currentround) {
   $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
-    if ( status == "error" ) {
+    if ( status == "error" || $("#roundtojoindiv").text() == currentround) {
       if (loadTimesCounter < 5) {
         loadTimesCounter++;
         loadTimes();
         console.log('ERROR loading gamedata, try number ' + loadTimesCounter);
       }
       else {
-        waitingForPlayers;
-        console.log('ERROR, CANNOT LOAD gamedata after 5 tries. Returning to waiting state.');
+        CODE TO KEEP TRYING, notify player (similar to waitingforplayers)
+        loadTimesCounter = 0;
+        console.log('ERROR - Connection problem after 5 data load tries - now in holding pattern...');
       }
     }
     else {
