@@ -482,6 +482,13 @@ function hideEndGameDialog() {
   $("#endofgamediv").hide();
 }
 
+function updateEndgameStats(){
+  $.ajax({
+    url: "/room/endofgamestatsinit",
+    type: "POST"
+  });
+}
+
 function gameOver() {
   function openDialog() {
     $("#endofgamediv").dialog('open');
@@ -489,13 +496,6 @@ function gameOver() {
     endOfGameMUS.play();
   }
   setTimeout(openDialog, 1250);
-  function updateStats(){
-    $.ajax({
-      url: "/room/endofgamestatsinit",
-      type: "POST"
-    });
-  }
-  setTimeout(updateStats, 500);
   function readyNewGame(){
     $.ajax({
       url: "/room/newgamegetready",

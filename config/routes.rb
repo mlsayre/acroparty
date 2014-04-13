@@ -37,6 +37,7 @@ Acroparty::Application.routes.draw do
       post 'roundprep'
       post 'votefor'
       post 'resetfamroom'
+      post 'evacfamroom'
       post 'updategamepoints'
       post 'updatewinnertweet'
       delete 'destroyplayer'

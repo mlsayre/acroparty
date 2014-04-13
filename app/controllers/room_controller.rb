@@ -446,11 +446,18 @@ class RoomController < ApplicationController
     render :nothing => true
   end
 
+  def evacfamroom
+    Player.where(:room => "familyroom").destroy_all
+    render :nothing => true
+  end
+
   def endofgamestatsinit
     @gamewinner = User.joins(:player).where('room = ?', 'familyroom')
                       .order('users.gamepoints DESC').first
     @playerlist = Player.where(:room => "familyroom")
-    @gamewinner.increment!(:gameswon, by = 1)
+    if current_user.id == @gamewinner.id
+      current_user.increment!(:gameswon, by = 1)
+    end
     current_user.increment!(:gamesplayed, by = 1)
     render :nothing => true
   end

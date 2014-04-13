@@ -11,6 +11,7 @@
     Games played: <%= @gamesplayed %></br>
     <% if @username == "Matt" %>
       <%= button_to "reset room", { :controller => :room, :action => 'resetfamroom' }, remote: true %>
+      <%= button_to "evac famroom", { :controller => :room, :action => 'evacfamroom' }, remote: true %>
     <% end %>
 
     <%= link_to "Your Stats", foyer_path, :class => "button round", :style => "margin-top:10px" %>

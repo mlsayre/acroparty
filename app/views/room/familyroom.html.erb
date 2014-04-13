@@ -251,7 +251,12 @@ var loadTimesAndSyncCheck = function(nextround) {
     else {
       console.log('SUCCESS loading gamedata');
       loadTimeCounter = 0;
-      setTimeout(stayInSync, 10000);
+      if ($("#roundtojoindiv").text() == "newGameStarts"){
+        setTimeout(stayInSync, 3000);
+      }
+      else {
+        setTimeout(stayInSync, 10000);
+      }
     }
     });
   };
@@ -442,7 +447,6 @@ function r2vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r2res, <%= @r2votetime %>*1000);
@@ -459,15 +463,9 @@ function r2res() {
   $("#roundtext").text("Round 2 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r3prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r3prep() {
@@ -518,7 +516,6 @@ function r3vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r3res, <%= @r3votetime %>*1000);
@@ -535,15 +532,9 @@ function r3res() {
   $("#roundtext").text("Round 3 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r4prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r4prep() {
@@ -594,7 +585,6 @@ function r4vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r4res, <%= @r4votetime %>*1000);
@@ -611,15 +601,9 @@ function r4res() {
   $("#roundtext").text("Round 4 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r5prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r5prep() {
@@ -670,7 +654,6 @@ function r5vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r5res, <%= @r5votetime %>*1000);
@@ -687,15 +670,9 @@ function r5res() {
   $("#roundtext").text("Round 5 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r6prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r6prep() {
@@ -746,7 +723,6 @@ function r6vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r6res, <%= @r6votetime %>*1000);
@@ -764,15 +740,9 @@ function r6res() {
   $("#roundtext").text("Round 6 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r7prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r7prep() {
@@ -823,7 +793,6 @@ function r7vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r7res, <%= @r7votetime %>*1000);
@@ -840,15 +809,9 @@ function r7res() {
   $("#roundtext").text("Round 7 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r8prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r8prep() {
@@ -899,7 +862,6 @@ function r8vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r8res, <%= @r8votetime %>*1000);
@@ -916,15 +878,9 @@ function r8res() {
   $("#roundtext").text("Round 8 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r9prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r9prep() {
@@ -975,7 +931,6 @@ function r9vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r9res, <%= @r9votetime %>*1000);
@@ -992,15 +947,9 @@ function r9res() {
   $("#roundtext").text("Round 9 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r10prep'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r10prep() {
@@ -1051,7 +1000,6 @@ function r10vote() {
   $("#votediv").load("/room/familyroom #votediv");
   $("#resultsdiv").text("");
   setTimeout(votingRound, 2500);
-  $("#gamedata").load("/room/familyroom #gamedata");
   vtimer();
   playerCountCheck();
   setTimeout(r10res, <%= @r10votetime %>*1000);
@@ -1068,19 +1016,14 @@ function r10res() {
   $("#roundtext").text("Round 10 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
-  $("#tweetwinner").hide();
-  setTimeout(loadTweet, 5750);
+  setTimeout(updateEndgameStats, 4000);
   function prepareToShowWinner() {
     $("#endofgamediv").load("/room/familyroom #endofgamediv");
   }
-  setTimeout(prepareToShowWinner, 9000);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000 - 9000);
-  }
-  setTimeout(stayInSync, 10000);
+  setTimeout(prepareToShowWinner, 6000);
+  setTimeout(loadTimesAndSyncCheck('finalResults'),2000);
+  $("#tweetwinner").hide();
+  setTimeout(loadTweet, 5750);
 }
 
 function finalResults() {
@@ -1119,13 +1062,7 @@ function readyForNewGame() {
     $("#rndletters").load("/room/familyroom #rndletters");
     $("#gamedata").load("/room/familyroom #gamedata");
   }
-  setTimeout(loadNewData, 1750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000);
-  }
-  setTimeout(stayInSync, 3000);
+  setTimeout(loadNewData, 1250);
+  setTimeout(loadTimesAndSyncCheck('newGameStarts'),2000);
 }
 </script>
