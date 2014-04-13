@@ -197,26 +197,61 @@ $(window).on('beforeunload', function () {
 <%= javascript_include_tag "game/game" %>
 
 <script>
-// try 5 times to load game time data for sync checks
+// sync game timing data
+function stayInSync() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, (timetojoin*1000) - 9000);
+  }
+
+// try 5 times to load game time data for sync checks, notify if sync error
 var loadTimesCounter = 0;
-var loadTimes = function(currentround) {
+var loadTimesAndSyncCheck = function(nextround) {
   $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
-    if ( status == "error" || $("#roundtojoindiv").text() != currentround) {
+    if ( status == "error" || $("#roundtojoindiv").text() != nextround) {
       if (loadTimesCounter < 5) {
-        loadTimesCounter++;
-        loadTimes();
-        console.log('ERROR loading gamedata, try number ' + loadTimesCounter);
+        function gamedataErrorLoading() {
+          loadTimesCounter++;
+          loadTimesAndSyncCheck();
+          console.log('ERROR loading gamedata, try number ' + loadTimesCounter);
+        }
+        setTimeout(gamedataErrorLoading, 800);
       }
       else {
-        // CODE TO KEEP TRYING, notify player (similar to waitingforplayers)
-        // make sure to cancel stayinsync settimeout
         loadTimesCounter = 0;
         console.log('ERROR - Connection problem after 5 data load tries - now in holding pattern...');
+        function connectionProblem() {
+          $(".ui-dialog-content").dialog("close");
+          $('#answerfield').addClass('animated fadeOutDown');
+          slideRoundText();
+          $("#roundtext").text(". . .");
+          $("#acroletters").removeClass('animated fadeOutUp');
+          document.getElementById("acroletters").style.visibility="visible";
+          $("#acroletters").css('fontSize', '100%')
+                           .show()
+                           .html("<br/>Connection problem.<br/>Trying to rejoin...");
+          $("#gamedata").load("/room/familyroom #gamedata", function( response, status, xhr ) {
+            if ( status == "error" ) {
+              function tryingToConnect() {
+                connectionProblem();
+                console.log('Still unable to connect.');
+              }
+              setTimeout(tryingToConnect, 3000);
+            }
+            else {
+              loadTimesCounter = 0;
+              setTimeout(joinInProgress, 800);
+            }
+          });
+        }
+        connectionProblem();
       }
     }
     else {
       console.log('SUCCESS loading gamedata');
       loadTimeCounter = 0;
+      setTimeout(stayInSync, 10000);
     }
     });
   };
@@ -227,7 +262,7 @@ function joinInProgress() {
   var roundtojoinraw = $("#roundtojoindiv").text();
   var roundtojoin = window[roundtojoinraw];
   var timetojoin = $("#timetojoindiv").text();
-  playerEnterInit();
+  document.getElementById("acroletters").style.visibility="visible";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%');
   $("#acroletters").html("<br/>Waiting to join...<br/>(about " + timetojoin + "s)");
@@ -261,18 +296,19 @@ function loadTweet() {
 }
 
 setTimeout(joinInProgress, 1500);
+playerEnterInit();
 
 // waiting for players
 function waitingForPlayers() {
   var roundtojoinraw = $("#roundtojoindiv").text();
   var roundtojoin = window[roundtojoinraw];
   var timetojoin = $("#timetojoindiv").text();
-  $("#acroletters").text("");
   $(".ui-dialog-content").dialog("close");
   $('#answerfield').addClass('animated fadeOutDown');
   slideRoundText();
   $("#roundtext").text(". . .");
   document.getElementById("acroletters").style.visibility="visible";
+  $("#acroletters").removeClass('animated fadeOutUp');
   $("#acroletters").show()
                    .html("<br/>Need 3 players<br/>to begin game...");
   $("#gamedata").load("/room/familyroom #gamedata");
@@ -352,16 +388,10 @@ function r1res() {
   setTimeout(resultsRound, 2500);
   $("#roundtext").text("Round 1 - Results");
   $("#rndletters").load("/room/familyroom #rndletters");
-  loadTimes(r2prep); // expect next round to be r2prep or show error
+  $("#gamedata").load("/room/familyroom #gamedata");
+  setTimeout(loadTimesAndSyncCheck('r2prep'),2000); // next is r2prep or error
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
-  function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, (timetojoin*1000) - 9000);
-  }
-  setTimeout(stayInSync, 10000);
 }
 
 function r2prep() {
