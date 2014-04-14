@@ -193,11 +193,11 @@ class RoomController < ApplicationController
                               "finalResults"]
     end
 
-    if Famroomanswer.where(user_id: current_user.id).find(:last) != nil
+    if Famroomanswer.where(user_id: current_user.id).find(:last)
       @submissiontime = Famroomanswer.where(user_id: current_user.id)
                         .find(:last).answertime
     else
-      @submissiontime = 1.11
+      @submissiontime = 30.00
     end
 
     if @playerlist.count >= 3

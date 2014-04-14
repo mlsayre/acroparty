@@ -10,7 +10,16 @@ class Famroomanswer < ActiveRecord::Base
   attr_reader :answertime
 
   def answertime
-    (created_at - roundstarted).round(2)
+    if created_at && roundstarted
+      rawtime = (created_at - roundstarted)
+      if rawtime >= 60
+        59.99
+      else
+        rawtime.round(2)
+      end
+    else
+      30.00
+    end
   end
 
 end

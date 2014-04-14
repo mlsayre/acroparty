@@ -40,7 +40,7 @@ Acroparty::Application.routes.draw do
       post 'evacfamroom'
       post 'updategamepoints'
       post 'updatewinnertweet'
-      delete 'destroyplayer'
+      post 'destroyplayer'
     end
   end
 
