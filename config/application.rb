@@ -72,7 +72,7 @@ module Acroparty
     end
 
   Obscenity.configure do |config|
-    config.blacklist   = :default
+    config.blacklist   = /blacklist.yml
     config.whitelist   = ["kill", "murder"]
   end
 end
