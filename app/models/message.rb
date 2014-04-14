@@ -4,4 +4,9 @@ class Message < ActiveRecord::Base
   belongs_to :user
 
   validates :content,  obscenity: { sanitize: true, replacement: :stars }
+
+  def pacifictime
+    created_at - 7.hours
+  end
 end
+

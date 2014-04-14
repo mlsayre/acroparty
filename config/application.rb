@@ -70,4 +70,9 @@ module Acroparty
 
     config.assets.precompile += %w( vendor/modernizr.js private_pub.js)
     end
+
+  Obscenity.configure do |config|
+    config.blacklist   = :default
+    config.whitelist   = ["kill", "murder"]
+  end
 end
