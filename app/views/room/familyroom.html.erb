@@ -221,11 +221,12 @@ $(document).unbind('keydown').bind('keydown', function (event) {
 <script>
 // sync game timing data
 function stayInSync() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, (timetojoin*1000) - 9000);
-  }
+  var roundtojoinraw = $("#roundtojoindiv").text();
+  var roundtojoin = window[roundtojoinraw];
+  var timetojoin = $("#timetojoindiv").text();
+  setTimeout(roundtojoin, (timetojoin*1000) - 9000);
+}
+
 
 // try 5 times to load game time data for sync checks, notify if sync error
 var loadTimesCounter = 0;
@@ -298,9 +299,11 @@ function joinInProgress() {
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
-  setTimeout(roundtojoin, timetojoin*1000);
+  setTimeout(finalResults, 1000);
 }
 
+
+// Host welcome message shown in chat box
 hideTextStart();
 $("#chat").append('<font color="purple">[Host] Welcome to the Family Room! This room is meant for all ages so please keep your acros and chat family friendly. And have fun!</font>');
 $("#chatbox").scrollTop(10000);
@@ -353,6 +356,7 @@ function newGameStarts() {
 }
 
 function r1prep() {
+  playerEnterInit();
   slideRoundText();
   $("#roundtext").text("Round 1/10 - Get ready!");
   $("#rndletters").load("/room/familyroom #rndletters");
@@ -1053,6 +1057,21 @@ function finalResults() {
   hideResultsDialog();
   $("#roundtext").text("The winner is...");
   $("#endofgamediv").load("/room/familyroom #endofgamediv");
+  function playerNewGameNotify() {
+    $("#acceptedtext").hide();
+    $("#acroletters").show();
+    document.getElementById("submittedtext").style.visibility="hidden";
+    $("#acroletters").css('fontSize', '100%')
+                     .html("<br/>Stay tuned for<br/>new game...")
+                     .removeClass('animated fadeOutUp');
+    slideRoundText();
+    $("#roundtext").text("Take a breath...");
+    $('#answerfield').addClass('animated fadeOutDown');
+    $("#answertextfield").attr("disabled", true);
+    $("#answersubmit").attr("disabled", true);
+    hideEndGameDialog();
+  }
+  setTimeout(playerNewGameNotify, 15000);
   setTimeout(gameOver, 1500);
   setTimeout(readyForNewGame, <%= @finalresultstime %>*1000);
 }
@@ -1063,10 +1082,10 @@ function readyForNewGame() {
   $("#acroletters").show();
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acroletters").css('fontSize', '100%')
-                   .html("<br/>Stay tuned for<br/>new game...")
+                   .html("<br/>New game<br/>now loading...")
                    .removeClass('animated fadeOutUp');
   slideRoundText();
-  $("#roundtext").text("Take a breath...");
+  $("#roundtext").text("New game loading...");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
@@ -1077,14 +1096,15 @@ function readyForNewGame() {
         url: "/room/familyroom",
         type: "POST"
       });
+      console.log('SUCCESS created new game data.');
     }
   }
-  setTimeout(newTimesAndLetters, 10100);
+  setTimeout(newTimesAndLetters, 100);
   function loadNewData(){
     $("#rndletters").load("/room/familyroom #rndletters");
     $("#gamedata").load("/room/familyroom #gamedata");
   }
-  setTimeout(loadNewData, 11250);
-  setTimeout(loadTimesAndSyncCheck('newGameStarts'),12000);
+  setTimeout(loadNewData, 1250);
+  setTimeout(loadTimesAndSyncCheck('newGameStarts'), 2000);
 }
 </script>

@@ -502,7 +502,7 @@ function gameOver() {
       type: "POST"
     });
   }
-  setTimeout(readyNewGame, 12500);
+  setTimeout(readyNewGame, 23000);
 }
 
 function playerCountCheck(){

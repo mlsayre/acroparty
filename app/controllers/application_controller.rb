@@ -49,7 +49,7 @@ class ApplicationController < ActionController::Base
     @r10writetime = 76
     @r10votetime = 30
     @r10restime = 21
-    @finalresultstime = 15
+    @finalresultstime = 25
   end
 
   # def set_time_zone
