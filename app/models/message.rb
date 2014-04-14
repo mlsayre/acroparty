@@ -6,7 +6,7 @@ class Message < ActiveRecord::Base
   validates :content,  obscenity: { sanitize: true, replacement: :stars }
 
   def pacifictime
-    created_at - 7.hours
+    created_at.utc - 7.hours
   end
 end
 
