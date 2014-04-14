@@ -55,7 +55,7 @@ $(document).unbind('keydown').bind('keydown', function (event) {
   <div id="votediv" class="small-12 columns centerall animated flip" style="font-size:110%;">
     <% @famroomanswersminusplayer.shuffle.each do |answer| %>
       <div style="float: left; font-size:70%; margin-right:4px;">
-        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id, :method => "put"}, :class => "votebuttons", :style => "position:relative; z-index:100;", remote: true %>
+        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id, :method => "put"}, :class => "votebuttons", :style => "position:relative; z-index:900;", remote: true %>
       </div>
       "<%= Obscenity.replacement(:stars).sanitize(answer.answer) %>"
     </br></br>
@@ -1079,12 +1079,12 @@ function readyForNewGame() {
       });
     }
   }
-  setTimeout(newTimesAndLetters, 100);
+  setTimeout(newTimesAndLetters, 10100);
   function loadNewData(){
     $("#rndletters").load("/room/familyroom #rndletters");
     $("#gamedata").load("/room/familyroom #gamedata");
   }
-  setTimeout(loadNewData, 1250);
-  setTimeout(loadTimesAndSyncCheck('newGameStarts'),2000);
+  setTimeout(loadNewData, 11250);
+  setTimeout(loadTimesAndSyncCheck('newGameStarts'),12000);
 }
 </script>
