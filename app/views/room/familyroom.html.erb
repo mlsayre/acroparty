@@ -53,9 +53,10 @@ $(document).unbind('keydown').bind('keydown', function (event) {
 
 <div class="row">
   <div id="votediv" class="small-12 columns centerall animated flip" style="font-size:110%;">
+    <i id="votecat" class="small-12 columns centerall animated flip" style="font-size:80%; display:none;"></i>
     <% @famroomanswersminusplayer.shuffle.each do |answer| %>
       <div style="float: left; font-size:70%; margin-right:4px;">
-        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id, :method => "put"}, :class => "votebuttons", :style => "position:relative; z-index:900;", remote: true %>
+        <%= button_to "Vote", {:controller => "room", :action => "votefor", :id => answer.id, :method => "put"}, :class => "votebuttons", :style => "position:relative; z-index:900000;", remote: true %>
       </div>
       "<%= Obscenity.replacement(:stars).sanitize(answer.answer) %>"
     </br></br>
@@ -299,7 +300,7 @@ function joinInProgress() {
   $('#answerfield').addClass('animated fadeOutDown');
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
-  setTimeout(finalResults, 1000);
+  setTimeout(roundtojoin, timetojoin*1000);
 }
 
 
@@ -393,10 +394,16 @@ function r1write() {
 }
 
 function r1vote() {
+  $("#votecat").replaceWith("derka");
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round1cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   $("#roundtext").text("Round 1 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -413,6 +420,7 @@ function r1res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
