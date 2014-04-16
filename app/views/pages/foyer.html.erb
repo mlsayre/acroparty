@@ -17,7 +17,19 @@
     <%= link_to "Your Stats", foyer_path, :class => "button round", :style => "margin-top:10px" %>
     <%= link_to "Edit Profile", edit_user_registration_path, :class => "button round" %>
     <%= link_to "How To Play", foyer_path, :class => "button round" %>
-  </br>Found a bug or have a suggestion? Email: <a href="mailto:matt@acroparty.com">matt@acroparty.com</a>
+  </br>Found a bug or have a suggestion? Email: <a href="mailto:matt@acroparty.com">matt@acroparty.com</a></br>
+
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=763490793663919";
+    fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+  <div class="fb-like" data-href="https://www.facebook.com/acroparty" data-layout="box_count" data-action="like" data-show-faces="true" data-share="true"></div>
+
   </div>
   <div class="small-4 columns centerall" style="margin-top:18px; margin-bottom:4px;">
     <p class="acrofont">Rooms:</p>

@@ -182,6 +182,11 @@ function submitAnswerFX() {
   $('#answerfield').removeClass('animated pulse');
   $('#answerfield').removeClass('animated rubberBand');
   $('#acceptedtext').removeClass('animated flip');
+  $("#answersubmit").attr("disabled", true);
+  function allowAnswerAgain() {
+    $("#answersubmit").removeAttr("disabled");
+  }
+  setTimeout(allowAnswerAgain, 2500);
   setTimeout(addPulse, 30);
   setTimeout(addAcceptedTextFlip, 370);
   answerAcceptSFX.play();
@@ -428,6 +433,8 @@ function votingRound() {
   $("#votediv").dialog('open');
   $("#votediv").dialog('moveToTop');
   $("#votediv").show();
+  // make sure answer submit is disabled after 2.5s answer delay
+  $("#answersubmit").attr("disabled", true);
   $("#votediv").submit(function() {
     $(".votebuttons").attr("disabled", true);
     $("#roundtext").text("Vote accepted...");

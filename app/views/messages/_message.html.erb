@@ -1,5 +1,13 @@
 <li id="chatline" style="list-style-type:none">
   <span id="messagetime" class="float right" style="font-size:.6em; color:gray; margin-right:12px;"><%= message.pacifictime.strftime("%l:%M%p") %></span>
-  <span style="color:red;"><%= message.user.username if message.user %>:</span>
-  <span><%= message.content %></span>
+  <span style="color:red;"><%= message.user.username if message.user %>
+    <% if message.user %>
+    :
+    <% end %>
+  </span>
+  <% if message.user %>
+    <span><%= message.content %></span>
+  <% else %>
+    <span style="color:purple; font-size:.9em;"><i><%= message.content %></i></span>
+  <% end %>
 </li>

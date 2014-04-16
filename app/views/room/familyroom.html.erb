@@ -20,6 +20,8 @@ $(window).on('beforeunload', function () {
 });
 
 $(window).bind('beforeunload', function(){
+  $('#hostmsg #message_content').val('[Host] <%= current_user.username %> has left the room.');
+  $('#hostmsg').submit();
   userLeaves();
 });
 // prevent backspace from leaving page
@@ -141,7 +143,8 @@ $(document).unbind('keydown').bind('keydown', function (event) {
 <div class="row">
   <div class="small-3 columns">
     <div class="small-12 float-right usertable" style="padding-left:6px; background:#d1fffe;">
-      <div id="userlistbox"><u><%= @playerlist.count %>/12 players:</u><br />
+      <div id="userlistbox"><u><%= @playerlist.count %>/12 players:</u>
+        <span style="float:right; margin-right:6px;"><u>points</u></span><br />
         <% @playerlist.joins(:user).order('users.gamepoints DESC').each do |player| %>
           <%= player.name %><span style="float:right; padding-right:6px;"><%= player.user.gamepoints%></span><br />
         <% end %>
@@ -164,6 +167,17 @@ $(document).unbind('keydown').bind('keydown', function (event) {
         </div>
       <% end %>
     </div>
+
+    <div style="visibilty=hidden;">
+      <%= form_for Message.new, html: { name: "hostmsg", id: "hostmsg" }, remote: true do |hostmessage| %>
+        <div class="row">
+          <%= hostmessage.hidden_field :content, :value => "[Host] Let's all welcome current_user.username" %>
+          <div class="small-2 columns"><%= hostmessage.submit "Send", :style => "visibility:hidden;" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
   </div>
   <div class="small-2 columns centerall">
     <%= button_tag "Sounds: On", :id => "sfxbutton", :class => "button small radius", :style => "margin-top:10px;" %>
@@ -220,6 +234,12 @@ $(document).unbind('keydown').bind('keydown', function (event) {
 <%= javascript_include_tag "game/game" %>
 
 <script>
+// player enters, message for all
+window.onload=function(){
+  $('#hostmsg #message_content').val('[Host] <%= current_user.username %> has entered the room.');
+  $('#hostmsg').submit();
+}
+
 // sync game timing data
 function stayInSync() {
   var roundtojoinraw = $("#roundtojoindiv").text();
@@ -394,7 +414,6 @@ function r1write() {
 }
 
 function r1vote() {
-  $("#votecat").replaceWith("derka");
   slideRoundText();
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
@@ -472,6 +491,11 @@ function r2write() {
 function r2vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round2cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 2 - Vote");
@@ -490,6 +514,7 @@ function r2res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -541,6 +566,11 @@ function r3write() {
 function r3vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round3cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 3 - Vote");
@@ -559,6 +589,7 @@ function r3res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -610,6 +641,11 @@ function r4write() {
 function r4vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round4cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 4 - Vote");
@@ -628,6 +664,7 @@ function r4res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -679,6 +716,11 @@ function r5write() {
 function r5vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round5cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 5 - Vote");
@@ -697,6 +739,7 @@ function r5res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -750,6 +793,11 @@ function r6vote() {
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round6cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   $("#roundtext").text("Round 6 - Vote");
   $('#answerfield').addClass('animated fadeOutDown');
   $("#acroletters").addClass('animated fadeOutUp');
@@ -766,6 +814,7 @@ function r6res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
@@ -818,6 +867,11 @@ function r7write() {
 function r7vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round7cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 7 - Vote");
@@ -836,6 +890,7 @@ function r7res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -887,6 +942,11 @@ function r8write() {
 function r8vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round8cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 8 - Vote");
@@ -905,6 +965,7 @@ function r8res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -956,6 +1017,11 @@ function r9write() {
 function r9vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round9cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 9 - Vote");
@@ -974,6 +1040,7 @@ function r9res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
@@ -1025,6 +1092,11 @@ function r10write() {
 function r10vote() {
   slideRoundText();
   $("#acceptedtext").hide();
+  function showCatForVote(){
+    $("#votecat").show();
+    $("#votecat").text("Category: <%= @round10cat %>");
+  }
+  setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#roundtext").text("Round 10 - Vote");
@@ -1043,6 +1115,7 @@ function r10res() {
   slideRoundText();
   $("#votediv").dialog('close');
   $("#votediv").hide();
+  $("#votecat").hide();
   $("#timertext").hide();
   $("#answertextfield").val("");
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
