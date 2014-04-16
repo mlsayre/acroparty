@@ -16,12 +16,24 @@ function userLeaves(){
 }
 
 $(window).on('beforeunload', function () {
+  var leavemsg = new Array('[Host] <%= current_user.username %> has left the room.',
+    '[Host] <%= current_user.username %> has vanished.',
+    '[Host] <%= current_user.username %> has disappeared',
+    '[Host] <%= current_user.username %> has departed.',
+    '[Host] <%= current_user.username %> is now elsewhere.',
+    '[Host] <%= current_user.username %> has gone away.',
+    '[Host] The room is now empty of <%= current_user.username %>.',
+    '[Host] <%= current_user.username %> has escaped.',
+    '[Host] <%= current_user.username %> is not here anymore.',
+    '[Host] The room misses <%= current_user.username %> now.',
+    '[Host] <%= current_user.username %> went to another place.');
+  var ranleavemsg = leavemsg[Math.floor(Math.random() * leavemsg.length)];
+  $('#hostmsg #message_content').val(ranleavemsg);
+  $('#hostmsg').submit();
   userLeaves();
 });
 
 $(window).bind('beforeunload', function(){
-  $('#hostmsg #message_content').val('[Host] <%= current_user.username %> has left the room.');
-  $('#hostmsg').submit();
   userLeaves();
 });
 // prevent backspace from leaving page
@@ -236,7 +248,19 @@ $(document).unbind('keydown').bind('keydown', function (event) {
 <script>
 // player enters, message for all
 window.onload=function(){
-  $('#hostmsg #message_content').val('[Host] <%= current_user.username %> has entered the room.');
+  var entermsg = new Array('[Host] <%= current_user.username %> has entered the room.',
+    '[Host] <%= current_user.username %> has arrived.',
+    '[Host] <%= current_user.username %> has appeared',
+    '[Host] Welcome <%= current_user.username %> to the room.',
+    '[Host] <%= current_user.username %> sneaks into the room.',
+    '[Host] <%= current_user.username %> saunters into the room.',
+    '[Host] The room feels the presence of <%= current_user.username %>.',
+    '[Host] <%= current_user.username %> is now here.',
+    '[Host] <%= current_user.username %> makes a grand appearance.',
+    '[Host] The room welcomes <%= current_user.username %> now.',
+    '[Host] <%= current_user.username %> is now present.');
+  var ranentermsg = entermsg[Math.floor(Math.random() * entermsg.length)];
+  $('#hostmsg #message_content').val(ranentermsg);
   $('#hostmsg').submit();
 }
 

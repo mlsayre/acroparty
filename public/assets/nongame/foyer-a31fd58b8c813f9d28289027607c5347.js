@@ -1,1 +1,0 @@
-$("#roomsrefresh").click(function(){$("#roomslist").spin("small"),setTimeout(function(){$("#roomslist").spin(!1)},1e3),setTimeout(function(){$("#roomslist").load("/pages/foyer #roomslist",".")},800)});
