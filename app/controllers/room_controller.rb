@@ -108,7 +108,7 @@ class RoomController < ApplicationController
 
     end
 
-    if @playerlist.count > 2
+    if @playerlist.count > 2 && @timernewgamestarts == nil
       @timernewgamestarts = Famroomroundtime.find(:first).newgamestarts.utc
       @timer1prep = Famroomroundtime.find(:first).r1prep.utc + 5.seconds
       @timer1write = Famroomroundtime.find(:first).r1write.utc + 5.seconds
