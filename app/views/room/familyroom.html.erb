@@ -1204,14 +1204,26 @@ function readyForNewGame() {
   $("#answertextfield").attr("disabled", true);
   $("#answersubmit").attr("disabled", true);
   hideEndGameDialog();
+  function newTimesAndLetters(){
+    if (<%= Player.order('user_id ASC').first.user_id %> == <%= current_user.id %>) {
+      $.ajax({
+        url: "/room/familyroom",
+        type: "POST"
+      });
+    }
+  }
+  setTimeout(newTimesAndLetters, 100);
   function loadNewData(){
     $("#rndletters").load("/room/familyroom #rndletters");
     $("#gamedata").load("/room/familyroom #gamedata");
   }
-  loadNewData();
-  var roundtojoinraw = $("#roundtojoindiv").text();
-  var roundtojoin = window[roundtojoinraw];
-  var timetojoin = $("#timetojoindiv").text();
-  setTimeout(roundtojoin, timetojoin*1000);
+  setTimeout(loadNewData, 1350);
+  function loadNewGame() {
+    var roundtojoinraw = $("#roundtojoindiv").text();
+    var roundtojoin = window[roundtojoinraw];
+    var timetojoin = $("#timetojoindiv").text();
+    setTimeout(roundtojoin, timetojoin*1000);
+  }
+  setTimeout(loadNewGame, 2250);
 }
 </script>
