@@ -269,7 +269,12 @@ function stayInSync() {
   var roundtojoinraw = $("#roundtojoindiv").text();
   var roundtojoin = window[roundtojoinraw];
   var timetojoin = $("#timetojoindiv").text();
-  setTimeout(roundtojoin, (timetojoin*1000) - 9000);
+  if ($("#roundtojoindiv").text() == "newGameStarts") {
+    setTimeout(roundtojoin, timetojoin*1000);
+  }
+  else {
+    setTimeout(roundtojoin, (timetojoin*1000) - 9000);
+  }
 }
 
 
@@ -320,7 +325,7 @@ var loadTimesAndSyncCheck = function(nextround) {
       console.log('SUCCESS loading gamedata');
       loadTimeCounter = 0;
       if ($("#roundtojoindiv").text() == "newGameStarts"){
-        setTimeout(stayInSync, 3000);
+        setTimeout(stayInSync, 30);
       }
       else {
         setTimeout(stayInSync, 10000);
@@ -1217,13 +1222,7 @@ function readyForNewGame() {
     $("#rndletters").load("/room/familyroom #rndletters");
     $("#gamedata").load("/room/familyroom #gamedata");
   }
-  setTimeout(loadNewData, 1350);
-  function loadNewGame() {
-    var roundtojoinraw = $("#roundtojoindiv").text();
-    var roundtojoin = window[roundtojoinraw];
-    var timetojoin = $("#timetojoindiv").text();
-    setTimeout(roundtojoin, timetojoin*1000);
-  }
-  setTimeout(loadNewGame, 2250);
+  setTimeout(loadNewData, 1250);
+  setTimeout(loadTimesAndSyncCheck('newGameStarts'),2000);
 }
 </script>
