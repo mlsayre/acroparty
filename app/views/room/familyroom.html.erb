@@ -330,7 +330,6 @@ var loadTimesAndSyncCheck = function(nextround) {
   };
 
 // decide which JS event(game round) the player will join next, set up board
-
 function joinInProgress() {
   var roundtojoinraw = $("#roundtojoindiv").text();
   var roundtojoin = window[roundtojoinraw];
@@ -349,7 +348,6 @@ function joinInProgress() {
 
 
 // Host welcome message shown in chat box
-hideTextStart();
 $("#chat").append('<font color="purple">[Host] Welcome to the Family Room! This room is meant for all ages so please keep your acros and chat family friendly. And have fun!</font>');
 $("#chatbox").scrollTop(10000);
 
@@ -370,7 +368,8 @@ function loadTweet() {
   });
 }
 
-setTimeout(joinInProgress, 1500);
+hideTextStart();
+joinInProgress();
 playerEnterInit();
 
 // waiting for players
@@ -517,8 +516,9 @@ function r2vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr2").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round2cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -592,8 +592,9 @@ function r3vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr3").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round3cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -667,8 +668,9 @@ function r4vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr4").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round4cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -742,8 +744,9 @@ function r5vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr5").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round5cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -819,8 +822,9 @@ function r6vote() {
   document.getElementById("submittedtext").style.visibility="hidden";
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr6").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round6cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   $("#roundtext").text("Round 6 - Vote");
@@ -893,8 +897,9 @@ function r7vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr7").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round7cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -968,8 +973,9 @@ function r8vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr8").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round8cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -1043,8 +1049,9 @@ function r9vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr9").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round9cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
@@ -1118,8 +1125,9 @@ function r10vote() {
   slideRoundText();
   $("#acceptedtext").hide();
   function showCatForVote(){
+    var catfromdiv = "Category: " + $("#catr10").text();
     $("#votecat").show();
-    $("#votecat").text("Category: <%= @round10cat %>");
+    $("#votecat").text(catfromdiv);
   }
   setTimeout(showCatForVote, 2500);
   document.getElementById("categorytext").style.visibility="hidden";
