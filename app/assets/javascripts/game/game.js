@@ -56,15 +56,23 @@ function roundPrep(){
 }
 
 // Writing and voting timer
-function wtimer() {
-  var answercount=61; // Answer write time (s)
+function wtimer(time) {
+  var answercount=time; // Answer write time (s)
   var writecounter=setInterval(writingtimer, 1000);
   $("#timertext").css('color', 'black');
   $("#timertext").show();
   function writingtimer() {
     answercount=answercount-1;
-    if ( answercount == 60 ) {
-      gameplayMUS.play();
+    if ( answercount == time - 1 ) {
+      if (time == 51) {
+        gameplay50MUS.play();
+      }
+      else if (time == 61) {
+        gameplayMUS.play();
+      }
+      else if (time == 81) {
+        gameplay80MUS.play();
+      }
     }
     if ( answercount == 0 )
     {
@@ -135,7 +143,7 @@ function vtimer() {
 
 // Letter display
 
-function showLetters() {
+function showLetters(time) {
   var text = $('#acroletters').text();
   var length = text.length;
   var timeOut;
@@ -155,7 +163,7 @@ function showLetters() {
       }
       if (character == length + 1) {
         clearTimeout(timeOut);
-        wtimer();
+        wtimer(time);
         $("#answertextfield").removeAttr("disabled");
         $("#answersubmit").removeAttr("disabled");
         document.getElementById("answertextfield").style.visibility="visible";

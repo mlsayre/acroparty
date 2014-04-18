@@ -4,6 +4,16 @@ var gameplayMUS = new Howl({
   volume: 0.25
 });
 
+var gameplay50MUS = new Howl({
+  urls: ['/assets/Gameplay50.mp3'],
+  volume: 0.25
+});
+
+var gameplay80MUS = new Howl({
+  urls: ['/assets/Gameplay80.mp3'],
+  volume: 0.25
+});
+
 var voteMUS = new Howl({
   urls: ['/assets/Vote.mp3'],
   volume: 0.25
