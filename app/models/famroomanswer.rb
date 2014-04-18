@@ -12,11 +12,7 @@ class Famroomanswer < ActiveRecord::Base
   def answertime
     if created_at && roundstarted
       rawtime = (created_at - roundstarted)
-      if rawtime >= 60
-        59.99
-      else
-        rawtime.round(2)
-      end
+      rawtime.round(2)
     else
       30.00
     end

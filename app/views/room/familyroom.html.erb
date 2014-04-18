@@ -180,11 +180,11 @@ $(document).unbind('keydown').bind('keydown', function (event) {
       <% end %>
     </div>
 
-    <div style="visibilty=hidden;">
+    <div style="display:none;">
       <%= form_for Message.new, html: { name: "hostmsg", id: "hostmsg" }, remote: true do |hostmessage| %>
         <div class="row">
           <%= hostmessage.hidden_field :content, :value => "[Host] Let's all welcome current_user.username" %>
-          <div class="small-2 columns"><%= hostmessage.submit "Send", :style => "visibility:hidden;" %>
+          <div class="small-2 columns"><%= hostmessage.submit "Send", :style => "display:none;" %>
           </div>
         </div>
       <% end %>
