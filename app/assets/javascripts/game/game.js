@@ -471,7 +471,7 @@ function resultsRound() {
   setTimeout(showFastestAnswer, 1000);
   setTimeout(showWinningVoters, 2000);
   setTimeout(showNonVoters, 2500);
-  setTimeout(updatePoints, 1500);
+  setTimeout(updatePoints, 30);
 }
 
 function hideResultsDialog() {

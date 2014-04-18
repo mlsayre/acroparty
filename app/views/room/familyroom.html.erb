@@ -1159,13 +1159,12 @@ function r10res() {
   $("#resultsdiv").load("/room/familyroom #resultsdiv");
   setTimeout(resultsRound, 2500);
   $("#roundtext").text("Round 10 - Results");
-  $("#rndletters").load("/room/familyroom #rndletters");
   $("#gamedata").load("/room/familyroom #gamedata");
-  setTimeout(updateEndgameStats, 4000);
+  setTimeout(updateEndgameStats, 1600);
   function prepareToShowWinner() {
     $("#endofgamediv").load("/room/familyroom #endofgamediv");
   }
-  setTimeout(prepareToShowWinner, 6000);
+  setTimeout(prepareToShowWinner, 8000);
   setTimeout(loadTimesAndSyncCheck('finalResults'),2000);
   $("#tweetwinner").hide();
   setTimeout(loadTweet, 5750);
