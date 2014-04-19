@@ -57,7 +57,6 @@ function roundPrep(){
 
 // Writing and voting timer
 function wtimer(time) {
-  $("#rndstart").load("/room/familyroom #rndstart");
   var answercount=time; // Answer write time (s)
   var writecounter=setInterval(writingtimer, 1000);
   $("#timertext").css('color', 'black');
@@ -69,11 +68,9 @@ function wtimer(time) {
         gameplay50MUS.play();
       }
       else if (time == 61) {
-        roundWriteTimerStart();
         gameplayMUS.play();
       }
       else if (time == 81) {
-        roundWriteTimerStart();
         gameplay80MUS.play();
       }
     }
